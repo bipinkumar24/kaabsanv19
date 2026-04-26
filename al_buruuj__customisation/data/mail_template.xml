@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="email_template_sale_approval_mail" model="mail.template">
+            <field name="name">Sale Approval Mail</field>
+            <field name="email_from">{{ object.user_id.email or '' }}</field>
+            <field name="subject">RMCL | Sale Approval Request | Quotation {{ object.name or '' }}</field>
+            <field name="email_to">{{ object.approver_id.email }}</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Dear Sir / Madam,</p>
+                    <p t-if="not object.next_discount_amount">
+                        Requesting your approval on the quotation <t t-out="object.name"/>.
+                    </p>
+                    <p t-if="object.next_discount_amount">
+                        Kindly requesting your approval for providing a discount of
+                        <t t-out="object.get_discount()"/>% on the quotation
+                        <t t-out="object.name"/>.
+                    </p>
+                    <p><b>Notes:</b></p>
+                    <p t-out="object.get_reason_notes()"/>
+                    <p>Thank you</p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

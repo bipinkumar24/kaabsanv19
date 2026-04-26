@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="leavescat" model="ir.module.category">
+            <field name="name">Leaves Management</field>
+        </record>
+
+        <record id="department_leaves" model="res.groups">
+            <field name="name">department leaves</field>
+            <field name="category_id" ref="timeoff_request.leavescat"/>
+        </record>
+
+        <record id="all_leaves" model="res.groups">
+            <field name="name">All leaves</field>
+            <field name="category_id" ref="timeoff_request.leavescat"/>
+        </record>
+
+        <record id="own_leaves" model="res.groups">
+            <field name="name">Own Leaves</field>
+            <field name="category_id" ref="timeoff_request.leavescat"/>
+        </record>
+    </data>
+</odoo>

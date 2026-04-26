@@ -1,0 +1,87 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="product_on_warehouse_list">
+            <field name="name">product.on.warehouse list</field>
+            <field name="model">product.on.warehouse</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="warehouse_id"/>
+                    <field name="available_qty"/>
+                    <field name="order_qty"/>
+                </list>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="inherit_sale_order_line">
+            <field name="name">sale.order list</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/list//field[@name='name']" position="after">
+                    <button name="show_form_view" type="object" string="Set WH" class="bg-primary o_highlight"
+                        context="{'compute_pows':True}"  invisible="parent.state != 'draft'"
+                        />
+                    <button name="unset_product_on_warehouse_ids" type="object" string="Clear WH" class="bg-warning" invisible="parent.state != 'draft'"/>
+                    <field name="product_on_warehouse_ids" column_invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_order_line_for_product_on_warehouse">
+            <field name="name">sale.order.line list</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <form string="Sales Order Item">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_id" readonly="1" force_save="1"/>
+
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <label for="product_uom_qty"/>
+                                <div class="o_row">
+                                    <field name="product_uom_qty" readonly="1" force_save="1"/>
+                                    <field name="product_uom_id" readonly="1" force_save="1"/>
+                                </div>
+                                <field name="order_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <field name="product_on_warehouse_ids">
+                            <list editable="bottom">
+                                <field name="warehouse_id" readonly="1" force_save="1"/>
+                                <field name="available_qty" sum="Total Available" readonly="1" force_save="1"/>
+                                <field name="order_qty" sum="Total"/>
+                            </list>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button string="Save" name="save_data" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.sale</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="10"/>
+            <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//block[@id='pricing_setting_container']" position="after">
+                    <block title="Multi-Warehouse Distribution" id="sale_order_line_auto_fill">
+                        <setting id="auto_fill"
+                                 title="Automatically Distribute Quantity Across Warehouses"
+                                 help="If enabled, the system will automatically distribute the sale order line quantity among available warehouses based on stock availability.">
+                            <field name="auto_fill"/>
+                        </setting>
+                    </block>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

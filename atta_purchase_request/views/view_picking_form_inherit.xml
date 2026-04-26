@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_picking_form_add_request" model="ir.ui.view">
+            <field name="name">view.picking.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']"
+                       position="after">
+                        <field name="request_uid"/>
+                        <field name="department_id"/>
+                        <field name="type_data"
+                               invisible="not is_expense"/>
+                        <field name="fleet_id"
+                               invisible="type_data in ['computer', 'other'] or not is_expense"
+                               required="type_data == 'car'"/>
+                        <field name="odometer"
+                               invisible="type_data in ['computer', 'other'] or not is_expense"/>
+                        <field name="equipment_id"
+                               invisible="type_data in ['car', 'other'] or not is_expense"
+                               required="type_data == 'computer'"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="stock_inherit_view_picking_form">
+            <field name="name">stock.view_picking_form</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="model">stock.picking</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_id']" position="attributes">
+                    <attribute name="readonly">state in ['assigned', 'done']</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

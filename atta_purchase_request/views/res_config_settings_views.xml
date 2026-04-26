@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_config_settings_view_form_purchase" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.purchase</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="26"/>
+            <field name="inherit_id"
+                   ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block"
+                         data-string="Purchase Requests"
+                         string="Purchase Requests"
+                         data-key="purchase_request"
+                         groups="atta_purchase_request.purchase_request_group_manager"
+                    >
+                        <h2>Purchase Request</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="has_pr_4th_approve"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="has_pr_4th_approve"/>
+                                    <div class="text-muted">
+                                        Tick the checkbox if you want to approve
+                                        purchase requests by 4 levels.
+                                        The 4th level is triggered by
+                                        the untaxed amount of purchase request!
+                                    </div>
+                                    <div class="content-group"
+                                         invisible="not has_pr_4th_approve">
+                                        <div class="row mt16">
+                                            <label for="pr_4th_approve_amount"
+                                                   class="col-md-4 o_light_label"/>
+                                            <field name="pr_4th_approve_amount"
+                                                   required="has_pr_4th_approve"/>
+                                        </div>
+                                        <div class="ml-16 text-muted">
+                                            Minimum untaxed amount will trigger
+                                            the 4th approval level!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="is_required_vendor_in_pr"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="is_required_vendor_in_pr"/>
+                                    <div class="text-muted">
+                                        Tick the checkbox if you want to
+                                        require preferred vendors for all
+                                        PR lines in 2nd approval!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="purchase_request_action_configuration"
+                model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{
+                    'module' : 'purchase_request',
+                    'bin_size': False,
+                }
+            </field>
+        </record>
+
+    </data>
+</odoo>

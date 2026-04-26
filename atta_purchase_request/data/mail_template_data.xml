@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="mail_template_data_purchase_request_first_approval"
+                model="mail.template">
+            <field name="name">Purchase Request: 1st Level Approval</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="subject">1ST LEVEL APPROVAL FOR PURCHASE REQUEST: ${object.name}</field>
+            <field name="email_to">${(object.department_id.manager_id.user_id.email or '')|safe}</field>
+            <field name="body_html" type="html"><div>
+<!-- CSS Code-->
+<style>
+table.GeneratedTable {/*Table Style*/
+ width: 720px;
+ margin: 20px auto;
+ border-collapse: collapse;
+ border: 1px solid #F5F5F5;
+ background-color: #F5F5F5;
+ font-size:13px;
+ font-family: &quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;
+}
+
+table.GeneratedTable th {/*Header Style*/
+ margin: inherit;
+ padding: 20px 20px 20px 20px !important;
+ border: 1px solid #875a7b;
+ background-color: #875a7b;
+ color: #ffffff;
+ text-align: center !important;
+ font-size:18px;
+}
+
+table.GeneratedTable td {/*Body Style*/
+ padding: 10px 20px 10px 20px !important;
+ background-color: #F5F5F5 !important;
+}
+
+.button {/*Button Style*/
+ padding:5px 5px;
+ border-radius:4px;
+ line-height:5px;
+ font-style: initial;
+ font-variant-ligatures: initial;
+ font-variant-caps: initial;
+ font-weight: initial;
+ font-size: 13px;
+ text-align: center;
+ text-transform:uppercase;
+ color:#fff !important;
+ background:#008784 !important;
+}
+
+.fline {/*Footer Line Style*/
+ border-top: 2px solid #875a7b;
+}
+
+</style>
+
+<!-- End CSS Code-->
+<!-- Get Access URL of Record-->
+% set base_url = object.env['ir.config_parameter'].get_param('web.base.url') + '/web?#'
+% set record_id = object.id or ''
+% set view_type = 'form'
+% set model = 'purchase.request'
+% set action = object.env.ref('atta_purchase_request.purchase_request_action').id or ''
+% set menu_id = object.env.ref('atta_purchase_request.purchase_request_menu_root').id or ''
+% set params = {
+'id': record_id,
+'view_type': view_type,
+'model': model,
+'action': action,
+'menu_id': menu_id
+}
+% set access_url = base_url + urlencode(params)
+<!-- End Get Access URL-->
+
+<!-- Start Email Content-->
+<table class="GeneratedTable">
+ <!--Header-->
+ <thead>
+   <tr>
+     <th>1ST LEVEL APPROVAL FOR PURCHASE REQUEST: ${object.name}</th>
+   </tr>
+ </thead>
+ <!--End Header-->
+ <!--Body-->
+ <tbody>
+   <tr>
+     <td>
+       <p>Dear ${object.department_id.manager_id.user_id.name or ''},</p>
+       <p>The purchase request <b>${object.name}</b> has been submitted by <b>${object.create_uid.name or ''}</b>.</p>
+       <p>Below is some information of the purchase request:</p>
+       <div>
+         <ul>
+           <li>Requester: ${','.join(object.create_uid.employee_ids and object.create_uid.employee_ids.mapped('name') or '')}</li>
+           <li>Department: ${object.department_id and object.department_id.name or ''}</li>
+           <li>Description: ${object.description or ''}</li>
+           <li>Requested Delivery Date: ${object.request_deliver_date or '' }</li>
+         </ul>
+       </div>
+       <p>Please click to <a href="${access_url}" target="_blank" class="button">${object.name}</a> for detail information!</p>
+       <p>Best Regards.</p>
+     </td>
+   </tr>
+<!--End Body-->
+
+<!--Footer-->
+   <tr>
+     <td>
+       <p class="fline"></p>
+       <div><b>${object.company_id.name}</b></div>
+       % if user.company_id.phone:
+       <div>Phone: ${object.company_id.phone}</div>
+       % endif
+       % if user.company_id.email:
+       <div>Email: ${object.company_id.email}</div>
+       % endif
+       % if user.company_id.website:
+       <div>Website: <a href="${object.company_id.website}">${object.company_id.website}</a></div>
+       % endif
+     </td>
+   </tr>
+<!--End Footer-->
+ </tbody>
+</table>
+<!--End Email Content--></div>
+            </field>
+            <field name="lang"/>
+        </record>
+
+        <record id="mail_template_data_purchase_request_second_approval"
+                model="mail.template">
+            <field name="name">Purchase Request: 2nd Level Approval</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="subject">2ND LEVEL APPROVAL FOR PURCHASE REQUEST: ${object.name}</field>
+            <field name="email_to">${','.join(object.env.ref('atta_purchase_request.purchase_request_group_second_approval').users.filtered('email').mapped('email') or '')|safe}</field>
+            <field name="body_html" type="html"><div>
+ <!-- CSS Code-->
+<style>
+table.GeneratedTable {/*Table Style*/
+  width: 720px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  border: 1px solid #F5F5F5;
+  background-color: #F5F5F5;
+  font-size:13px;
+  font-family: &quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;
+}
+
+table.GeneratedTable th {/*Header Style*/
+  margin: inherit;
+  padding: 20px 20px 20px 20px !important;
+  border: 1px solid #875a7b;
+  background-color: #875a7b;
+  color: #ffffff;
+  text-align: center !important;
+  font-size:18px;
+}
+
+table.GeneratedTable td {/*Body Style*/
+  padding: 10px 20px 10px 20px !important;
+  background-color: #F5F5F5 !important;
+}
+
+.button {/*Button Style*/
+  padding:5px 5px;
+  border-radius:4px;
+  line-height:5px;
+  font-style: initial;
+  font-variant-ligatures: initial;
+  font-variant-caps: initial;
+  font-weight: initial;
+  font-size: 13px;
+  text-align: center;
+  text-transform:uppercase;
+  color:#fff !important;
+  background:#008784 !important;
+}
+
+.fline {/*Footer Line Style*/
+  border-top: 2px solid #875a7b;
+}
+
+</style>
+<!-- End CSS Code-->
+
+<!-- Get Access URL of Record-->
+% set base_url = object.env['ir.config_parameter'].get_param('web.base.url') + '/web?#'
+% set record_id = object.id or ''
+% set view_type = 'form'
+% set model = 'purchase.request'
+% set action = object.env.ref('atta_purchase_request.purchase_request_action').id or ''
+% set menu_id = object.env.ref('atta_purchase_request.purchase_request_menu_root').id or ''
+% set params = {
+'id': record_id,
+'view_type': view_type,
+'model': model,
+'action': action,
+'menu_id': menu_id
+}
+% set access_url = base_url + urlencode(params)
+<!-- End Get Access URL-->
+
+<!-- Start Email Content-->
+<table class="GeneratedTable">
+  <!--Header-->
+  <thead>
+    <tr>
+      <th>2ND LEVEL APPROVAL FOR PURCHASE REQUEST: ${object.name}</th>
+    </tr>
+  </thead>
+  <!--End Header-->
+
+  <!--Body-->
+  <tbody>
+    <tr>
+      <td>
+        <p>Dear all,</p>
+        <p>The purchase request <b>${object.name}</b> has been submitted by <b>${object.first_approve_uid and object.first_approve_uid.name or ''}</b>.</p>
+        <p>Below is some information of the purchase request:</p>
+        <div>
+          <ul>
+            <li>Requester: ${','.join(object.create_uid.employee_ids and object.create_uid.employee_ids.mapped('name') or '')}</li>
+            <li>Department: ${object.department_id and object.department_id.name or ''}</li>
+            <li>Description: ${object.description or ''}</li>
+            <li>Requested Delivery Date: ${object.request_deliver_date or '' }</li>
+          </ul>
+        </div>
+        <p>Please click to <a href="${access_url}" target="_blank" class="button">${object.name}</a> for detail information!</p>
+        <p>Best Regards.</p>
+      </td>
+    </tr>
+<!--End Body-->
+
+<!--Footer-->
+    <tr>
+      <td>
+        <p class="fline"></p>
+        <div><b>${object.company_id.name}</b></div>
+        % if user.company_id.phone:
+        <div>Phone: ${object.company_id.phone}</div>
+        % endif
+        % if user.company_id.email:
+        <div>Email: ${object.company_id.email}</div>
+        % endif
+        % if user.company_id.website:
+        <div>Website: <a href="${object.company_id.website}">${object.company_id.website}</a></div>
+        % endif
+      </td>
+    </tr>
+<!--End Footer-->
+  </tbody>
+</table>
+<!--End Email Content-->
+                </div>
+            </field>
+            <field name="lang"/>
+        </record>
+        
+        <record id="mail_template_data_purchase_request_third_approval"
+                model="mail.template">
+            <field name="name">Purchase Request: 3rd Level Approval</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="subject">3RD LEVEL APPROVAL FOR PURCHASE REQUEST: ${object.name}</field>
+            <field name="email_to">${','.join(object.env.ref('atta_purchase_request.purchase_request_group_third_approval').users.filtered('email').mapped('email') or '')|safe}</field>
+            <field name="body_html" type="html"><div>
+<!-- CSS Code-->
+<style>
+table.GeneratedTable {/*Table Style*/
+  width: 720px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  border: 1px solid #F5F5F5;
+  background-color: #F5F5F5;
+  font-size:13px;
+  font-family: &quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;
+}
+
+table.GeneratedTable th {/*Header Style*/
+  margin: inherit;
+  padding: 20px 20px 20px 20px !important;
+  border: 1px solid #875a7b;
+  background-color: #875a7b;
+  color: #ffffff;
+  text-align: center !important;
+  font-size:18px;
+}
+
+table.GeneratedTable td {/*Body Style*/
+  padding: 10px 20px 10px 20px !important;
+  background-color: #F5F5F5 !important;
+}
+
+.button {/*Button Style*/
+  padding:5px 5px;
+  border-radius:4px;
+  line-height:5px;
+  font-style: initial;
+  font-variant-ligatures: initial;
+  font-variant-caps: initial;
+  font-weight: initial;
+  font-size: 13px;
+  text-align: center;
+  text-transform:uppercase;
+  color:#fff !important;
+  background:#008784 !important;
+}
+
+.fline {/*Footer Line Style*/
+  border-top: 2px solid #875a7b;
+}
+
+</style>
+<!-- End CSS Code-->
+
+<!-- Get Access URL of Record-->
+% set base_url = object.env['ir.config_parameter'].get_param('web.base.url') + '/web?#'
+% set record_id = object.id or ''
+% set view_type = 'form'
+% set model = 'purchase.request'
+% set action = object.env.ref('atta_purchase_request.purchase_request_action').id or ''
+% set menu_id = object.env.ref('atta_purchase_request.purchase_request_menu_root').id or ''
+% set params = {
+'id': record_id,
+'view_type': view_type,
+'model': model,
+'action': action,
+'menu_id': menu_id
+}
+% set access_url = base_url + urlencode(params)
+<!-- End Get Access URL-->
+
+<!-- Start Email Content-->
+<table class="GeneratedTable">
+  <!--Header-->
+  <thead>
+    <tr>
+      <th>3RD LEVEL APPROVAL FOR PURCHASE REQUEST: ${object.name}</th>
+    </tr>
+  </thead>
+  <!--End Header-->
+  <!--Body-->
+  <tbody>
+    <tr>
+      <td>
+        <p>Dear all,</p>
+        <p>The purchase request <b>${object.name}</b> has been submitted by <b>${object.second_approve_uid and object.second_approve_uid.name or ''}</b>.</p>
+        <p>Below is some information of the purchase request:</p>
+        <div>
+          <ul>
+            <li>Requester: ${','.join(object.create_uid.employee_ids and object.create_uid.employee_ids.mapped('name') or '')}</li>
+            <li>Department: ${object.department_id and object.department_id.name or ''}</li>
+            <li>Description: ${object.description or ''}</li>
+            <li>Requested Delivery Date: ${object.request_deliver_date or '' }</li>
+          </ul>
+        </div>
+        <p>Please click to <a href="${access_url}" target="_blank" class="button">${object.name}</a> for detail information!</p>
+        <p>Best Regards.</p>
+      </td>
+    </tr>
+<!--End Body-->
+<!--Footer-->
+    <tr>
+      <td>
+        <p class="fline"></p>
+        <div><b>${object.company_id.name}</b></div>
+        % if user.company_id.phone:
+        <div>Phone: ${object.company_id.phone}</div>
+        % endif
+        % if user.company_id.email:
+        <div>Email: ${object.company_id.email}</div>
+        % endif
+        % if user.company_id.website:
+        <div>Website: <a href="${object.company_id.website}">${object.company_id.website}</a></div>
+        % endif
+      </td>
+    </tr>
+<!--End Footer-->
+  </tbody>
+</table>
+<!--End Email Content-->
+                </div>
+            </field>
+            <field name="lang"/>
+        </record>
+        
+        <record id="mail_template_data_purchase_request_fourth_approval"
+                model="mail.template">
+            <field name="name">Purchase Request: 4th Level Approval</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="subject">4TH LEVEL APPROVAL FOR PURCHASE REQUEST: ${object.name}</field>
+            <field name="email_to">${','.join(object.env.ref('atta_purchase_request.purchase_request_group_4th_approval').users.filtered('email').mapped('email') or '')|safe}</field>
+            <field name="body_html" type="html"><div>
+<!-- CSS Code-->
+<style>
+table.GeneratedTable {/*Table Style*/
+  width: 720px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  border: 1px solid #F5F5F5;
+  background-color: #F5F5F5;
+  font-size:13px;
+  font-family: &quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;
+}
+
+table.GeneratedTable th {/*Header Style*/
+  margin: inherit;
+  padding: 20px 20px 20px 20px !important;
+  border: 1px solid #875a7b;
+  background-color: #875a7b;
+  color: #ffffff;
+  text-align: center !important;
+  font-size:18px;
+}
+
+table.GeneratedTable td {/*Body Style*/
+  padding: 10px 20px 10px 20px !important;
+  background-color: #F5F5F5 !important;
+}
+
+.button {/*Button Style*/
+  padding:5px 5px;
+  border-radius:4px;
+  line-height:5px;
+  font-style: initial;
+  font-variant-ligatures: initial;
+  font-variant-caps: initial;
+  font-weight: initial;
+  font-size: 13px;
+  text-align: center;
+  text-transform:uppercase;
+  color:#fff !important;
+  background:#008784 !important;
+}
+
+.fline {/*Footer Line Style*/
+  border-top: 2px solid #875a7b;
+}
+</style>
+<!-- End CSS Code-->
+
+<!-- Get Access URL of Record-->
+% set base_url = object.env['ir.config_parameter'].get_param('web.base.url') + '/web?#'
+% set record_id = object.id or ''
+% set view_type = 'form'
+% set model = 'purchase.request'
+% set action = object.env.ref('atta_purchase_request.purchase_request_action').id or ''
+% set menu_id = object.env.ref('atta_purchase_request.purchase_request_menu_root').id or ''
+% set params = {
+'id': record_id,
+'view_type': view_type,
+'model': model,
+'action': action,
+'menu_id': menu_id
+}
+% set access_url = base_url + urlencode(params)
+<!-- End Get Access URL-->
+
+<!-- Start Email Content-->
+<table class="GeneratedTable">
+  <!--Header-->
+  <thead>
+    <tr>
+      <th>4TH LEVEL APPROVAL FOR PURCHASE REQUEST: ${object.name}</th>
+    </tr>
+  </thead>
+  <!--End Header-->
+  <!--Body-->
+  <tbody>
+    <tr>
+      <td>
+        <p>Dear all,</p>
+        <p>The purchase request <b>${object.name}</b> has been submitted by <b>${object.third_approve_uid and object.third_approve_uid.name or ''}</b>.</p>
+        <p>Below is some information of the purchase request:</p>
+        <div>
+          <ul>
+            <li>Requester: ${','.join(object.create_uid.employee_ids and object.create_uid.employee_ids.mapped('name') or '')}</li>
+            <li>Department: ${object.department_id and object.department_id.name or ''}</li>
+            <li>Description: ${object.description or ''}</li>
+            <li>Requested Delivery Date: ${object.request_deliver_date or '' }</li>
+          </ul>
+        </div>
+        <p>Please click to <a href="${access_url}" target="_blank" class="button">${object.name}</a> for detail information!</p>
+        <p>Best Regards.</p>
+      </td>
+    </tr>
+<!--End Body-->
+
+<!--Footer-->
+    <tr>
+      <td>
+        <p class="fline"></p>
+        <div><b>${object.company_id.name}</b></div>
+        % if user.company_id.phone:
+        <div>Phone: ${object.company_id.phone}</div>
+        % endif
+        % if user.company_id.email:
+        <div>Email: ${object.company_id.email}</div>
+        % endif
+        % if user.company_id.website:
+        <div>Website: <a href="${object.company_id.website}">${object.company_id.website}</a></div>
+        % endif
+      </td>
+    </tr>
+<!--End Footer-->
+  </tbody>
+</table>
+<!--End Email Content-->
+                </div>
+            </field>
+            <field name="lang"/>
+        </record>
+        
+        <record id="mail_template_data_purchase_request_successfully_approved"
+                model="mail.template">
+            <field name="name">Purchase Request: Successfully approved</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="subject">SUCCESSFULLY APPROVED PURCHASE REQUEST: ${object.name}</field>
+            <field name="email_to">${object.user_id.email |safe}</field>
+            <field name="body_html" type="html"><div>
+<!-- CSS Code-->
+<style>
+table.GeneratedTable {/*Table Style*/
+  width: 720px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  border: 1px solid #F5F5F5;
+  background-color: #F5F5F5;
+  font-size:13px;
+  font-family: &quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;
+}
+
+table.GeneratedTable th {/*Header Style*/
+  margin: inherit;
+  padding: 20px 20px 20px 20px !important;
+  border: 1px solid #875a7b;
+  background-color: #875a7b;
+  color: #ffffff;
+  text-align: center !important;
+  font-size:18px;
+}
+table.GeneratedTable td {/*Body Style*/
+  padding: 10px 20px 10px 20px !important;
+  background-color: #F5F5F5 !important;
+}
+.button {/*Button Style*/
+  padding:5px 5px;
+  border-radius:4px;
+  line-height:5px;
+  font-style: initial;
+  font-variant-ligatures: initial;
+  font-variant-caps: initial;
+  font-weight: initial;
+  font-size: 13px;
+  text-align: center;
+  text-transform:uppercase;
+  color:#fff !important;
+  background:#008784 !important;
+}
+.fline {/*Footer Line Style*/
+  border-top: 2px solid #875a7b;
+}
+</style>
+<!-- End CSS Code-->
+
+<!-- Get Access URL of Record-->
+% set base_url = object.env['ir.config_parameter'].get_param('web.base.url') + '/web?#'
+% set record_id = object.id or ''
+% set view_type = 'form'
+% set model = 'purchase.request'
+% set action = object.env.ref('atta_purchase_request.purchase_request_action').id or ''
+% set menu_id = object.env.ref('atta_purchase_request.purchase_request_menu_root').id or ''
+% set params = {
+'id': record_id,
+'view_type': view_type,
+'model': model,
+'action': action,
+'menu_id': menu_id
+}
+% set access_url = base_url + urlencode(params)
+<!-- End Get Access URL-->
+
+<!-- Start Email Content-->
+<table class="GeneratedTable">
+  <!--Header-->
+  <thead>
+    <tr>
+      <th>SUCCESSFULLY APPROVED PURCHASE REQUEST: ${object.name}</th>
+    </tr>
+  </thead>
+  <!--End Header-->
+  <!--Body-->
+  <tbody>
+    <tr>
+      <td>
+        <p>Dear ${object.user_id and object.user_id.name},</p>
+        <p>The purchase request <b>${object.name}</b> has been approved successfully.</p>
+        <p>Below is some information of the purchase request:</p>
+        <div>
+          <ul>
+            <li>Requester: ${','.join(object.create_uid.employee_ids and object.create_uid.employee_ids.mapped('name') or '')}</li>
+            <li>Department: ${object.department_id and object.department_id.name or ''}</li>
+            <li>Description: ${object.description or ''}</li>
+            <li>Requested Delivery Date: ${object.request_deliver_date or '' }</li>
+          </ul>
+        </div>
+        <p>Please click to <a href="${access_url}" target="_blank" class="button">${object.name}</a> for next actions!</p>
+        <p>Best Regards.</p>
+      </td>
+    </tr>
+<!--End Body-->
+
+<!--Footer-->
+    <tr>
+      <td>
+        <p class="fline"></p>
+        <div><b>${object.company_id.name}</b></div>
+        % if user.company_id.phone:
+        <div>Phone: ${object.company_id.phone}</div>
+        % endif
+        % if user.company_id.email:
+        <div>Email: ${object.company_id.email}</div>
+        % endif
+        % if user.company_id.website:
+        <div>Website: <a href="${object.company_id.website}">${object.company_id.website}</a></div>
+        % endif
+      </td>
+    </tr>
+<!--End Footer-->
+  </tbody>
+</table>
+<!--End Email Content-->
+                </div>
+            </field>
+            <field name="lang"/>
+        </record>
+
+        <record id="mail_template_data_purchase_request_cancel"
+                model="mail.template">
+            <field name="name">Purchase Request: Canceled</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="subject">CANCELED PURCHASE REQUEST: ${object.name}</field>
+            <field name="email_to">${','.join(object.message_partner_ids.mapped('user_ids').filtered('email').mapped('email'))}</field>
+            <field name="body_html" type="html"><div>
+<!-- CSS Code-->
+<style>
+table.GeneratedTable {/*Table Style*/
+  width: 720px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  border: 1px solid #F5F5F5;
+  background-color: #F5F5F5;
+  font-size:13px;
+  font-family: &quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif;
+}
+table.GeneratedTable th {/*Header Style*/
+  margin: inherit;
+  padding: 20px 20px 20px 20px !important;
+  border: 1px solid #875a7b;
+  background-color: #875a7b;
+  color: #ffffff;
+  text-align: center !important;
+  font-size:18px;
+}
+table.GeneratedTable td {/*Body Style*/
+  padding: 10px 20px 10px 20px !important;
+  background-color: #F5F5F5 !important;
+}
+.button {/*Button Style*/
+  padding:5px 5px;
+  border-radius:4px;
+  line-height:5px;
+  font-style: initial;
+  font-variant-ligatures: initial;
+  font-variant-caps: initial;
+  font-weight: initial;
+  font-size: 13px;
+  text-align: center;
+  text-transform:uppercase;
+  color:#fff !important;
+  background:#008784 !important;
+}
+
+.fline {/*Footer Line Style*/
+  border-top: 2px solid #875a7b;
+}
+</style>
+<!-- End CSS Code-->
+
+<!-- Get Access URL of Record-->
+% set base_url = object.env['ir.config_parameter'].get_param('web.base.url') + '/web?#'
+% set record_id = object.id or ''
+% set view_type = 'form'
+% set model = 'purchase.request'
+% set action = object.env.ref('atta_purchase_request.purchase_request_action').id or ''
+% set menu_id = object.env.ref('atta_purchase_request.purchase_request_menu_root').id or ''
+% set params = {
+'id': record_id,
+'view_type': view_type,
+'model': model,
+'action': action,
+'menu_id': menu_id
+}
+% set access_url = base_url + urlencode(params)
+<!-- End Get Access URL-->
+
+<!-- Start Email Content-->
+<table class="GeneratedTable">
+  <!--Header-->
+  <thead>
+    <tr>
+      <th>CANCELED PURCHASE REQUEST: ${object.name}</th>
+    </tr>
+  </thead>
+  <!--End Header-->
+  <!--Body-->
+  <tbody>
+    <tr>
+      <td>
+        <p>Dear all,</p>
+        <p>The purchase request <b>${object.name}</b> has been canceled by <b>${object.cancel_uid and object.cancel_uid.name or ''}</b>.</p>
+        <p>Below is some information of the purchase request:</p>
+        <div>
+          <ul>
+            <li>Requester: ${','.join(object.create_uid.employee_ids and object.create_uid.employee_ids.mapped('name') or '')}</li>
+            <li>Department: ${object.department_id and object.department_id.name or ''}</li>
+            <li>Description: ${object.description or ''}</li>
+            <li>Requested Delivery Date: ${object.request_deliver_date or '' }</li>
+          </ul>
+        </div>
+        <p>Please click to <a href="${access_url}" target="_blank" class="button">${object.name}</a> for detail information!</p>
+        <p>Best Regards.</p>
+      </td>
+    </tr>
+<!--End Body-->
+
+<!--Footer-->
+    <tr>
+      <td>
+        <p class="fline"></p>
+        <div><b>${object.company_id.name}</b></div>
+        % if user.company_id.phone:
+        <div>Phone: ${object.company_id.phone}</div>
+        % endif
+        % if user.company_id.email:
+        <div>Email: ${object.company_id.email}</div>
+        % endif
+        % if user.company_id.website:
+        <div>Website: <a href="${object.company_id.website}">${object.company_id.website}</a></div>
+        % endif
+      </td>
+    </tr>
+<!--End Footer-->
+  </tbody>
+</table>
+<!--End Email Content-->
+                </div>
+            </field>
+            <field name="lang"/>
+        </record>
+
+    </data>
+</odoo>

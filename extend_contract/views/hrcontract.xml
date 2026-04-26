@@ -1,0 +1,53 @@
+<odoo>
+    <data noupdate="">
+        <!-- Odoo 19 migration: hr_contract.hr_contract_view_form and hr.contract no longer exist.
+             Old view kept for migration reference:
+        <record model="ir.ui.view" id="hr_view_pyroll_contract">
+            <field name="name">hr._view_pyroll_contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="model">hr.contract</field>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[2]/group[1]" position="inside">
+                    <group name="salary">
+                        <label for="thesalary"/>
+                        <div class="o_row" name="salary">
+                            <field name="thesalary" nolabel="1"/>
+                            <span>/ month</span>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        -->
+
+        <record model="ir.ui.view" id="hr_view_pyroll_contract">
+            <field name="name">hr.employee.form.inherit.thesalary</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='wage']" position="after">
+                    <label for="thesalary"/>
+                    <div class="o_row" name="thesalary">
+                        <field name="thesalary" nolabel="1"/>
+                        <span>/ month</span>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_contract_template_form_inherit_thesalary">
+            <field name="name">hr.contract.template.form.inherit.thesalary</field>
+            <field name="inherit_id" ref="hr.hr_contract_template_form_view"/>
+            <field name="model">hr.version</field>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='wage']" position="after">
+                    <label for="thesalary"/>
+                    <div class="o_row" name="thesalary">
+                        <field name="thesalary" nolabel="1"/>
+                        <span>/ month</span>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

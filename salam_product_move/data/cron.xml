@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="cron_stock_move_line_update_qty" model="ir.cron">
+            <field name="name">Stock Move Line qty update</field>
+            <field name="model_id" ref="salam_product_move.model_stock_move_line"/>
+            <field name="state">code</field>
+            <field name="code">model.update_move_qty_line()</field>
+            <field eval="False" name="active" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+    </data>
+</odoo>

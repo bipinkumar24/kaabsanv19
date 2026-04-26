@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="purchase_request_line_view_tree" model="ir.ui.view">
+            <field name="name">purchase.request.line.view.tree</field>
+            <field name="model">purchase.request.line</field>
+            <field name="arch" type="xml">
+                <tree decoration-muted="quantity == 0 or request_state == 'canceled'"
+                      decoration-danger="request_state == 'final' and po_creation_state != 'fully' and quantity > 0"
+                      decoration-success="request_state == 'done' or po_creation_state == 'fully'"
+                >
+                    <field name="request_id" optional="show"/>
+                    <field name="request_state" optional="show"/>
+                    <field name="product_id" optional="show"/>
+                    <field name="description" optional="show"/>
+                    <field name="request_deliver_date" optional="show"/>
+                    <field name="schedule_date" optional="show"/>
+                    <field name="quantity" optional="show"/>
+                    <field name="partner_id" optional="show"/>
+                    <field name="currency_id" optional="show"/>
+                    <field name="price_unit_currency" optional="hide"/>
+                    <field name="price_unit" optional="hide"/>
+                    <field name="uom_id" optional="show"/>
+                    <field name="price_total" optional="hide"/>
+                    <field name="purchased_qty" optional="show"/>
+                    <field name="po_creation_state" invisible="1"/>
+                    <field name="state_creation"/>
+                    <field name="note" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="purchase_request_line_view_form" model="ir.ui.view">
+            <field name="name">purchase.request.line.view.form</field>
+            <field name="model">purchase.request.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_id"/>
+                                <field name="description"/>
+                                <field name="uom_id"/>
+                                <field name="request_qty"/>
+                                <field name="quantity"/>
+                                <field name="purchased_qty"/>
+                                <field name="price_unit_currency"
+                                       groups="atta_purchase_request.purchase_request_group_second_approval"/>
+                                <field name="currency_id"/>
+                                <field name="price_unit"
+                                       groups="atta_purchase_request.purchase_request_group_second_approval"/>
+                                <field name="price_total"
+                                       groups="atta_purchase_request.purchase_request_group_second_approval"/>
+                            </group>
+                            <group>
+                                <field name="request_id"/>
+                                <field name="request_state"/>
+                                <field name="request_deliver_date"/>
+                                <field name="schedule_date"/>
+                                <field name="po_creation_state"/>
+                                <field name="request_uid"/>
+                                <field name="department_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Purchase Order Lines"
+                                  groups="atta_purchase_request.purchase_request_group_second_approval">
+                                <field name="order_line_ids">
+                                    <tree>
+                                        <field name="order_id"/>
+                                        <field name="partner_id"/>
+                                        <field name="product_id"/>
+                                        <field name="name"/>
+                                        <field name="price_unit"/>
+                                        <field name="product_qty" sum="Sum"/>
+                                        <field name="product_uom"/>
+                                        <field name="price_subtotal"
+                                               sum="Sum"/>
+                                        <field name="date_planned"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter
+                        reload_on_post="True"
+                        reload_on_attachment="True"
+                        reload_on_follower="True"
+                        open_attachments="True"
+                    />
+                </form>
+            </field>
+        </record>
+
+        <record id="purchase_request_line_view_search" model="ir.ui.view">
+            <field name="name">purchase.request.line.view.search</field>
+            <field name="model">purchase.request.line</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="request_id"/>
+                    <field name="product_id"/>
+                    <field name="partner_id"/>
+                    <filter string="Need To Be Purchased"
+                            name="need_purchase"
+                            domain="[
+                                ('request_state','=','final'),
+                                ('po_creation_state','!=','fully'),
+                                ('quantity','>',0),
+                            ]"/>
+                    <group>
+                        <filter string="Purchase Request"
+                                name="group_request_id"
+                                context="{'group_by': 'request_id'}"
+                        />
+                        <filter string="Product"
+                                name="group_product_id"
+                                context="{'group_by': 'product_id'}"
+                        />
+                        <filter string="Preferred Vendor"
+                                name="group_partner_id"
+                                context="{'group_by': 'partner_id'}"
+                        />
+                        <filter string="RFQ/PO Creation Status"
+                                name="group_po_creation_state"
+                                context="{'group_by': 'po_creation_state'}"
+                        />
+                        <filter string="Status"
+                                name="group_request_state"
+                                context="{'group_by': 'request_state'}"
+                        />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="purchase_request_line_action"
+                model="ir.actions.act_window">
+            <field name="name">Purchase Request Lines</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.request.line</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="context">{
+                'create': 0,
+                'edit': 0,
+                'delete': 0,
+                'search_default_need_purchase': 1,
+                }
+            </field>
+        </record>
+
+        <record id="purchase_request_line_action_create_po"
+                model="ir.actions.server">
+            <field name="name">Create RFQ/PO</field>
+            <field name="model_id" ref="model_purchase_request_line"/>
+            <field name="binding_model_id" ref="model_purchase_request_line"/>
+            <field name="groups_id" eval="[(4, ref('atta_purchase_request.group_create_RFQ_PO'))]"/>
+            <field name="state">code</field>
+            <field name="code">action = records.create_purchase_order()</field>
+        </record>
+
+        <record id="purchase_request_line_action_create_expense_transfer" model="ir.actions.server">
+            <field name="name">Create Expense Transfer</field>
+            <field name="model_id" ref="model_purchase_request_line"/>
+            <field name="binding_model_id" ref="model_purchase_request_line"/>
+            <field name="groups_id" eval="[(4, ref('atta_purchase_request.group_create_expense_transfer'))]"/>
+            <field name="state">code</field>
+            <field name="code">action = records.create_expense_transfer()</field>
+        </record>
+
+        <record id="purchase_request_line_action_group_create_stock_request" model="ir.actions.server">
+            <field name="name">Create Stock Request</field>
+            <field name="model_id" ref="model_purchase_request_line"/>
+            <field name="binding_model_id" ref="model_purchase_request_line"/>
+            <field name="groups_id" eval="[(4, ref('atta_purchase_request.group_create_stock_request'))]"/>
+            <field name="state">code</field>
+            <field name="code">action = records.create_stock_request()</field>
+        </record>
+    </data>
+</odoo>

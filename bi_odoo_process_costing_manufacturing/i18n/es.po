@@ -1,0 +1,630 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_odoo_process_costing_manufacturing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-25 13:02+0000\n"
+"PO-Revision-Date: 2022-08-25 13:02+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.actions.report,print_report_name:bi_odoo_process_costing_manufacturing.action_report_bom_cost_report
+msgid ""
+"'BOM - %s' % (object.product_id.name or object.product_tmpl_id.name or '')"
+msgstr ""
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.actions.report,print_report_name:bi_odoo_process_costing_manufacturing.action_report_order_cost
+msgid "'Production Order Cost- %s' % object.name"
+msgstr "'Costo de orden de producción- %s' % object.name"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "<strong>Bill of Material : </strong>"
+msgstr "<strong>Lista de materiales: </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "<strong>Bom Type : </strong>"
+msgstr "<strong>Tipo de Bom: </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "<strong>Deadline Start : </strong>"
+msgstr "<strong>Plazo de inicio: </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "<strong>Product : </strong>"
+msgstr "<strong>Producto : </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "<strong>Product Variant : </strong>"
+msgstr "<strong>Variante del producto: </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "<strong>Quantity : </strong>"
+msgstr "<strong>Cantidad : </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "<strong>Quantity To Produce : </strong>"
+msgstr "<strong>Cantidad a producir: </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "<strong>Reference : </strong>"
+msgstr "<strong>Referencia : </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "<strong>Responsible : </strong>"
+msgstr "<strong>Responsable : </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "<strong>Routing : </strong>"
+msgstr "<strong>Enrutamiento: </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "<strong>Source : </strong>"
+msgstr "<strong>Fuente : </strong>"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_workcenter_view_inherit_extend_view_1_pro
+msgid "Actual Costing"
+msgstr "Costo real"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__actual_qty
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__actual_qty
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__actual_hour_wo
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Actual Hour"
+msgstr "Hora real"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__actual_qty
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Actual Qty"
+msgstr "Cantidad real"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.actions.report,name:bi_odoo_process_costing_manufacturing.action_report_bom_cost_report
+msgid "BOM Cost Report"
+msgstr "Informe de costos de lista de materiales"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Bill Of Materials"
+msgstr "Lista de materiales"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Lista de materiales"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Línea de lista de materiales"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "By Products"
+msgstr "Por productos"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_change_production_qty
+msgid "Change Production Qty"
+msgstr "Cambiar cantidad de producción"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Components"
+msgstr "Componentes"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Consumed"
+msgstr "Consumada"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Consumed In Operation"
+msgstr "consumido en funcionamiento"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Consumed Materials"
+msgstr "Materiales consumidos"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__cost
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Cost/Hour"
+msgstr "Costo/Hora"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__cost
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Cost/Unit"
+msgstr "Costo/Unidad"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_material_cost_form_view
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_material_cost_form_view
+msgid "Costing"
+msgstr "Costo"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__create_uid
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__create_uid
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__create_date
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__create_date
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom__currency_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__currency_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__currency_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__currency_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__currency_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__currency_id
+msgid "Currency"
+msgstr "Divisa"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_material_cost_form_view
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_material_cost_form_view
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Direct Labour Cost"
+msgstr "Costo de mano de obra directa"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_material_cost_form_view
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_material_cost_form_view
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Direct Material Cost"
+msgstr "Costo de materiales directos"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_material_cost_form_view
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_material_cost_form_view
+msgid "Direct Overhead Cost"
+msgstr "Costo indirecto directo"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__display_name
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__display_name
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Finished Products"
+msgstr "Productos terminados"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__id
+msgid "ID"
+msgstr "IDENTIFICACIÓN"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom__bom_labour_cost_ids
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__pro_labour_cost_ids
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__wo_labour_cost_ids
+msgid "Labour Cost"
+msgstr "Costo laboral"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workcenter__labour_costs_hour
+msgid "Labour Costs per hour"
+msgstr "Costos de mano de obra por hora"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost____last_update
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost____last_update
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__write_uid
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__write_uid
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__write_date
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__write_date
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.view_res_config_process_inherit
+msgid "MO Process Costing"
+msgstr "Costeo de procesos de MO"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields.selection,name:bi_odoo_process_costing_manufacturing.selection__res_company__process_costing__manually
+msgid "Manually"
+msgstr "A mano"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Manufacturing Orders -"
+msgstr "Órdenes de Fabricación -"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_material_cost_form_view
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Manufacturing Overhead Cost"
+msgstr "Costo general de fabricación"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.view_production_cost_pivot
+msgid "Manufacturing Process Costing"
+msgstr "Costeo del proceso de fabricación"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom__bom_material_cost_ids
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__pro_material_cost_ids
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__wo_material_cost_ids
+msgid "Material Cost"
+msgstr "Costo material"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__mrp_bom_labour_id
+msgid "Mrp Bom Labour"
+msgstr "Mrp buen trabajo"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__mrp_bom_material_id
+msgid "Mrp Bom Material"
+msgstr "Material de la lista de materiales de Mrp"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__mrp_bom_overhead_id
+msgid "Mrp Bom Overhead"
+msgstr "Mrp Bom gastos generales"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__mrp_pro_labour_id
+msgid "Mrp Production Labour"
+msgstr "Mano de obra de producción Mrp"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__mrp_pro_material_id
+msgid "Mrp Production Material"
+msgstr "Material de producción mrp"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__mrp_pro_overhead_id
+msgid "Mrp Production Overhead"
+msgstr "Gastos generales de producción de Mrp"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__mrp_wo_labour_id
+msgid "Mrp Workorder Labour"
+msgstr "Mano de obra Mrp Workorder"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__mrp_wo_material_id
+msgid "Mrp Workorder Material"
+msgstr "Material de orden de trabajo Mrp"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__mrp_wo_overhead_id
+msgid "Mrp Workorder Overhead"
+msgstr "Gastos generales de la orden de trabajo de Mrp"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__operation_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__operation_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__operation_id
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Operation"
+msgstr "Operación"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom__bom_overhead_cost_ids
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__pro_overhead_cost_ids
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__wo_overhead_cost_ids
+msgid "Overhead Cost"
+msgstr "Costo general"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workcenter__overhead_cost_hour
+msgid "Overhead Costs per hour"
+msgstr "Costos generales por hora"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__planned_qty
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__planned_qty
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Planned Hour"
+msgstr "Hora planificada"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__planned_qty
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Planned Qty"
+msgstr "Cantidad planificada"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_res_company__process_costing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_res_config_settings__process_costing
+msgid "Process Costing Method"
+msgstr "Método de costeo por procesos"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.view_res_config_process_inherit
+msgid "Process Costing Method."
+msgstr "Método de costeo por procesos."
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Produced"
+msgstr "Producida"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__product_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__product_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__product_id
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Product"
+msgstr "Producto"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Product Qty"
+msgstr "Cantidad de producto"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Product Quantity"
+msgstr "Cantidad de producto"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Product UOM"
+msgstr "Unidad de medida del producto"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__product_unit_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__product_unit_cost
+msgid "Product Unit Cost"
+msgstr "Costo unitario del producto"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_mrp_production
+msgid "Production Order"
+msgstr "Orden de producción"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.actions.report,name:bi_odoo_process_costing_manufacturing.action_report_order_cost
+msgid "Production Order Cost"
+msgstr "Costo de orden de producción"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,help:bi_odoo_process_costing_manufacturing.field_mrp_workcenter__labour_costs_hour
+msgid "Specify cost of Labour per hour."
+msgstr "Especifique el costo de mano de obra por hora."
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,help:bi_odoo_process_costing_manufacturing.field_mrp_workcenter__overhead_cost_hour
+msgid "Specify cost of Overhead per hour."
+msgstr "Especifique el costo de Overhead por hora."
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "To Consume"
+msgstr "Consumir"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__total_actual_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__total_actual_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__total_actual_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__total_actual_all_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__total_actual_all_cost
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Total Actual Cost"
+msgstr "Costo real total"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__total_actual_labour_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__total_actual_labour_cost
+msgid "Total Actual Labour Cost"
+msgstr "Costo total de mano de obra real"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__total_actual_material_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__total_actual_material_cost
+msgid "Total Actual Material Cost"
+msgstr "Costo total real de materiales"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__total_actual_overhead_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__total_actual_overhead_cost
+msgid "Total Actual Overhead Cost"
+msgstr "Costo general real total"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__total_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__total_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__total_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__total_all_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__total_all_cost
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Total Cost"
+msgstr "Coste total"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Total Cost :"
+msgstr "Coste total :"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom__bom_total_labour_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__total_labour_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__total_labour_cost
+msgid "Total Labour Cost"
+msgstr "Costo total de mano de obra"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Total Labour Cost :"
+msgstr "Costo total de mano de obra :"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom__bom_total_material_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__pro_total_material_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__total_material_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__total_material_cost
+msgid "Total Material Cost"
+msgstr "Costo total de materiales"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Total Material Cost :"
+msgstr "Costo total de materiales :"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom__bom_total_overhead_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_production__total_overhead_cost
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_workorder__total_overhead_cost
+msgid "Total Overhead Cost"
+msgstr "Costo general total"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Total Overhead Cost :"
+msgstr "Costo general total :"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__uom_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_material_cost__uom_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__uom_id
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "UOM"
+msgstr "UOM"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Unit Of Measure"
+msgstr "Unidad de medida"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_order_report_custom
+msgid "Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_bom_cost_report_custom
+msgid "Variants"
+msgstr "variantes"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_mrp_workcenter
+msgid "Work Center"
+msgstr "Centro de trabajo"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_mrp_workorder
+msgid "Work Order"
+msgstr "Orden de trabajo"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields.selection,name:bi_odoo_process_costing_manufacturing.selection__res_company__process_costing__workcenter
+msgid "Work-Center"
+msgstr "Centro de trabajo"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_labour_cost__workcenter_id
+#: model:ir.model.fields,field_description:bi_odoo_process_costing_manufacturing.field_mrp_bom_overhead_cost__workcenter_id
+msgid "Workcenter"
+msgstr "Centro de trabajo"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: code:addons/bi_odoo_process_costing_manufacturing/models/process_costing.py:0
+#, python-format
+msgid "You have already processed %s. Please input a quantity higher than %s "
+msgstr "Ya ha procesado %s. Ingrese una cantidad superior a %s"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_material_cost_form_view
+msgid "cost"
+msgstr "costo"
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_mrp_bom_labour_cost
+msgid "mrp.bom.labour.cost"
+msgstr ""
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_mrp_bom_material_cost
+msgid "mrp.bom.material.cost"
+msgstr ""
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model:ir.model,name:bi_odoo_process_costing_manufacturing.model_mrp_bom_overhead_cost
+msgid "mrp.bom.overhead.cost"
+msgstr ""
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_material_cost_form_view
+msgid "total_actual_cost"
+msgstr ""
+
+#. module: bi_odoo_process_costing_manufacturing
+#: model_terms:ir.ui.view,arch_db:bi_odoo_process_costing_manufacturing.mrp_production_material_cost_form_view
+msgid "total_cost"
+msgstr ""

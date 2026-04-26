@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="remark_remark_wizard_wizard_view" model="ir.ui.view">
+            <field name="name">Voucher</field>
+            <field name="model">remark.remark.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Voucher">
+                    <group>
+                        <div class="o_td_label">
+                            <label for="name" string="Remarks" class="oe_inline" />
+                            <label for="name" string="  *" class="text-danger oe_inline" />
+                        </div>
+                        <div>
+                            <field name="name" required="1" nolable="1" />
+                        </div>
+                    </group>
+                    <footer>
+                        <button name="approve" string="Approve" type="object" default_focus="1" class="oe_highlight" />
+                        <button name="reject" string="Reject" type="object" default_focus="1" class="oe_highlight" />
+                        <button string="Cancel" class="btn btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

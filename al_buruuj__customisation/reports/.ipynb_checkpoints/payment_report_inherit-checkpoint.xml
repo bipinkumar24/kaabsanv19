@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="payment_report_inherit" inherit_id="account.report_payment_receipt_document">
+           
+         <xpath expr="//div[@class='row mt64']" position="before">
+                 <div class="row mt64" id="col_inherit3">
+                    <div class="col-6" t-if="o.payment_id.create_uid">
+                        <strong>Create by: </strong> <span t-field="o.payment_id.create_uid"/>
+                    </div>
+                    <div class="col-6" t-if="o.payment_id.create_date">
+                        <strong>Created date: </strong> <span t-field="o.payment_id.create_date"/>
+                    </div>
+                 </div>
+        	
+         </xpath>
+        <xpath expr="//div[@class='row mt64']" position="after">
+                <div class="row mt64" id="col_inherit1">
+                    <div class="col-6" t-if="o.payment_id.Vocher_number">
+                        <strong>Voucher number: </strong> <span t-field="o.payment_id.Vocher_number"/>
+                    </div>
+                    <div class="col-6" t-if="o.payment_id.Check_number">
+                        <strong>Check number: </strong> <span t-field="o.payment_id.Check_number"/>
+                    </div>
+                 </div>
+                     
+                <div class="row mt64" id="col_inherit2">
+                    <div class="col-6" t-if="o.payment_id.payment_Method">
+                        <strong>Payment: </strong> <span t-field="o.payment_id.payment_Method"/>
+                    </div>
+                     
+                     <div class="col-6" >
+                        <strong>Status: </strong> <span t-field="o.payment_id.state"/>
+                    </div> 
+                </div>
+            </xpath>
+        
+    </template>
+    
+</odoo>
+
+

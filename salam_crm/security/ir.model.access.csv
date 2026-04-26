@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_approval_level_crm,access.approval.level.crm,model_approval_level_crm,,1,1,1,1
+access_remarks_approval, access.remarks.approval,model_crm_remark_wizard,,1,1,1,1
+access_remarks_approval_crm, access.remarks.approval.crm,model_remarks_approval_crm,,1,1,1,1

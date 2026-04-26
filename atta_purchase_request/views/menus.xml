@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="purchase_request_menu_root"
+                  name="Purchase Requests"
+                  web_icon="purchase_request,static/description/icon.png"
+                  groups="atta_purchase_request.purchase_request_group_user"
+                  sequence="26"
+        />
+
+        <menuitem id="purchase_request_menu_action"
+                  name="Purchase/Stock Requests / Expense Transfer"
+                  parent="purchase_request_menu_root"
+                  action="purchase_request_action"
+                  sequence="10"
+        />
+
+        <menuitem id="purchase_request_line_menu_action"
+                  name="Purchase Request Lines"
+                  parent="purchase_request_menu_root"
+                  action="purchase_request_line_action"
+                  groups="atta_purchase_request.purchase_request_group_second_approval"
+                  sequence="20"
+        />
+
+        <menuitem id="purchase_request_menu_config"
+                  name="Configuration"
+                  parent="purchase_request_menu_root"
+                  sequence="100"
+                  groups="atta_purchase_request.purchase_request_group_manager"
+        />
+
+        <menuitem id="menu_purchase_general_settings"
+                  name="Settings"
+                  parent="purchase_request_menu_config"
+                  sequence="0"
+                  action="purchase_request_action_configuration"
+                  groups="base.group_system"
+        />
+
+
+    </data>
+</odoo>

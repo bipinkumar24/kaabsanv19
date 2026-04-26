@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_evalution_competencies_objectives_form">
+            <field name="name">evalution.competencies.objectives.template.form</field>
+            <field name="model">evalution.competencies.objectives.template</field>
+            <field name="arch" type="xml">
+                <form string="Evaluation Evaluation Question Template Form">
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="active" invisible="1"/>
+                            </group>
+                        </group>
+                        <group name="description" string="DESCRIPTION">
+                            <field name="performance_introduction" nolabel="1"/>
+                        </group>
+                        <notebook>
+                            <page name="compentenies_page" string="Competencies">
+                                <field name="competencies_line_ids">
+                                    <list editable="bottom">
+                                        <field name="competencies_objectives_id"  context="{'default_type': 'competencies'}" domain="[('type', '=', 'competencies')]"/>
+                                        <field name="percentage"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="competencies_objectives_id"/>
+                                            <field name="percentage"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page name="objective_page" string="Objectives">
+                                <field name="objectives_line_ids">
+                                    <list editable="bottom">
+                                        <field name="competencies_objectives_id" context="{'default_type': 'objectives'}" domain="[('type', '=', 'objectives')]"/>
+                                        <field name="percentage"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="competencies_objectives_id"/>
+                                            <field name="percentage"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_evalution_competencies_objectives_tree">
+            <field name="name">evalution.competencies.objectives.template.tree</field>
+            <field name="model">evalution.competencies.objectives.template</field>
+            <field name="arch" type="xml">
+                <list string="Evaluation Evaluation Question Template List">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_evalution_competencies_objectives_search">
+            <field name="name">evalution.competencies.objectives.template.search</field>
+            <field name="model">evalution.competencies.objectives.template</field>
+            <field name="arch" type="xml">
+                <search string="Evaluation Evaluation Question Template Search">
+                   <field name="name" string="Competencies / Objectives"/>
+               </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_evalution_competencies_objectives">
+            <field name="name">Evaluation Question Template</field>
+            <field name="res_model">evalution.competencies.objectives.template</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem  id="menu_evalution_competencies_objectives" parent="odoo_hr_evaluation_form.menu_human_resources_configuration_hr_evaluation" action="action_evalution_competencies_objectives"/>
+
+
+    </data>
+</odoo>

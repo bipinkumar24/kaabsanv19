@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="allcation_request_wizard_form" model="ir.ui.view">
+            <field name="name">allcation.request.wizard.form</field>
+            <field name="model">allcation.request.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="subject" required="1"/>
+                                <field name="department_id"/>
+                            </group>
+                            <group>
+                                <field name="warehouse_id" required="1"/>
+                                <field name="location_id" required="1"/>
+                                <field name="destination_id" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer class="oe_edit_only">
+                        <button name="action_allocation_request" type="object"
+                                string="Create Allocation"
+                                class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

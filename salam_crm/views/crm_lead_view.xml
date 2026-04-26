@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_crm_case_my_activities_filter_approvel" model="ir.ui.view">
+            <field name="name">crm.lead.search.myactivities</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='activity_state']" position="before">
+                    <field name="next_approval_id"/>
+                </xpath>
+                <xpath expr="//filter[@name='salesperson']" position="before">
+                    <filter string="Lead Status" name="lead_status" context="{'group_by':'next_approval_id'}"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_crm_case_my_graph_filter_approvel" model="ir.ui.view">
+            <field name="name">crm.lead.search.graph.salam</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_graph"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='stage_id']" position="replace">
+                    <field name="next_approval_id"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_crm_lead_inherit_salam" model="ir.ui.view">
+            <field name="name">crm.lead.inherit.salam</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/field[@name='stage_id']" position="after">
+                    <field name="next_approval_id" widget="statusbar" />
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="p_name"/>
+            </xpath>
+
+
+                <xpath expr="//header/button[@name='%(crm.action_crm_lead2opportunity_partner)d']" position="replace"/>
+                <xpath expr="//header/button[@name='%(crm.crm_lead_lost_action)d']" position="replace"/>
+                <xpath expr="//header" position="inside">
+                    <field name="is_button" invisible="1" />
+                    <field name="is_customer_doc_required" invisible="1" />
+                    <button name="action_approve" type="object" invisible="not is_button" string="Next Stage / Reject" class="oe_highlight" />
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="next_approval_user_ids"  invisible="1"/>
+                </xpath>
+
+                <xpath expr="//h2" position="after">
+                    <field name="company_type" widget="radio" options="{'horizontal': true}"/>
+                </xpath>
+                <xpath expr="//field[@name='lang_id']" position="after">
+                    <field name="pickup_location_id"/>
+                    <field name="drop_location_id"/>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="string">Agent</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="groups">base.group_user</attribute>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="customer_info_doc" string="Customer Documents">
+                        <group>
+                            <group>
+                                <field name="commercial_reg"
+                                       required="is_customer_doc_required"
+                                />
+                                <field name="business_license"
+                                       required="is_customer_doc_required"
+                                />
+                                <field name="passport"
+                                       required="is_customer_doc_required"
+                                />
+
+                                <field name="article_of_association"
+                                       required="company_type == 'company' and is_customer_doc_required"
+                                       invisible="company_type != 'company'" />
+                                <field name="mou"
+                                       required="company_type == 'company' and is_customer_doc_required"
+                                       invisible="company_type != 'company'"/>
+                                <field name="minutes"
+                                       required="company_type == 'company' and is_customer_doc_required"
+                                       invisible="company_type != 'company'"/>
+                                <field name="resolution_latter"
+                                       required="company_type == 'company' and is_customer_doc_required"
+                                       invisible="company_type != 'company'"/>
+                            </group>
+
+                            <group >
+
+                            </group>
+                        </group>
+                    </page>
+                    <page name="remarks" string="Remarks">
+                        <field name="remark_ids" readonly="1">
+                            <list>
+                                <field name="user_id" readonly="1"/>
+                                <field name="name" readonly="1"/>
+                                <field name="remark_datettime" readonly="1"/>
+                                <field name="consumed_hours" readonly="1"/>
+                                <field name="from_stage_id" readonly="1"/>
+                                <field name="to_stage_id" readonly="1"/>
+                                <field name="remark_type" readonly="1"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

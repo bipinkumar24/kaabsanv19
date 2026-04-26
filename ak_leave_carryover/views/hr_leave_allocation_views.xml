@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_leave_allocation_view_tree_carry_over" model="ir.ui.view">
+        <field name="name">hr.leave.allocation.view.tree.carry.over</field>
+        <field name="model">hr.leave.allocation</field>
+        <field name="inherit_id" ref="hr_holidays.view_hr_leave_allocation_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='year']" position="after">
+                <separator/>
+            <filter domain="[('leave_carryover_id','!=', False)]" string="Carry Over" name="carryover"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

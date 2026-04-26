@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="purchase_request_stock_request_wizard" model="ir.ui.view">
+            <field name="name">purchase_request_stock_request_wizard</field>
+            <field name="model">stock.request.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="expected_date" required="1"/>
+                                <field name="picking_policy" required="1"/>
+                            </group>
+                            <group>
+                                <field name="company_id" invisible="1"/>
+                                <field name="allow_virtual_location" invisible="1"/>
+                                <field name="warehouse_id" required="1"/>
+                                <field name="location_id" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer class="oe_edit_only">
+                        <button name="action_create_stock_request" type="object"
+                                string="Create Stock Request"
+                                class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

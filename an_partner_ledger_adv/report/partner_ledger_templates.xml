@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="layout_account_partner_ledger">
+        <t t-if="not o" t-set="o" t-value="doc" />
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <img src="/an_partner_ledger_adv/static/img/header.jpeg" class="img img-fluid" style="width: 130%; max-height: 160px;  margin: auto;"/>
+            </div>
+          </div>  
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0" />
+        </div>
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="row col-12" style="padding: 10px 0;">
+                <img src="/an_partner_ledger_adv/static/img/footerlogo.jpg" style="max-width: 100%; max-height: 130px;  margin: auto;"/>
+            </div>
+        </div> 
+    </template>
+    <!-- Detailed Partner Ledger Report Template -->
+    <template id="report_partner_ledger">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <style>
+                table {
+                      border-spacing: 0;
+                      width: 100%;
+                      border: 1px solid #464343;
+                    }
+
+                td {
+                      border: 1px solid #464343;
+                      text-align: center;
+                      font-size:10px;
+                      font-weight: bold;
+                    }
+                th {
+                  background-color: #d3d3d3;
+                  padding: 5px;
+                  border: 1px solid #464343;
+                  text-align: center;
+                  vertical-align: middle;
+                  font-size:13px;
+                }
+                .border_1px {
+                    border: 1px solid black !important;
+                    }
+                </style>
+                <div class="page">
+                    <h2 class="text-center">The Account Statement</h2>
+                    <div class="row border_1px ml-0 mr-0">
+                        <div class="col-6 mt-1 mb-1">
+                            <p class="text-right">
+                                <strong>Date Range:</strong> <strong t-esc="date_from" t-options='{"widget": "date", "format": "dd/MM/YYYY" }'/> - <strong t-esc="date_to" t-options='{"widget": "date", "format": "dd/MM/YYYY" }'/><br/>
+                                <strong>Company:</strong> <span t-esc="company.name"/>
+                            </p>
+                        </div>
+                        <div class="col-6 mt-1 mb-1">
+                            <p class="text-right">
+                                <strong>Generated on:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/><br/>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Check if there is data -->
+                    <t t-if="not docs">
+                        <div class="alert alert-warning">
+                            <p class="text-center">No data found for the selected criteria.</p>
+                        </div>
+                    </t>
+                    
+                    <!-- For each partner -->
+                    <br/>
+                    <t t-foreach="docs" t-as="partner_data">
+                        <t t-if="not partner_data_first">
+                            <div class="page-break"/>
+                        </t>
+                        <div class="border_1px ml-0 mr-0">
+                        <h3 class="mt16 ">
+                            <t t-esc="partner_data['partner'].name"/>
+                            <span class="text-muted" t-if="partner_data['partner'].ref">
+                                (<t t-esc="partner_data['partner'].ref"/>)
+                            </span>
+                            <t t-if="partner_data['partner'].user_id">
+                                <small class="text-muted ml-2">
+                                    Salesperson: <t t-esc="partner_data['partner'].user_id.name"/>
+                                </small>
+                            </t>
+                        </h3>
+                        
+                        <!-- Initial Balance -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h5>Initial Balance: <span t-esc="partner_data['initial_balance']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/></h5>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- Check if there are move lines -->
+                        <t t-if="not partner_data['move_lines']">
+                            <div class="alert alert-info">
+                                <p>No transactions found for this partner in the selected period.</p>
+                            </div>
+                        </t>
+                        <br/>
+                        <!-- Move Lines -->
+                        <t t-if="partner_data['move_lines']">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width:8%">Date</th>
+                                        <th style="width:7%">Type</th>
+                                        <th>Reference</th>
+                                        <th>Label</th>
+                                        <th class="text-right" style="width:7%">Debit</th>
+                                        <th class="text-right" style="width:7%">Credit</th>
+                                        <th class="text-right" style="width:7%">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="running_balance" t-value="partner_data['initial_balance']"/>
+                                    <t t-foreach="partner_data['move_lines']" t-as="line">
+                                        <!-- Update running balance with each line -->
+                                        <t t-set="running_balance" t-value="running_balance + line['debit'] - line['credit']"/>
+                                        
+                                        <!-- Main row with colored background if it has details and show_details is enabled -->
+                                        <tr t-att-class="'bg-light font-weight-bold' if show_details and (line['is_invoice'] or line['delivery_address']) else ''">
+                                            <td><span t-esc="line['date']" t-options='{"widget": "date", "format": "dd/MM/YYYY" }'/></td>
+                                            <td><span t-esc="line['type']"/></td>
+                                            <td>
+                                                <span t-esc="line['move_name']"/>
+                                                <span t-if="line['ref']"> - <t t-esc="line['ref']"/></span>
+                                            </td>
+                                            <td><span t-esc="line['name']"/></td>
+                                            <td class="text-right">
+                                                <span t-esc="line['debit']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="line['credit']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="running_balance" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                            </td>
+                                        </tr>
+                                        
+                                        <!-- Display Delivery Address if available -->
+                                        <t t-if="show_details and line['delivery_address']">
+                                            <tr>
+                                                <td></td>
+                                                <td colspan="6" class="text-muted">
+                                                    <strong>Delivery Address:</strong> 
+                                                    <span t-esc="line['delivery_address']['name']"/> - 
+                                                    <span t-esc="line['delivery_address']['address']"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        
+                                        <!-- Invoice Line Details if show_details is enabled and the journal is sale or purchase -->
+                                        <t t-if="show_details and line['is_invoice'] and line['invoice_lines']">
+                                            <tr>
+                                                <td colspan="7" class="text-center bg-light">
+                                                    <strong>Invoice Line Details</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td colspan="6">
+                                                    <table class="table table-sm table-bordered" style="width: 100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Product</th>
+                                                                <th class="text-right">Quantity</th>
+                                                                <th>UoM</th>
+                                                                <th class="text-right">Unit Price</th>
+                                                                <th class="text-right">Subtotal</th>
+                                                                <th class="text-right">Total (with Tax)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr t-foreach="line['invoice_lines']" t-as="inv_line">
+                                                                <td><span t-esc="inv_line['product_name']"/></td>
+                                                                <td class="text-right"><span t-esc="inv_line['quantity']"/></td>
+                                                                <td><span t-esc="inv_line['uom']"/></td>
+                                                                <td class="text-right">
+                                                                    <span t-esc="inv_line['price_unit']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <span t-esc="inv_line['price_subtotal']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <span t-esc="inv_line['price_total']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="text-right"><strong>Total</strong></td>
+                                        <td class="text-right">
+                                            <strong t-esc="partner_data['total_debit']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong t-esc="partner_data['total_credit']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong t-esc="partner_data['ending_balance']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="12" class="text-left">
+                                            <h5>Ending Balance: <span t-esc="partner_data['ending_balance']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/></h5>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+
+                            </table>
+                        </t>
+                        <!-- Balance Confirmation Section -->
+                        <t t-if="balance_confirmation">
+                            <div class="page-break"/>
+                            <div class="mt32 mb32">
+                                <!-- English or Arabic based on the user's language -->
+                                <t t-if="env.lang == 'ar_001' or env.lang == 'ar' or env.lang.startswith('ar')">
+                                    <!-- Arabic version -->
+                                    <h4 class="text-center">مصادقة على صحة الرصيد</h4>
+                                    <p class="mt16">
+                                        نفيدكم أن رصيد حسابكم لدينا وفقًا لسجلاتنا في <strong><t t-esc="current_date_time.strftime('%d/%m/%Y %H:%M')"/></strong>
+                                        هو <strong><t t-esc="partner_data['ending_balance']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/></strong> 
+                                        (<t t-esc="partner_data['amount_in_words']"/>) لا غير.
+                                    </p>
+                                    <p>
+                                        فضلا التكرم بالتوقيع أدناه على صحة الرصيد، وإذا لم نتلقى الرد خلال 7 أيام سيعتبر ذلك موافقة نهائية منكم على صحة الرصيد المذكور أعلاه، ولا يحق تقديم اعتراض بعدها.
+                                    </p>
+                                </t>
+                                <t t-else="">
+                                    <!-- English version -->
+                                    <h4 class="text-center">Balance Confirmation</h4>
+                                    <p class="mt16">
+                                        We hereby inform you that your account balance according to our records as of <strong><t t-esc="current_date_time.strftime('%d/%m/%Y %H:%M')"/></strong>
+                                        is <strong><t t-esc="partner_data['ending_balance']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/></strong>
+                                        (<t t-esc="partner_data['amount_in_words']"/>) only.
+                                    </p>
+                                    <p>
+                                        Please sign below to confirm this balance. If we do not receive your response within 7 days, this will be considered your final approval of the balance mentioned above, and no objection will be accepted thereafter.
+                                    </p>
+                                </t>
+                                
+                                <!-- Separator line -->
+                                <hr style="border-top: 1px solid #000; margin-top: 30px; margin-bottom: 30px;"/>
+                                
+                                <!-- Client confirmation section -->
+                                <t t-if="env.lang == 'ar_001' or env.lang == 'ar' or env.lang.startswith('ar')">
+                                    <!-- Arabic -->
+                                    <h5 class="text-center">توقيع العميل</h5>
+                                    <p>
+                                        نفيدكم بأننا نقر بصحة رصيد الحساب المرسل من طرفكم في تاريخ __________________ البالغ قدره __________________ <t t-esc="company.currency_id.name"/>
+                                    </p>
+                                    <div class="row mt32">
+                                        <div class="col-6">
+                                            <p>اسم الموقع: ____________________</p>
+                                            <p>صفة الموقع: ____________________</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p>رقم الهاتف: ____________________</p>
+                                            <p>التوقيع: ____________________</p>
+                                        </div>
+                                    </div>
+                                </t>
+                                <t t-else="" style="page-break-inside: avoid;">
+                                    <!-- English -->
+                                    <h5 class="text-center">Client Signature Section</h5>
+                                    <p>
+                                        We hereby confirm the accuracy of the account balance sent by you on the date __________________ amounting to __________________ <t t-esc="company.currency_id.name"/>
+                                    </p>
+                                    <div class="row mt32" >
+                                        <div class="col-6">
+                                            <p>Signatory Name: ____________________</p>
+                                            <p>Signatory Title: ____________________</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p>Phone Number: ____________________</p>
+                                            <p>Signature: ____________________</p>
+                                        </div>
+                                    </div>
+                                </t>
+                                
+                                <!-- Company stamp area -->
+                                <div class="row mt32 mb32" style="page-break-inside: avoid;">
+                                    <div class="col-6">
+                                        <t t-if="env.lang == 'ar_001' or env.lang == 'ar' or env.lang.startswith('ar')">
+                                            <p class="text-center">ختم الشركة</p>
+                                        </t>
+                                        <t t-else="">
+                                            <p class="text-center">Company Stamp</p>
+                                        </t>
+                                        <div style="border: 1px dashed #999; height: 120px; width: 80%; margin: 0 auto;"></div>
+                                    </div>
+                                    <div class="col-6"></div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+    
+    <!-- Summary Partner Ledger Report Template -->
+    <template id="report_partner_ledger_summary">
+        <t t-call="web.html_container">
+            <t t-call="an_partner_ledger_adv.layout_account_partner_ledger">
+                <div class="page">
+                    <h2>Partner Ledger Summary Report</h2>
+                    <div class="row mb16">
+                        <div class="col-6">
+                            <p>
+                                <strong>Date Range:</strong> <span t-esc="date_from" t-options='{"widget": "date"}'/> - <span t-esc="date_to" t-options='{"widget": "date"}'/><br/>
+                                <strong>Company:</strong> <span t-esc="company.name"/>
+                            </p>
+                            <t t-if="salesperson">
+                                <p><strong>Salesperson:</strong> <span t-esc="salesperson.name"/></p>
+                            </t>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-right">
+                                <strong>Generated on:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Display Filtered Journals -->
+                    <t t-if="journals and len(journals) &lt; len(env['account.journal'].search([]))">
+                        <div class="row">
+                            <div class="col-12">
+                                <p><strong>Filtered by Journals:</strong>
+                                    <t t-foreach="journals" t-as="journal">
+                                        <span t-esc="journal.name"/>
+                                        <t t-if="not journal_last">, </t>
+                                    </t>
+                                </p>
+                            </div>
+                        </div>
+                    </t>
+                    
+                    <!-- Check if there is data -->
+                    <t t-if="not partners_data">
+                        <div class="alert alert-warning">
+                            <p class="text-center">No data found for the selected criteria.</p>
+                        </div>
+                    </t>
+                    
+                    <!-- Partners Summary Table -->
+                    <t t-if="partners_data">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Partner</th>
+                                    <th class="text-right">Initial Balance</th>
+                                    <th class="text-right">Debit</th>
+                                    <th class="text-right">Credit</th>
+                                    <th class="text-right">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="partners_data" t-as="partner_data">
+                                    <td>
+                                        <span t-esc="partner_data['partner'].name"/>
+                                        <span t-if="partner_data['partner'].ref"> (<t t-esc="partner_data['partner'].ref"/>)</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="partner_data['initial_balance']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="partner_data['total_debit']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="partner_data['total_credit']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="partner_data['ending_balance']" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td class="text-right">
+                                        <strong t-esc="total_initial" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong t-esc="total_debit" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong t-esc="total_credit" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong t-esc="total_balance" t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

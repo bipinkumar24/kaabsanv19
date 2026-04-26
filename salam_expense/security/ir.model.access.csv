@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_approval_level,access_approval_level,model_approval_level,,1,1,1,1
+access_remarks_approval, access.remarks.approval,model_remark_remark_wizard,,1,1,1,1

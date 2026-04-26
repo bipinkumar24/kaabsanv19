@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+# See LICENSE file for full copyright and licensing details.
+{
+    'name': 'Purchase Request Management',
+    'version': '14.0.1.0.0',
+    'license': 'OPL-1',
+    'category': 'Purchase Management',
+    'author': 'ATTA SOLUTION',
+    'website': '',
+    'depends': [
+        'base_automation',
+        'hr',
+        'purchase',
+    ],
+    'data': [
+        'data/module_data.xml',
+        'data/ir_sequence_data.xml',
+        'data/mail_template_data.xml',
+        'data/base_automation_data.xml',
+        'security/purchase_request_groups.xml',
+        'security/purchase_request_rules.xml',
+        'security/purchase_request_line_rules.xml',
+        'security/ir.model.access.csv',
+        'wizard/purchase_request_line_create_purchase_order_wizard.xml',
+        'views/purchase_request_views.xml',
+        'views/purchase_request_line_views.xml',
+        'views/purchase_order_views.xml',
+        'views/res_partner_views.xml',
+        'views/res_config_settings_views.xml',
+        'views/menus.xml',
+    ],
+    'application': True,
+    'images': ['static/description/purchase_request_background.png'],
+    'price': 129,
+    'currency': 'USD',
+    'support': 'atta.erp@gmail.com',
+}

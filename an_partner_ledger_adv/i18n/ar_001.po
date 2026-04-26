@@ -1,0 +1,496 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* an_partner_ledger_adv
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-23 09:37+0000\n"
+"PO-Revision-Date: 2025-06-23 09:37+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid ") only."
+msgstr "فقط"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid ") لا غير."
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid ""
+"<br/>\n"
+"                                <strong>Company:</strong>"
+msgstr ""
+"<br/>\n"
+"                                <strong>الشركة:</strong>"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "<strong>Date Range:</strong>"
+msgstr "<strong>نطاق التاريخ:</strong>"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "<strong>Delivery Address:</strong>"
+msgstr "<strong>عنوان التسليم:</strong>"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "<strong>Filtered by Journals:</strong>"
+msgstr "<strong>مصفى حسب دفاتر اليومية:</strong>"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "<strong>Generated on:</strong>"
+msgstr "<strong>تم إنشاؤه في:</strong>"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "<strong>Invoice Line Details</strong>"
+msgstr "<strong>تفاصيل بنود الفاتورة</strong>"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "<strong>Salesperson:</strong>"
+msgstr "<strong>مندوب مبيعات:</strong>"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "<strong>Total</strong>"
+msgstr "<strong>المجموع</strong>"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "Balance"
+msgstr "الرصيد"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Balance Confirmation"
+msgstr "تأكيد الرصيد"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__balance_confirmation
+msgid "Balance Confirmation Request"
+msgstr "طلب تأكيد الرصيد"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.view_partner_ledger_wizard_form
+msgid "Cancel"
+msgstr "يلغي"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Client Signature Section"
+msgstr "قسم توقيع العميل"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__company_id
+msgid "Company"
+msgstr "شركة"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Company Stamp"
+msgstr "ختم الشركة"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__create_uid
+msgid "Created by"
+msgstr "تم إنشاؤها بواسطة"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__create_date
+msgid "Created on"
+msgstr "تم الإنشاء بتاريخ"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "Credit"
+msgstr "الدائن"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Date"
+msgstr "تاريخ"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "Debit"
+msgstr "المدين"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__date_to
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Ending Balance:"
+msgstr "الرصيد الختامي:"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,help:an_partner_ledger_adv.field_partner_ledger_wizard__user_id
+msgid "Filter partners by their assigned salesperson"
+msgstr "تصفية الشركاء حسب مندوب المبيعات المخصص لهم"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__id
+msgid "ID"
+msgstr "بطاقة تعريف"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__include_reconciled
+msgid "Include Fully Reconciled Entries"
+msgstr "تضمين الإدخالات المتوافقة بالكامل"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,help:an_partner_ledger_adv.field_partner_ledger_wizard__balance_confirmation
+msgid "Include a balance confirmation request section in the report"
+msgstr "تضمين قسم طلب تأكيد الرصيد في التقرير"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "Initial Balance"
+msgstr "الرصيد الأولي"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Initial Balance:"
+msgstr "الرصيد الافتتاحي"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__journal_ids
+msgid "Journals"
+msgstr "دفتر اليومية"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Label"
+msgstr "ملصق"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard____last_update
+msgid "Last Modified on"
+msgstr "تاريخ آخر تعديل"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث بتاريخ"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "No data found for the selected criteria."
+msgstr "لم يتم العثور على بيانات للمعايير المحددة."
+
+#. module: an_partner_ledger_adv
+#: code:addons/an_partner_ledger_adv/report/partner_ledger_report.py:0
+#: code:addons/an_partner_ledger_adv/report/partner_ledger_report.py:0
+#, python-format
+msgid "No data provided for the report."
+msgstr "لم يتم توفير أي بيانات للتقرير."
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "No transactions found for this partner in the selected period."
+msgstr "لم يتم العثور على أي معاملات لهذا الشريك في الفترة المحددة."
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__only_with_movement
+msgid "Only Partners With Movements"
+msgstr "شركاء فقط مع الحركات"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.view_partner_ledger_wizard_form
+msgid "Options"
+msgstr "خيارات"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "Partner"
+msgstr "شريك"
+
+#. module: an_partner_ledger_adv
+#: model:ir.actions.act_window,name:an_partner_ledger_adv.action_partner_ledger_wizard
+#: model:ir.actions.report,name:an_partner_ledger_adv.action_report_partner_ledger
+#: model:ir.ui.menu,name:an_partner_ledger_adv.menu_partner_ledger_report
+msgid "Partner Ledger"
+msgstr "دفتر الأستاذ للشركاء"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model,name:an_partner_ledger_adv.model_report_an_partner_ledger_adv_report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.view_partner_ledger_wizard_form
+msgid "Partner Ledger Report"
+msgstr "تقرير دفتر الأستاذ للشركاء"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model,name:an_partner_ledger_adv.model_partner_ledger_wizard
+msgid "Partner Ledger Report Wizard"
+msgstr "معالج تقرير دفتر الأستاذ للشريك"
+
+#. module: an_partner_ledger_adv
+#: model:ir.actions.report,name:an_partner_ledger_adv.action_report_partner_ledger_summary
+msgid "Partner Ledger Summary"
+msgstr "ملخص دفتر الأستاذ للشركاء"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model,name:an_partner_ledger_adv.model_report_an_partner_ledger_adv_report_partner_ledger_summary
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger_summary
+msgid "Partner Ledger Summary Report"
+msgstr "تقرير ملخص دفتر الأستاذ للشركاء"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__partner_category_ids
+msgid "Partner Tags"
+msgstr "علامات الشريك"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__partner_ids
+msgid "Partners"
+msgstr "الشركاء"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Phone Number: ____________________"
+msgstr "رقم الهاتف:"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid ""
+"Please sign below to confirm this balance. If we do not receive your "
+"response within 7 days, this will be considered your final approval of the "
+"balance mentioned above, and no objection will be accepted thereafter."
+msgstr ""
+"فضلا التكرم بالتوقيع أدناه على صحة الرصيد، وإذا لم نتلقى الرد خلال 7 أيام "
+"سيعتبر ذلك موافقة نهائية منكم على صحة الرصيد المذكور أعلاه، ولا يحق تقديم "
+"اعتراض بعدها."
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.view_partner_ledger_wizard_form
+msgid "Print PDF"
+msgstr "طباعة PDF"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Product"
+msgstr "المنتج"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Quantity"
+msgstr "الكمية"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Reference"
+msgstr "المرجع"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__user_id
+msgid "Salesperson"
+msgstr "مندوب المبيعات"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Salesperson:"
+msgstr "مندوب المبيعات"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,help:an_partner_ledger_adv.field_partner_ledger_wizard__journal_ids
+msgid ""
+"Select specific journals to include in the report. Leave empty to include "
+"all journals."
+msgstr ""
+"اختر دفاتر يومية محددة لتضمينها في التقرير. اتركه فارغًا لتضمين جميع دفاتر "
+"اليومية."
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__show_details
+msgid "Show Invoice Details"
+msgstr "عرض تفاصيل الفاتورة"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,help:an_partner_ledger_adv.field_partner_ledger_wizard__show_details
+msgid ""
+"Show invoice line details and delivery address for sales and purchase "
+"transactions"
+msgstr "عرض تفاصيل بنود الفاتورة وعنوان التسليم لمعاملات المبيعات والمشتريات"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,help:an_partner_ledger_adv.field_partner_ledger_wizard__summary_by_salesperson
+msgid ""
+"Show summary report grouped by salesperson instead of detailed partner "
+"ledger"
+msgstr ""
+"عرض تقرير ملخص مجمع حسب مندوب المبيعات بدلاً من تقرير دفتر الأستاذ المفصل "
+"للشركاء"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Signatory Name: ____________________"
+msgstr "اسم الموقع:"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Signatory Title: ____________________"
+msgstr "صفة الموقع:"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Signature: ____________________"
+msgstr "التوقيع:"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__date_from
+msgid "Start Date"
+msgstr "تاريخ البدء"
+
+#. module: an_partner_ledger_adv
+#: code:addons/an_partner_ledger_adv/wizard/partner_ledger_wizard.py:0
+#, python-format
+msgid "Start date must be less than or equal to end date."
+msgstr "يجب أن يكون تاريخ البدء أقل من أو يساوي تاريخ الانتهاء."
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Subtotal"
+msgstr "المجموع الفرعي"
+
+#. module: an_partner_ledger_adv
+#: model:ir.model.fields,field_description:an_partner_ledger_adv.field_partner_ledger_wizard__summary_by_salesperson
+msgid "Summary by Salesperson"
+msgstr "ملخص حسب مندوب المبيعات"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "The Account Statement"
+msgstr "كشف الحساب"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Total (with Tax)"
+msgstr "المجموع (مع الضريبة)"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Type"
+msgstr "النوع"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "Unit Price"
+msgstr "سعر الوحدة"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "UoM"
+msgstr "وحدة القياس"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid ""
+"We hereby confirm the accuracy of the account balance sent by you on the "
+"date __________________ amounting to __________________"
+msgstr "البالغ قدره"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid ""
+"We hereby inform you that your account balance according to our records as "
+"of"
+msgstr "نفيدكم أن رصيد حسابكم لدينا وفقًا لسجلاتنا في"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "is"
+msgstr "هو"
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "اسم الموقع: ____________________"
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "التوقيع: ____________________"
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "توقيع العميل"
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "ختم الشركة"
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "رقم الهاتف: ____________________"
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "صفة الموقع: ____________________"
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid ""
+"فضلا التكرم بالتوقيع أدناه على صحة الرصيد، وإذا لم نتلقى الرد خلال 7 أيام "
+"سيعتبر ذلك موافقة نهائية منكم على صحة الرصيد المذكور أعلاه، ولا يحق تقديم "
+"اعتراض بعدها."
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "مصادقة على صحة الرصيد"
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "نفيدكم أن رصيد حسابكم لدينا وفقًا لسجلاتنا في"
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid ""
+"نفيدكم بأننا نقر بصحة رصيد الحساب المرسل من طرفكم في تاريخ "
+"__________________ البالغ قدره __________________"
+msgstr ""
+
+#. module: an_partner_ledger_adv
+#: model_terms:ir.ui.view,arch_db:an_partner_ledger_adv.report_partner_ledger
+msgid "هو"
+msgstr ""

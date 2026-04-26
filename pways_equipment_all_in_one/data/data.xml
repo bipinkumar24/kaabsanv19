@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="allocation_request_no" model="ir.sequence">
+            <field name="name">Allocation Request No</field>
+            <field name="code">allcation.request</field>
+            <field name="prefix">ARN/</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+</odoo>

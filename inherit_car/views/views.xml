@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="inherit_car.list">
+      <field name="name">inherit_car list</field>
+      <field name="model">inherit_car.inherit_car</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="inherit_car.action_window">
+      <field name="name">inherit_car window</field>
+      <field name="res_model">inherit_car.inherit_car</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="inherit_car.action_server">
+      <field name="name">inherit_car server</field>
+      <field name="model_id" ref="model_inherit_car_inherit_car"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="inherit_car" id="inherit_car.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="inherit_car.menu_1" parent="inherit_car.menu_root"/>
+    <menuitem name="Menu 2" id="inherit_car.menu_2" parent="inherit_car.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="inherit_car.menu_1_list" parent="inherit_car.menu_1"
+              action="inherit_car.action_window"/>
+    <menuitem name="Server to list" id="inherit_car" parent="inherit_car.menu_2"
+              action="inherit_car.action_server"/>
+-->
+  </data>
+</odoo>

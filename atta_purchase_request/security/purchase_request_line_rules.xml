@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="purchase_request_line_rule_requester" model="ir.rule">
+            <field name="name">Purchase Request Line: Requester</field>
+            <field name="model_id" ref="model_purchase_request_line"/>
+            <field name="domain_force">[('request_id.create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('purchase_request_group_user'))]"/>
+        </record>
+
+        <record id="purchase_request_line_rule_first_approve" model="ir.rule">
+            <field name="name">Purchase Request Line: 1st Approval</field>
+            <field name="model_id" ref="model_purchase_request_line"/>
+            <field name="domain_force">[
+                    '|',
+                    ('request_id.create_uid', '=', user.id),
+                    ('request_id.department_id.manager_id.user_id', '=', user.id),
+                ]
+            </field>
+            <field name="groups" eval="[(4, ref('purchase_request_group_first_approval'))]"/>
+        </record>
+
+        <record id="purchase_request_line_rule_second_approve" model="ir.rule">
+            <field name="name">Purchase Request Line: 2nd Approval</field>
+            <field name="model_id" ref="model_purchase_request_line"/>
+            <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('purchase_request_group_second_approval'))]"/>
+        </record>
+        
+        <record id="purchase_request_line_rule_multi_company" model="ir.rule">
+            <field name="name">Purchase Request Line: Multi Company</field>
+            <field name="model_id" ref="model_purchase_request_line"/>
+            <field name="domain_force">[('company_id', 'in', user.company_ids.ids)]</field>
+            <field name="global" eval="1"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_maintenance_request_line,access_maintenance_request_line,model_maintenance_request_line,base.group_user,1,1,1,1
+access_work_schedule,access_work_schedule,model_work_schedule,base.group_user,1,1,1,1
+access_allcation_request,access_allcation_request,model_allcation_request,base.group_user,1,1,1,1
+access_maintenance_checklist_line,access_maintenance_checklist_line,model_maintenance_checklist_line,base.group_user,1,1,1,1
+access_damage_details_line,access_damage_details_line,model_damage_details_line,base.group_user,1,1,1,1
+access_allocation_return_transfer_wizard,access_allocation_return_transfer_wizard,model_allocation_return_transfer_wizard,base.group_user,1,1,1,1

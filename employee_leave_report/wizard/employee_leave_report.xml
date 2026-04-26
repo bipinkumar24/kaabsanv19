@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_hr_employee_leave_report" model="ir.ui.view">
+            <field name="name">hr.employee.leave.form</field>
+            <field name="model">hr.employee.leave</field>
+            <field name="arch" type="xml">
+                <form string="Employee Leave Report">
+                    <group col="4" colspan="6">
+                        <field name="holiday_type"/>
+                        <newline/>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Print" type="object" class="btn-primary" data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_leave_employee_report_action" model="ir.actions.act_window">
+            <field name="name">Employee Leave Report</field>
+            <field name="res_model">hr.employee.leave</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_hr_employee_leave_report"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_employee_leave_report"
+                  name="Employee Leave Report"
+                  action="action_hr_leave_employee_report_action"
+                  parent="hr_holidays.menu_hr_holidays_report"/>
+
+</odoo>

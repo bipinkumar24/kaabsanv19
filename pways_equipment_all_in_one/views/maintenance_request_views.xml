@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="equipment_stage_view_tree_inherit" model="ir.ui.view">
+        <field name="name">maintenance.stage.form.inherit</field>
+        <field name="model">maintenance.stage</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_stage_view_tree"/>
+        <field name="arch" type="xml">
+            <field name='name' position='after'>
+                <field name='stage_type'/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_equipment_view_form_inherit" model="ir.ui.view">
+        <field name="name">maintenance.equipment.form.inherit</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='maintenance_team_id']" position="after">
+                <field name='recurring_type'/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="product_id" domain="[('equipment', '=', True)]">
+                </field>
+            </xpath>
+            <xpath expr="//field[@name='serial_no']" position="after">
+                <field name="equipment_status"></field>
+            </xpath>
+            
+        </field>
+    </record>
+
+    <record id="equipment_request_view_form_inherit" model="ir.ui.view">
+        <field name="name">maintenance.request.form.inherit</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <field name='description' position='replace'/>
+            <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name='readonly'>1</attribute>
+                <attribute name='options'></attribute>
+            </xpath>
+            <xpath expr="//field[@name='maintenance_type']" position="after">
+                <field name='request_stage_type' invisible='1'/>
+            </xpath>
+            
+            <xpath expr="//field[@name='equipment_id']" position="after">
+                <field name='product_id' domain="[('equipment', '=', True)]"/>
+            </xpath>
+            <button name='archive_equipment_request' position='before'>
+                <button name='action_submit' type="object" string='Submit' class="oe_highlight" invisible="request_stage_type != 'new' or archive"/>
+                
+                <button name='action_approval' type="object" string='Approval' class="oe_highlight" invisible="request_stage_type != 'wait' or archive"/>
+                
+                <button name='action_confim' type="object" string='Confirm' class="oe_highlight" invisible="request_stage_type != 'approval' or archive"/>
+
+                <button name='action_in_progress' type="object" string='Process' class="oe_highlight" invisible="request_stage_type != 'in_progress' or archive"/>
+                
+                <button name='action_create_invoice' type="object" string='Create Invoice' class="oe_highlight" invisible="request_stage_type != 'repaired'"/>
+            </button>
+
+            <xpath expr="//sheet/div[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" name="open_task"  type="object" icon="fa-" invisible="task_count == 0">
+                        <field string="Job Orders" name="task_count" widget="statinfo" />
+                    </button>
+                    <button name="action_request_moves" type="object" string="Pickings" class="oe_stat_button" icon="fa-exchange" invisible="request_stage_type == 'new'"/>
+                    <button class="oe_stat_button" name="open_invoices"  type="object" icon="fa-usd" invisible="invoice_count == 0">
+                        <field string="Invoices" name="invoice_count" widget="statinfo" />
+                    </button>
+                </div>
+            </xpath>
+
+            <button name="archive_equipment_request" position='attributes'>
+                <attribute name='invisible'>request_stage_type not in ['new', 'in_progress']</attribute>
+            </button>
+
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page string="Components">
+                        <field name="line_ids" mode='list'>
+                            <list editable="bottom">
+                                <field name="product_id" required='1'/>
+                                <field name="product_uom_category_id" invisible="1"/>
+                                <field name="quantity"/>
+                                <field name="product_uom_id" options="{'no_create': True}"/>
+                                <field name='price_unit'/>
+                                <field name="tax_ids" widget='many2many_tags'/>
+                                <field name="price_tax"/>
+                                <field name="price_subtotal"/>
+                                <field name="price_total" invisible="1"/>
+                            </list>
+                        </field>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="amount_total"/>
+                        </group>
+                        <div class="oe_clear"/>
+                    </page>
+                    <page string="Stock Movements">
+                        <field name="move_ids" readonly='1'>
+                        </field>
+                    </page>
+                    <page string="Job Details">
+                        <field name="task_ids" readonly='1'>
+                        </field>
+                    </page>                    
+                    <page string="Expense Details">
+                        <field name="invoice_ids" readonly='1'>
+                        </field>
+                    </page>
+                    <page string="Damage Details">
+                        <field name="damage_ids">
+                            <list editable="bottom">
+                                <field name="date"/>
+                                <field name="descriptione" />
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Checklist">
+                        <field name="checklist_ids">
+                            <list editable="bottom">
+                                <field name="checklist_ids"/>
+                                <field name="descriptione" />
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Other Information">
+                        <group>
+                            <field name='location_id' required='1'/>
+                            <field name='dest_location_id' required='1'/>
+                        </group>
+                        <field name="note" placeholder='Write a note or description'/>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="purchase_request_line_create_purchase_order_wizard" model="ir.ui.view">
+            <field name="name">purchase.request.line.create.purchase.order.wizard</field>
+            <field name="model">purchase.request.line.create.purchase.order.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="is_required_vendor_in_pr"
+                                       force_save="1"
+                                       invisible="1"/>
+                                <field name="is_sync_vendor" invisible="1"/>
+                                <field name="partner_id"
+                                       invisible="not is_sync_vendor"
+                                       required="is_sync_vendor"
+                                />
+                                <field name="currency_id" invisible="1"
+                                       required="is_sync_vendor"
+                                />
+                            </group>
+                            <group>
+
+                            </group>
+                            <group colspan="2" invisible="1">
+                                <field name="select_all"/>
+                            </group>
+                            <field name="line_ids" invisible="1">
+                                <tree editable="bottom" create="0">
+                                    <field name="select"/>
+                                    <field name="request_line_id"
+                                           invisible="1"
+                                           force_save="1"/>
+                                    <field name="request_id"/>
+                                    <field name="product_id"/>
+                                    <field name="description"/>
+                                    <field name="schedule_date"/>
+                                    <field name="qty_to_purchase"/>
+                                    <field name="purchased_qty"/>
+                                    <field name="quantity"/>
+                                    <field name="partner_id"
+                                           force_save="1"
+                                           readonly="parent.is_required_vendor_in_pr"/>
+                                    <field name="currency_id"
+                                           force_save="1"
+                                           readonly="parent.is_required_vendor_in_pr"/>
+                                    <field name="uom_id"/>
+                                    <field name="price_unit_currency"/>
+                                    <field name="price_unit"/>
+                                    <field name="tax_ids" invisible="1"/>
+                                    <field name="price_subtotal"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                    <footer class="oe_edit_only">
+                        <button name="action_create_po" type="object"
+                                string="Create RFQ/PO"
+                                class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

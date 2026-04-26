@@ -1,0 +1,297 @@
+car_reservation/wizard/car_reserve_details_rep.xml:55:        <field name="view_mode">form</field>
+car_reservation/wizard/car_reserve_details_rep.xml:69:        <field name="view_mode">form</field>
+car_reservation/wizard/car_reserve_details_rep.py:318:                "view_mode": "form",
+pways_equipment_all_in_one/wizard/transfer_view.xml:24:        <field name="view_mode">form</field>
+pways_equipment_all_in_one/wizard/transfer_wizard.py:25:            'view_mode': 'form',
+car_reservation/views/car_reserve_view.xml:68:        <field name="view_mode">google_map</field>
+car_reservation/views/car_reserve_view.xml:72:        <field name="view_mode">google_map</field>
+car_reservation/views/car_reserve_view.xml:80:        <field name="view_mode">google_map</field>
+car_reservation/views/car_reserve_view.xml:84:        <field name="view_mode">google_map</field>
+car_reservation/views/car_reserve_view.xml:97:                        widget="statusbar"
+car_reservation/views/car_reserve_view.xml:114:                        groups="fleet.fleet_group_manager"
+car_reservation/views/car_reserve_view.xml:123:                        groups="fleet.fleet_group_manager"
+car_reservation/views/car_reserve_view.xml:140:                        groups="fleet.fleet_group_manager"
+car_reservation/views/car_reserve_view.xml:347:        <field name="view_mode">list,form,calendar</field>
+car_reservation/views/car_reserve_view.xml:528:        <field name="view_mode">list,form</field>
+sh_all_in_one_cancel_adv/sh_landed_cost_cancel/models/models.py:122:                'view_mode': 'tree,form',
+sh_all_in_one_cancel_adv/sh_purchase_cancel/models/models.py:345:                'view_mode': 'tree,kanban,form,pivot,graph,calendar,activity',
+sh_all_in_one_cancel_adv/sh_landed_cost_cancel/views/views.xml:9:                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_stock_landed_cost_cancel" invisible = 'state != done'></button>
+sh_all_in_one_cancel_adv/sh_purchase_cancel/views/views.xml:9:                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_purchase_cancel" attrs="{'invisible':[('state','=','cancel')]}"></button>
+sh_all_in_one_cancel_adv/sh_purchase_cancel/views/purchase_config_settings.xml:11:                    <h2 groups="sh_all_in_one_cancel_adv.group_sh_purchase_cancel">Purchase Order Cancel Configuration</h2>
+sh_all_in_one_cancel_adv/sh_purchase_cancel/views/purchase_config_settings.xml:12:                    <div class="row mt16 o_settings_container" groups="sh_all_in_one_cancel_adv.group_sh_purchase_cancel">
+sh_all_in_one_cancel_adv/sh_purchase_cancel/views/purchase_config_settings.xml:23:                    <div class="row mt16 o_settings_container" groups="sh_all_in_one_cancel_adv.group_sh_purchase_cancel">
+sh_all_in_one_cancel_adv/sh_stock_cancel/models/models.py:110:                'view_mode': 'list,form',
+sh_all_in_one_cancel_adv/sh_stock_cancel/models/models.py:312:    #             'view_mode': 'list,kanban,form,calendar',
+sh_all_in_one_cancel_adv/sh_stock_cancel/models/models.py:357:            'view_mode': 'list,kanban,form,calendar',
+pways_equipment_all_in_one/models/allocation_request.py:55:            'view_mode': 'list,form',
+pways_equipment_all_in_one/models/allocation_request.py:90:            'view_mode': 'list,form',
+pways_equipment_all_in_one/models/maintenance_request.py:332:            'view_mode': 'list,form',
+pways_equipment_all_in_one/models/maintenance_request.py:344:            'view_mode': 'list,form',
+pways_equipment_all_in_one/models/maintenance_request.py:375:            'view_mode': 'tree,form',
+pways_equipment_all_in_one/views/recurring_work_schedule_view.xml:36:        <field name="view_mode">list,form</field>
+bi_odoo_process_costing_manufacturing/views/config.xml:8:				<xpath expr="//app[@groups='mrp.group_mrp_manager']" position="inside">
+sh_all_in_one_cancel_adv/sh_pos_cancel/models/models.py:198:                'view_mode': 'tree,form',
+pways_equipment_all_in_one/views/allocation_request.xml:8:                    <field name="state" widget="statusbar" statusbar_visible="new,waitapprove,approve,allocate,return,trans,cancel"/>
+pways_equipment_all_in_one/views/allocation_request.xml:10:                    <button name="button_approve" string="Approve" type="object" class="btn-primary" invisible="state != 'waitapprove'" groups="maintenance.group_equipment_manager"/>
+pways_equipment_all_in_one/views/allocation_request.xml:11:                    <button name="button_allocate" string="Allocate" type="object" class="btn-primary" invisible="state != 'approve'" groups="maintenance.group_equipment_manager"/>
+pways_equipment_all_in_one/views/allocation_request.xml:12:                    <button name="button_retrun" string="Return" type="object" class="btn-primary" invisible="state != 'allocate'" groups="maintenance.group_equipment_manager" />
+pways_equipment_all_in_one/views/allocation_request.xml:13:                    <button name="%(action_allocation_return_transfer_wizard)d" string="Transfer" type="action" class="btn-primary" invisible="state != 'return'" groups="maintenance.group_equipment_manager"/>
+pways_equipment_all_in_one/views/allocation_request.xml:87:        <field name="view_mode">list,form</field>
+pways_equipment_all_in_one/views/allocation_request.xml:96:        <field name="view_mode">list,form</field>
+pways_equipment_all_in_one/views/allocation_request.xml:104:        <field name="view_mode">list,form</field>
+pways_equipment_all_in_one/views/allocation_request.xml:112:        <field name="view_mode">list,form</field>
+pways_equipment_all_in_one/views/allocation_request.xml:119:        <field name="view_mode">list,form</field>
+pways_equipment_all_in_one/views/allocation_request.xml:133:        groups="maintenance.group_equipment_manager"
+pways_equipment_all_in_one/views/allocation_request.xml:140:        groups="maintenance.group_equipment_manager"
+pways_equipment_all_in_one/views/allocation_request.xml:147:        groups="maintenance.group_equipment_manager"
+sh_all_in_one_cancel_adv/sh_stock_cancel/views/views.xml:9:<!--                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_stock_cancel" attrs="{'invisible':[('state','=','cancel')]}"/>-->
+sh_all_in_one_cancel_adv/sh_stock_cancel/views/views.xml:20:<!--                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_stock_adjustment_cancel" attrs="{'invisible':[('state','=','cancel')]}"></button>-->
+sh_all_in_one_cancel_adv/sh_stock_cancel/views/views.xml:31:<!--                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_stock_scrap_cancel" attrs="{'invisible':[('state','=','cancel')]}"></button>-->
+pways_equipment_all_in_one/views/checklist_line.xml:35:        <field name="view_mode">list,form</field>
+pways_equipment_all_in_one/views/checklist_line.xml:71:        <field name="view_mode">list,form</field>
+sh_all_in_one_cancel_adv/sh_stock_cancel/views/res_config_settings.xml:12:                    <div class="col-12 col-lg-6 o_setting_box" groups="sh_all_in_one_cancel_adv.group_sh_stock_cancel">
+sh_all_in_one_cancel_adv/sh_stock_cancel/views/res_config_settings.xml:21:                    <div class="col-12 col-lg-6 o_setting_box" groups="sh_all_in_one_cancel_adv.group_sh_stock_adjustment_cancel">
+sh_all_in_one_cancel_adv/sh_stock_cancel/views/res_config_settings.xml:30:                    <div class="col-12 col-lg-6 o_setting_box" groups="sh_all_in_one_cancel_adv.group_sh_stock_scrap_cancel">
+sh_all_in_one_cancel_adv/sh_pos_cancel/views/pos_config_settings.xml:10:                <h2 groups="sh_all_in_one_cancel_adv.group_sh_pos_cancel">POS Order Cancel Configuration</h2>
+sh_all_in_one_cancel_adv/sh_pos_cancel/views/pos_config_settings.xml:11:                <div class="row mt16 o_settings_container" groups="sh_all_in_one_cancel_adv.group_sh_pos_cancel">
+sh_all_in_one_cancel_adv/sh_pos_cancel/views/pos_config_settings.xml:22:                <div class="row mt16 o_settings_container" groups="sh_all_in_one_cancel_adv.group_sh_pos_cancel">
+ak_leave_balance_report/models/leave_balance_report.py:67:            'view_mode': 'list,graph,pivot',
+salam_crm/wizard/remark_view.xml:24:                                <label for="partner_ids" string="Recipients" groups="base.group_user"/>
+salam_crm/wizard/remark_view.xml:25:                                <div groups="base.group_user">
+ak_leave_balance_report/views/leave_balance_report.xml:73:        groups="hr_holidays.group_hr_holidays_user"
+sh_all_in_one_cancel_adv/sh_hr_expense_cancel/views/views.xml:9:                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_expense_cancel" invisible="state == 'cancel'"></button>
+sh_all_in_one_cancel_adv/sh_hr_expense_cancel/views/views.xml:20:                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_expense_cancel" invisible="state == refused'"></button>
+salam_crm/models/crm_lead.py:97:                'view_mode': 'form',
+salam_crm/views/approval_level_crm_view.xml:43:            <field name="view_mode">list,form</field>
+salam_crm/views/approval_level_crm_view.xml:47:                  groups="base.group_system" sequence="4" />
+salam_crm/views/crm_lead_view.xml:34:                    <field name="next_approval_id" widget="statusbar" />
+bi_basic_generic_import/views/bank_statement.xml:38:            <field name="view_mode">form</field>
+bi_basic_generic_import/views/purchase_invoice.xml:62:            <field name="view_mode">form</field>
+bi_basic_generic_import/views/supp_info.xml:38:            <field name="view_mode">form</field>
+bi_basic_generic_import/views/product_view.xml:44:			<field name="view_mode">form</field>
+bi_basic_generic_import/views/product_view.xml:51:            sequence="4" groups="sales_team.group_sale_salesman"/>
+bi_basic_generic_import/views/stock_view.xml:46:            <field name="view_mode">form</field>
+bi_basic_generic_import/views/stock_view.xml:52:     parent="stock.menu_stock_inventory_control" groups="stock.group_stock_user" sequence="31"/>
+bi_basic_generic_import/views/sale.xml:62:            <field name="view_mode">form</field>
+bi_basic_generic_import/views/sale.xml:69:                  groups="sales_team.group_sale_salesman,sales_team.group_sale_manager" />
+bi_basic_generic_import/views/customer_payment.xml:38:            <field name="view_mode">form</field>
+bi_basic_generic_import/views/picking_view.xml:24:							<field name="location_id" groups="stock.group_stock_multi_locations" />
+bi_basic_generic_import/views/picking_view.xml:25:							<field name="location_dest_id" groups="stock.group_stock_multi_locations" />
+bi_basic_generic_import/views/picking_view.xml:52:			<field name="view_mode">form</field>
+bi_basic_generic_import/views/account_invoice.xml:59:            <field name="view_mode">form</field>
+bi_basic_generic_import/views/account_move.xml:38:            <field name="view_mode">form</field>
+bi_basic_generic_import/views/partner.xml:41:			<field name="view_mode">form</field>
+bi_basic_generic_import/views/mrp.xml:55:            <field name="view_mode">form</field>
+salam_product_move/views/stock_move.xml:20:                <td groups="uom.group_uom"><span>Minutes</span></td>
+salam_product_move/views/stock_move.xml:49:                <td groups="uom.group_uom"></td>
+salam_product_move/views/stock_move.xml:69:                <td groups="uom.group_uom"></td>
+salam_product_move/views/stock_move.xml:89:                <td groups="uom.group_uom"></td>
+sh_all_in_one_cancel_adv/sh_sale_cancel/models/models.py:348:                'view_mode': 'tree,kanban,form,calendar,pivot,graph,activity',
+web_google_maps/hooks.py:6:                   "SET view_mode=replace(view_mode, ',google_map', '') "
+web_google_maps/hooks.py:7:                   "WHERE view_mode LIKE '%,google_map%';")
+web_google_maps/hooks.py:9:                   "SET view_mode=replace(view_mode, 'google_map,', '') "
+web_google_maps/hooks.py:10:                   "WHERE view_mode LIKE '%google_map,%';")
+web_google_maps/hooks.py:11:    env.cr.execute("DELETE FROM ir_act_window WHERE view_mode = 'google_map';")
+ak_leave_carryover/models/leave_carry_over.py:71:            'view_mode': 'list,form',
+ak_leave_carryover/views/carryover_views.xml:7:        <field name="view_mode">list,form</field>
+ak_leave_carryover/views/carryover_views.xml:64:                    <field name="state" widget="statusbar" statusbar_visible="draft,done,cancel"/>
+ak_leave_carryover/views/carryover_views.xml:110:                <div class="oe_chatter">
+ak_leave_carryover/views/carryover_views.xml:111:                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+ak_leave_carryover/views/carryover_views.xml:112:                    <field name="activity_ids" widget="mail_activity"/>
+ak_leave_carryover/views/carryover_views.xml:113:                    <field name="message_ids" widget="mail_thread"/>
+ak_leave_carryover/views/carryover_views.xml:124:    groups="hr_holidays.group_hr_holidays_user"
+bi_hr_blood_group/models/hr_employee.py:19:        groups="hr.group_hr_user",
+bi_hr_blood_group/models/hr_employee.py:25:        groups="hr.group_hr_user",
+sh_all_in_one_cancel_adv/sh_sale_cancel/views/sale_config_settings.xml:11:                    <h2 groups="sh_all_in_one_cancel_adv.group_sh_sale_cancel">Sale Order Cancel Configuration</h2>
+sh_all_in_one_cancel_adv/sh_sale_cancel/views/sale_config_settings.xml:12:                    <div class="row mt16 o_settings_container" groups="sh_all_in_one_cancel_adv.group_sh_sale_cancel">
+sh_all_in_one_cancel_adv/sh_sale_cancel/views/sale_config_settings.xml:23:                    <div class="row mt16 o_settings_container" groups="sh_all_in_one_cancel_adv.group_sh_sale_cancel">
+web_google_maps/README.md:99:        <field name="view_mode">kanban,tree,form,google_map</field>
+web_google_maps/views/res_partner.xml:70:        <field name="view_mode">kanban,list,form,google_map</field>
+web_google_maps/views/res_partner.xml:74:        <field name="view_mode">google_map</field>
+web_google_maps/i18n/web_google_maps.pot:283:#: model:ir.model.fields.selection,name:web_google_maps.selection__ir_actions_act_window_view__view_mode__google_map
+web_google_maps/i18n/web_google_maps.pot:729:#: model:ir.model.fields,field_description:web_google_maps.field_ir_actions_act_window_view__view_mode
+sh_all_in_one_cancel_adv/sh_mrp_cancel/models/models.py:304:                'view_mode':'tree,form',
+web_google_maps/i18n/fr.po:283:#: model:ir.model.fields.selection,name:web_google_maps.selection__ir_actions_act_window_view__view_mode__google_map
+web_google_maps/i18n/fr.po:739:#: model:ir.model.fields,field_description:web_google_maps.field_ir_actions_act_window_view__view_mode
+an_partner_ledger_adv/wizard/partner_ledger_wizard_views.xml:13:                        <field name="company_id" groups="base.group_multi_company"/>
+an_partner_ledger_adv/wizard/partner_ledger_wizard_views.xml:43:        <field name="view_mode">form</field>
+bi_employee_advance_salary/wizard/advance_salary_wizard.py:47:            'view_mode': 'list',
+web_google_maps/models/ir_act_window_view.py:9:    view_mode = fields.Selection(
+bi_employee_advance_salary/wizard/advance_salary_wizard_view.xml:33:        <field name="view_mode">form</field>
+bi_employee_advance_salary/wizard/advance_salary_wizard_view.xml:36:	<menuitem  id="advance_salary_report" parent="bi_employee_advance_salary.admin_tab_id" name="Advance Salary Report" sequence="100" action="action_advance_salary_wizard" groups="bi_hr_employee_loan.action_show_report_admin_id"/>
+sh_all_in_one_cancel_adv/sh_mrp_cancel/views/views.xml:9:                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_mrp_cancel" invisible ="state != 'done'"></button>
+sh_all_in_one_cancel_adv/sh_mrp_cancel/views/mrp_config_settings.xml:9:                <h2 groups="sh_all_in_one_cancel_adv.group_sh_mrp_cancel">Manufacturing Cancel Configuration</h2>
+sh_all_in_one_cancel_adv/sh_mrp_cancel/views/mrp_config_settings.xml:10:                <div class="row mt16 o_settings_container" groups="sh_all_in_one_cancel_adv.group_sh_mrp_cancel">
+bi_employee_advance_salary/models/advance_salary.py:158:            'view_mode': 'list,form',
+bi_employee_advance_salary/views/advance_salary_view.xml:39:                    	type="object" invisible="state != 'confirmed'" class="btn-primary" groups="bi_employee_advance_salary.dept_manager_advance_salary_id"/>
+bi_employee_advance_salary/views/advance_salary_view.xml:42:                    	type="object" invisible="state != 'approve_dept'" class="btn-primary" groups="bi_employee_advance_salary.hr_manager_advance_salary_id"/>
+bi_employee_advance_salary/views/advance_salary_view.xml:45:                    	type="object" invisible="state != 'approve_hr'" class="btn-primary" groups="bi_employee_advance_salary.director_manager_advance_salary_id"/>
+bi_employee_advance_salary/views/advance_salary_view.xml:51:                    	type="object" class="btn-primary" groups="bi_employee_advance_salary.account_manager_advance_salary_id"/>
+bi_employee_advance_salary/views/advance_salary_view.xml:58:	    		<field name="state" widget="statusbar" statusbar_visible="draft,confirmed,approve_dept,approve_hr,approve_director,approved,partially_paid,paid,done,cancel"/>
+bi_employee_advance_salary/views/advance_salary_view.xml:130:	  <field name="view_mode">list,form,kanban</field>
+bi_employee_advance_salary/views/advance_salary_view.xml:150:	  <field name="view_mode">list,form,kanban</field>
+bi_employee_advance_salary/views/advance_salary_view.xml:159:<menuitem action="advance_salary_req_action_dept" id="menu_advance_salary_dept" parent="sub_menu_advance_salary" name="Depertment Approvals" sequence="29" groups="bi_employee_advance_salary.dept_manager_advance_salary_id"/>
+bi_employee_advance_salary/views/advance_salary_view.xml:167:	  <field name="view_mode">list,form,kanban</field>
+bi_employee_advance_salary/views/advance_salary_view.xml:175:<menuitem action="advance_salary_req_action_hr" id="menu_advance_salary_hr" parent="sub_menu_advance_salary" name="HR Approvals" sequence="29" groups="bi_employee_advance_salary.hr_manager_advance_salary_id"/>
+bi_employee_advance_salary/views/advance_salary_view.xml:182:	  <field name="view_mode">list,form,kanban</field>
+bi_employee_advance_salary/views/advance_salary_view.xml:190:<menuitem action="advance_salary_req_action_director" id="menu_advance_salary_director" parent="sub_menu_advance_salary" name="Director Approvals" sequence="29" groups="bi_employee_advance_salary.director_manager_advance_salary_id"/>
+bi_employee_advance_salary/views/advance_salary_view.xml:198:	  <field name="view_mode">list,form,kanban</field>
+bi_employee_advance_salary/views/advance_salary_view.xml:205:<menuitem action="advance_salary_req_action_accountant" id="menu_advance_salary_accountant" parent="account.menu_finance_receivables" name="Advance Salary Request" sequence="29" groups="bi_employee_advance_salary.account_manager_advance_salary_id"/>
+bi_hr_employee_loan/wizard/reject_request.xml:31:			<field name="view_mode">form</field>
+bi_hr_employee_loan/wizard/indemnity_wizard_view.xml:34:        <field name="view_mode">form</field>
+bi_hr_employee_loan/wizard/indemnity_wizard_view.xml:37:	<menuitem  id="indemnity_wizard_wizard" parent="hr_payroll.menu_hr_payroll_report" name="Indemnity Report" sequence="100" action="action_indemnity_wizard" groups="bi_hr_employee_loan.action_show_report_admin_id"/>
+bi_hr_employee_loan/wizard/loan_installment_wizard.py:42:            'view_mode': 'tree',
+bi_hr_employee_loan/wizard/loan_installment_wizard_view.xml:34:        <field name="view_mode">form</field>
+bi_hr_employee_loan/wizard/loan_installment_wizard_view.xml:37:	<menuitem  id="loan_installment_wizard" parent="bi_hr_employee_loan.main_menu_loan" name="Loan Report" sequence="100" action="action_loan_installment_wizard" groups="bi_hr_employee_loan.action_show_report_admin_id"/>
+bi_hr_employee_loan/wizard/indemnity_wizard.py:64:            'view_mode': 'tree',
+sh_all_in_one_cancel_adv/sh_account_cancel/views/views.xml:9:                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_account_cancel" invisible="state == 'cancelled'"></button>
+sh_all_in_one_cancel_adv/sh_account_cancel/views/views.xml:20:                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_account_cancel"></button>
+sh_all_in_one_cancel_adv/sh_account_cancel/views/res_config_settings.xml:12:                    <h2 groups="sh_all_in_one_cancel_adv.group_sh_account_cancel">Cancel Configuration</h2>
+sh_all_in_one_cancel_adv/sh_account_cancel/views/res_config_settings.xml:13:                    <div class="row mt16 o_settings_container" groups="sh_all_in_one_cancel_adv.group_sh_account_cancel">
+bi_hr_employee_loan/models/loan_request.py:138:            'view_mode': 'tree,form',
+bi_hr_employee_loan/models/loan_request.py:393:                'view_mode': 'form',
+bi_hr_employee_loan/models/loan_request.py:406:                'view_mode': 'form',
+bi_hr_employee_loan/models/loan_request.py:419:                'view_mode': 'form',
+bi_hr_employee_loan/views/loan_installment_view.xml:9:	    <tree string="Loan Installment" decoration-success="state == 'paid'">
+bi_hr_employee_loan/views/loan_installment_view.xml:40:	    		<field name="state" widget="statusbar" statusbar_visible="unpaid,approve,paid"/>
+bi_hr_employee_loan/views/loan_installment_view.xml:42:                    	type="object" invisible="state != 'unpaid'" groups="bi_hr_employee_loan.hr_loan_accountant_id,bi_hr_employee_loan.loan_employee"/>
+bi_hr_employee_loan/views/loan_installment_view.xml:43:                <button name="book_interest" string="Book Interest" groups="bi_hr_employee_loan.hr_loan_accountant_id" 
+bi_hr_employee_loan/views/loan_installment_view.xml:47:                	type="object" invisible="state != 'approve'" groups="bi_hr_employee_loan.hr_loan_accountant_id,bi_hr_employee_loan.loan_employee"/>
+bi_hr_employee_loan/views/loan_installment_view.xml:111:	  <field name="view_mode">tree,form,kanban</field>
+bi_hr_employee_loan/views/loan_request_view.xml:22:		<tree string="Loan Type">
+bi_hr_employee_loan/views/loan_request_view.xml:65:						groups="bi_hr_employee_loan.hr_loan_department_id"/>
+bi_hr_employee_loan/views/loan_request_view.xml:69:						 groups="bi_hr_employee_loan.hr_loan_manager_id"/>  
+bi_hr_employee_loan/views/loan_request_view.xml:74:						groups="bi_hr_employee_loan.hr_loan_accountant_id"/>
+bi_hr_employee_loan/views/loan_request_view.xml:78:						 groups="bi_hr_employee_loan.hr_loan_accountant_id"/>
+bi_hr_employee_loan/views/loan_request_view.xml:80:						type="object" groups="bi_hr_employee_loan.hr_loan_department_id"
+bi_hr_employee_loan/views/loan_request_view.xml:84:						type="object" groups="bi_hr_employee_loan.hr_loan_manager_id"
+bi_hr_employee_loan/views/loan_request_view.xml:88:						type="object" groups="bi_hr_employee_loan.hr_loan_accountant_id"
+bi_hr_employee_loan/views/loan_request_view.xml:95:						groups="base.group_system"/>			
+bi_hr_employee_loan/views/loan_request_view.xml:97:						type="object" groups="bi_hr_employee_loan.group_send_to_draft_loan"
+bi_hr_employee_loan/views/loan_request_view.xml:102:				<field name="stage" widget="statusbar" statusbar_visible="draft,applied,waiting_depart,waiting,approve"/>
+bi_hr_employee_loan/views/loan_request_view.xml:157:								<tree create="false" edit="true">
+bi_hr_employee_loan/views/loan_request_view.xml:249:			<div class="oe_chatter">
+bi_hr_employee_loan/views/loan_request_view.xml:250:				<field name="message_follower_ids" widget="mail_followers"/>
+bi_hr_employee_loan/views/loan_request_view.xml:251:				<field name="activity_ids" widget="mail_activity"/>
+bi_hr_employee_loan/views/loan_request_view.xml:252:				<field name="message_ids" widget="mail_thread"/>
+bi_hr_employee_loan/views/loan_request_view.xml:263:	<field name="view_mode">tree,form,kanban</field>
+bi_hr_employee_loan/views/loan_request_view.xml:291:	<field name="view_mode">tree,form,kanban</field>
+bi_hr_employee_loan/views/loan_request_view.xml:304:		groups="hr_loan_manager_id,hr_loan_department_id,hr_loan_accountant_id"/>
+bi_hr_employee_loan/views/loan_request_view.xml:311:	    <tree string="Loan Type" create="false">
+bi_hr_employee_loan/views/loan_request_view.xml:338:	<field name="view_mode">tree,form,kanban</field>
+bi_hr_employee_loan/views/loan_request_view.xml:346:            <field name="view_mode">tree</field>
+bi_hr_employee_loan/views/loan_request_view.xml:356:	    <tree string="Loan Type" create="false">
+bi_hr_employee_loan/views/loan_request_view.xml:384:	  <field name="view_mode">tree,form,kanban</field>
+bi_hr_employee_loan/views/loan_request_view.xml:396:            <field name="view_mode">tree</field>
+bi_hr_employee_loan/views/loan_request_view.xml:406:		groups="hr_loan_accountant_id"/>
+bi_hr_employee_loan/views/loan_request_view.xml:414:		groups="hr_loan_accountant_id"/>
+bi_hr_employee_loan/views/loan_request_view.xml:415:	<menuitem action="loan_req_total_action" id="menu_loan_req_total" parent="sub_req_menu_loan" name="Disbursed Loans" groups="hr_loan_accountant_id,hr_loan_manager_id,hr_loan_department_id" sequence="56"/>	
+bi_hr_employee_loan/views/loan_type_view.xml:9:	    <tree string="Loan Type">
+bi_hr_employee_loan/views/loan_type_view.xml:46:	    				<!-- <field name="interest_account" attrs="{'invisible':[('hide_interest','=',True)]}"/> -->
+bi_hr_employee_loan/views/loan_type_view.xml:68:	  <field name="view_mode">tree,form,kanban</field>
+bi_hr_employee_loan/views/loan_policies_view.xml:9:	    <tree string="Loan Policies">
+bi_hr_employee_loan/views/loan_policies_view.xml:67:	  <field name="view_mode">tree,form,kanban</field>
+bi_hr_employee_loan/views/loan_proof_view.xml:9:	    <tree string="Loan proof">
+bi_hr_employee_loan/views/loan_proof_view.xml:42:	  <field name="view_mode">tree,form,kanban</field>
+bi_hr_employee_loan/views/loan_proof_view.xml:74:      <field name="view_mode">tree,form,kanban</field>
+bi_hr_employee_loan/views/loan_proof_view.xml:83:	<menuitem  id="config_menu_loan" parent="main_menu_loan" name="Configuration" sequence="20" groups="hr_loan_manager_id"/>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:19:            <tree string="Multiple Overtime Request">
+bi_hr_overtime_request/views/multiple_overtime_request.xml:42:                            groups="bi_hr_overtime_request.hr_manager_overtime_id"/>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:46:                            groups="bi_hr_overtime_request.dept_manager_overtime_id"/>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:51:                    <field name="state" widget="statusbar" statusbar_visible="new,first_approve,dept_approve,done"/>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:55:                    <!--	    	<h2><field name="employee_ids" widget="many2many_tags" attrs="{'readonly' : [('state','!=','new')]}"/></h2>-->
+bi_hr_overtime_request/views/multiple_overtime_request.xml:80:                                <tree editable="bottom">
+bi_hr_overtime_request/views/multiple_overtime_request.xml:96:                <div class="oe_chatter">
+bi_hr_overtime_request/views/multiple_overtime_request.xml:97:                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:98:                    <field name="activity_ids" widget="mail_activity"/>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:99:                    <field name="message_ids" widget="mail_thread"/>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:111:        <field name="view_mode">tree,form,kanban</field>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:121:              groups="bi_hr_overtime_request.hr_manager_overtime_id,bi_hr_overtime_request.dept_manager_overtime_id"/>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:129:        <field name="view_mode">tree,form,kanban</field>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:140:              groups="bi_hr_overtime_request.hr_manager_overtime_id"
+bi_hr_overtime_request/views/multiple_overtime_request.xml:149:        <field name="view_mode">tree,form,kanban</field>
+bi_hr_overtime_request/views/multiple_overtime_request.xml:160:              groups="bi_hr_overtime_request.dept_manager_overtime_id"
+bi_hr_overtime_request/views/account_view.xml:35:        <field name="view_mode">tree,form</field>
+bi_hr_overtime_request/views/account_view.xml:43:              groups="expense_requests.can_request_expenses,expense_requests.all_expensess_manager," sequence="2"/>
+mrp_production_extended/views/mrp_production_view.xml:28:                <button name="action_validate_data" string="Validate" groups="mrp_production_extended.group_validate_post_entry"
+mrp_production_extended/views/mrp_production_view.xml:57:                <button name="action_validate_data" string="Post Entry" groups="mrp_production_extended.group_validate_post_entry"
+bi_hr_overtime_request/views/overtime_request_view.xml:19:            <tree string="Overtime Request">
+bi_hr_overtime_request/views/overtime_request_view.xml:43:                            groups="bi_hr_overtime_request.hr_manager_overtime_id"/>
+bi_hr_overtime_request/views/overtime_request_view.xml:47:                            groups="bi_hr_overtime_request.dept_manager_overtime_id"/>
+bi_hr_overtime_request/views/overtime_request_view.xml:51:                            groups="bi_hr_overtime_request.hr_manager_overtime_id,bi_hr_overtime_request.dept_manager_overtime_id"
+bi_hr_overtime_request/views/overtime_request_view.xml:54:                    <field name="state" widget="statusbar" statusbar_visible="new,first_approve,dept_approve,done"/>
+bi_hr_overtime_request/views/overtime_request_view.xml:90:                <div class="oe_chatter">
+bi_hr_overtime_request/views/overtime_request_view.xml:91:                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+bi_hr_overtime_request/views/overtime_request_view.xml:92:                    <field name="activity_ids" widget="mail_activity"/>
+bi_hr_overtime_request/views/overtime_request_view.xml:93:                    <field name="message_ids" widget="mail_thread"/>
+bi_hr_overtime_request/views/overtime_request_view.xml:105:        <field name="view_mode">tree,form,kanban</field>
+bi_hr_overtime_request/views/overtime_request_view.xml:122:        <field name="view_mode">tree,form,kanban</field>
+bi_hr_overtime_request/views/overtime_request_view.xml:132:              groups="bi_hr_overtime_request.hr_manager_overtime_id"/>
+bi_hr_overtime_request/views/overtime_request_view.xml:140:        <field name="view_mode">tree,form,kanban</field>
+bi_hr_overtime_request/views/overtime_request_view.xml:151:              groups="bi_hr_overtime_request.dept_manager_overtime_id"/>
+al_buruuj__customisation/wizard/sale_approval_reason_view.xml:32:          <field name="view_mode">form</field>
+salam_expense/models/picking.py:113:                'view_mode': 'form',
+salam_expense/models/picking.py:127:                'view_mode': 'list,kanban,form,calendar',
+salam_expense/models/picking.py:138:            'view_mode': 'list,kanban,form,calendar',
+salam_expense/views/picking_view.xml:70:                        type="object" groups="sh_all_in_one_cancel_adv.group_sh_stock_cancel"
+salam_expense/views/picking_view.xml:98:                <button name="action_cancel" invisible="is_expense or state not in ['assigned', 'confirmed', 'draft', 'waiting']" string="Cancel" groups="base.group_user" type="object" data-hotkey="z"/>
+salam_expense/views/picking_view.xml:102:                <field name="next_approval_id" widget="statusbar" invisible="not is_expense"/>
+salam_expense/views/picking_view.xml:120:        <field name="view_mode">list,kanban,form,calendar</field>
+salam_expense/views/picking_view.xml:139:        <field name="view_mode">list,kanban,form,calendar</field>
+salam_expense/views/picking_view.xml:155:              groups="stock.group_stock_manager,stock.group_stock_user"/>
+salam_expense/views/picking_view.xml:191:        <field name="view_mode">list,form</field>
+salam_expense/views/picking_view.xml:196:              groups="base.group_system" sequence="4" />
+web_google_maps/static/src/js/view/form/form_controller.js:45:                view_mode: 'google_map',
+al_buruuj__customisation/views/views.xml:165:                            <create string="Configure a product" context="{'open_product_configurator': True}" groups="product.group_product_variant"/>
+al_buruuj__customisation/views/views.xml:176:                        <field name="product_uom_id" readonly="state in ['sale', 'done', 'cancel']" context="{'company_id': parent.company_id}" groups="uom.group_uom" options='{"no_open": True}'/>
+al_buruuj__customisation/views/views.xml:177:                        <field name="analytic_distribution" widget="analytic_distribution" options="{'product_field': 'product_id', 'business_domain': 'sale_order', 'amount_field': 'price_subtotal'}" groups="analytic.group_analytic_accounting"/>
+al_buruuj__customisation/views/views.xml:180:                        <field name="discount" groups="sale.group_discount_per_so_line"/>
+al_buruuj__customisation/views/views.xml:205:            <field name="view_mode">list,kanban,form,calendar,pivot,graph</field>
+al_buruuj__customisation/views/views.xml:215:        <menuitem action="action_sale_approval" id="menu_sale_approval" parent="sale.sale_order_menu" sequence="11" groups="sales_team.group_sale_salesman,sales_team.group_sale_manager"/>
+al_buruuj__customisation/views/views.xml:223:                    <app notApp="1" string="Sales" data-string="Sales" name="sale_management" groups="sales_team.group_sale_manager">
+atta_purchase_request/wizard/purchase_request_line_create_purchase_order_wizard.xml:32:                                <tree editable="bottom" create="0">
+atta_purchase_request/wizard/remark_view.xml:24:                                <label for="partner_ids" string="Recipients" groups="base.group_user"/>
+atta_purchase_request/wizard/remark_view.xml:25:                                <div groups="base.group_user">
+atta_purchase_request/wizard/purchase_request_line_create_purchase_order_wizard.py:89:            'view_mode': 'form',
+atta_purchase_request/models/purchase_request.py:63:                'view_mode': 'form',
+atta_purchase_request/models/purchase_request.py:455:            'view_mode': 'form',
+atta_purchase_request/models/purchase_request.py:480:            'view_mode': 'form',
+atta_purchase_request/models/purchase_request.py:498:            'view_mode': 'form',
+atta_purchase_request/models/purchase_request.py:637:            'view_mode': 'tree,form',
+atta_purchase_request/models/purchase_request.py:648:            'view_mode': 'tree,form',
+atta_purchase_request/models/purchase_request_line.py:421:            'view_mode': 'form',
+atta_purchase_request/models/purchase_request_line.py:442:            'view_mode': 'form',
+atta_purchase_request/models/purchase_request_line.py:481:            'view_mode': 'form',
+atta_purchase_request/views/res_config_settings_views.xml:18:                         groups="atta_purchase_request.purchase_request_group_manager"
+atta_purchase_request/views/res_config_settings_views.xml:74:            <field name="view_mode">form</field>
+atta_purchase_request/views/approval_level_pr_view.xml:8:                <tree string="Approval Level Form" editable="bottom">
+atta_purchase_request/views/approval_level_pr_view.xml:45:            <field name="view_mode">tree,form</field>
+atta_purchase_request/views/approval_level_pr_view.xml:49:                  groups="base.group_system" sequence="4" />
+atta_purchase_request/views/purchase_order_views.xml:52:                            groups="atta_purchase_request.group_procurement"
+atta_purchase_request/views/purchase_order_views.xml:56:                            groups="atta_purchase_request.group_general"
+atta_purchase_request/views/purchase_request_views.xml:9:                <tree>
+atta_purchase_request/views/purchase_request_views.xml:38:                        <field name="next_approval_id" widget="statusbar"/>
+atta_purchase_request/views/purchase_request_views.xml:56:                                    groups="atta_purchase_request.purchase_request_group_second_approval">
+atta_purchase_request/views/purchase_request_views.xml:64:                                    groups="atta_purchase_request.purchase_request_group_second_approval">
+atta_purchase_request/views/purchase_request_views.xml:103:                                            groups="atta_purchase_request.purchase_request_group_user"/>
+atta_purchase_request/views/purchase_request_views.xml:116:                                            groups="atta_purchase_request.purchase_request_group_second_approval"/>
+atta_purchase_request/views/purchase_request_views.xml:135:                                    <tree editable="bottom"
+atta_purchase_request/views/purchase_request_views.xml:177:                                               groups="atta_purchase_request.purchase_request_group_second_approval"
+atta_purchase_request/views/purchase_request_views.xml:180:                                               groups="atta_purchase_request.purchase_request_group_second_approval"
+atta_purchase_request/views/purchase_request_views.xml:189:                                               groups="atta_purchase_request.purchase_request_group_second_approval"
+atta_purchase_request/views/purchase_request_views.xml:199:                                       groups="atta_purchase_request.purchase_request_group_second_approval">
+atta_purchase_request/views/purchase_request_views.xml:219:                                    <tree editable="bottom" create="0" delete="0">
+atta_purchase_request/views/purchase_request_views.xml:230:                                    <group string="Company" groups="base.group_multi_company">
+atta_purchase_request/views/purchase_request_views.xml:258:                                    <tree>
+atta_purchase_request/views/purchase_request_views.xml:308:            <field name="view_mode">tree,form</field>
+atta_purchase_request/views/menus.xml:8:                  groups="atta_purchase_request.purchase_request_group_user"
+atta_purchase_request/views/menus.xml:23:                  groups="atta_purchase_request.purchase_request_group_second_approval"
+atta_purchase_request/views/menus.xml:31:                  groups="atta_purchase_request.purchase_request_group_manager"
+atta_purchase_request/views/menus.xml:39:                  groups="base.group_system"
+atta_purchase_request/views/purchase_request_line_views.xml:9:                <tree decoration-muted="quantity == 0 or request_state == 'canceled'"
+atta_purchase_request/views/purchase_request_line_views.xml:49:                                       groups="atta_purchase_request.purchase_request_group_second_approval"/>
+atta_purchase_request/views/purchase_request_line_views.xml:52:                                       groups="atta_purchase_request.purchase_request_group_second_approval"/>
+atta_purchase_request/views/purchase_request_line_views.xml:54:                                       groups="atta_purchase_request.purchase_request_group_second_approval"/>
+atta_purchase_request/views/purchase_request_line_views.xml:68:                                  groups="atta_purchase_request.purchase_request_group_second_approval">
+atta_purchase_request/views/purchase_request_line_views.xml:70:                                    <tree>
+atta_purchase_request/views/purchase_request_line_views.xml:143:            <field name="view_mode">tree,form,pivot</field>

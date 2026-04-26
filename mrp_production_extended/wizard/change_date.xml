@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_server_change_date" model="ir.actions.server">
+            <field name="name">Change date</field>
+            <field name="model_id" ref="mrp.model_mrp_production"/>
+            <field name="binding_model_id" ref="mrp.model_mrp_production"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                'type': 'ir.actions.act_window',
+                'res_model': 'change.date',
+                'target': 'new',
+                'views': [(env.ref('mrp_production_extended.view_change_date_form').id, 'form')],
+                'context': {
+                    'from_server_action': True,
+                    'default_change_date_ids': records.ids,
+                    'default_chage_date_ids': records.ids,
+                },
+                }
+            </field>
+        </record>
+
+        <record id="view_change_date_form" model="ir.ui.view">
+            <field name="name">Change Date Form</field>
+            <field name="model">change.date</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="date" required="1"/>
+
+                    </group>
+                    <footer>
+                        <button string="Change" type="object" name="change_date" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

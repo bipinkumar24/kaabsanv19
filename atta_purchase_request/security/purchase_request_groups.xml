@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="purchase_request_group_user" model="res.groups">
+            <field name="name">Purchase Request: Requester</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4 , ref('base.user_root'))]"/>
+        </record>
+
+        <record id="purchase_request_group_first_approval" model="res.groups">
+            <field name="name">Purchase Request: 1st Approval</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('purchase_request_group_user'))]"/>
+            <field name="users" eval="[(4 , ref('base.user_root'))]"/>
+        </record>
+
+        <record id="purchase_request_group_second_approval" model="res.groups">
+            <field name="name">Purchase Request: 2nd Approval</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('purchase_request_group_user'))]"/>
+            <field name="users" eval="[(4 , ref('base.user_root'))]"/>
+        </record>
+
+        <record id="purchase_request_group_third_approval" model="res.groups">
+            <field name="name">Purchase Request: 3rd Approval</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('purchase_request_group_second_approval'))]"/>
+            <field name="users" eval="[(4 , ref('base.user_root'))]"/>
+        </record>
+
+        <record id="purchase_request_group_4th_approval" model="res.groups">
+            <field name="name">Purchase Request: 4th Approval</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('purchase_request_group_third_approval'))]"/>
+            <field name="users" eval="[(4 , ref('base.user_root'))]"/>
+        </record>
+
+        <record id="purchase_request_group_manager" model="res.groups">
+            <field name="name">Purchase Request Configuration</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('purchase_request_group_user'))]"/>
+            <field name="users" eval="[(4 , ref('base.user_root'))]"/>
+        </record>
+
+        <record id="suplier_change_team" model="res.groups">
+            <field name="name">Suplier Change Team</field>
+            <field name="category_id" ref="module_purchase_request"/>
+            <field name="implied_ids" eval="[(4, ref('purchase_request_group_user'))]"/>
+            <field name="users" eval="[(4 , ref('base.user_root'))]"/>
+        </record>
+
+        <record id="purchase.group_purchase_user" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('purchase_request_group_second_approval'))]"/>
+        </record>
+
+        <record id="purchase.group_purchase_manager" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('purchase_request_group_third_approval'))]"/>
+        </record>
+
+        <record id="group_create_RFQ_PO" model="res.groups">
+            <field name="name">Create RFQ/PO</field>
+        </record>
+        <record id="group_create_expense_transfer" model="res.groups">
+            <field name="name">Create Expense Transfer</field>
+        </record>
+
+        <record id="group_create_stock_request" model="res.groups">
+            <field name="name">Create Stock Request</field>
+        </record>
+
+    </data>
+</odoo>

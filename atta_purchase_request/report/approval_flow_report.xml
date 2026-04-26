@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="approval_flow_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+
+                    <div class="page ">
+                        <div style="position:absolute;opacity:0.25;z-index:1000;width:200%;margin-top:20px;margin-left:250px;">
+                            <center style="font-size:2em;border-top:10px;border-bottom:10px;border-right:10px;border-left:10px;border-color:blue; border-style:double;display:inline-block;font-family: fantasy;">
+                                <h1 > State :<span t-esc="doc.next_approval_id.name"/></h1>
+                            </center>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12" id="has_config_view">
+                                <br/>
+                                <h4>Approval Flow Details</h4>
+                                <br/>
+                            </div>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2">
+                            <strong>Report Date:</strong>
+                            <p class="m-0" t-field="doc.create_date"/>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-bordered" id="has_config_table" style="table-layout:fixed">
+                                    <thead style="display:table-row-group, font-weight='bold'">
+                                        <tr>
+                                            <th class="text-center">Requested Reference</th>
+                                            <th class="text-center">Approval User</th>
+                                            <th class="text-center">Requested Delivery Date</th>
+                                            <th class="text-center">schedule Date</th>
+                                            <th class="text-center">Buyer</th>
+                                            <th class="text-center">Approval Stage</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">
+                                                <span t-esc="doc.name"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="doc.remark_ids.user_id.name"/>
+                                            </td>
+                                            <td class="text-center" scope="col">
+                                                <span t-esc="doc.request_deliver_date"/>
+                                            </td>
+                                            <td class="text-center" scope="col">
+                                                <span t-esc="doc.schedule_date"/>
+                                            </td>
+                                            <td class="text-center" scope="col">
+                                                <span t-esc="doc.user_id.name"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="doc.next_approval_id.name"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <dic class="row" id="has_last_div">
+                            <div class="col-12" id="has_chain_complain">
+                                <br/>
+                            </div>
+                        </dic>
+
+                    </div>
+                </t>
+
+            </t>
+        </t>
+    </template>
+
+    <record id="action_approval_level_flow_report" model="ir.actions.report">
+        <field name="name">Approval Level Report</field>
+        <field name="model">purchase.request</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">atta_purchase_request.approval_flow_report</field>
+        <field name="report_file">atta_purchase_request.approval_flow_report</field>
+        <field name="binding_model_id" ref="model_purchase_request"/>
+        <field name="binding_type">report</field>
+
+    </record>
+
+</odoo>

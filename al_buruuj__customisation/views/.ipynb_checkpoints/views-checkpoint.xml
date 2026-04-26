@@ -1,0 +1,336 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+        <!-- Res_Partner list view Update -->
+    
+    <record model="ir.ui.view" id="bur_res_partner_list">
+      <field name="name">bur_partner_list_add</field>
+          <field name="inherit_id" ref="base.view_partner_tree"/>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="total_invoiced" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='total_invoiced']" position="after">
+                <field name="total_due" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='total_due']" position="after">
+                <field name="total_due_OC" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='total_due_OC']" position="after">
+                <field name="MRB_Customer" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='MRB_Customer']" position="after">
+                <field name="MRB_Bank" optional="hide"/>
+            </xpath>
+      </field>
+    </record>
+      
+      
+           <!-- Account_Payment list view Update -->
+    <record model="ir.ui.view" id="bur_account_payment_list">
+      <field name="name">bur_account_payment_list_add</field>
+          <field name="inherit_id" ref="account.view_account_payment_tree"/>
+      <field name="model">account.payment</field>
+      <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="Check_number" optional="hide"/>
+            </xpath>
+           <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="Vocher_number" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="payment_Method" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="payment_type" optional="hide"/>
+            </xpath>
+      </field>
+    </record>
+      
+      
+      
+        <!-- Res_Partner form view Update -->
+    <record model="ir.ui.view" id="bur_res_partner_form">
+      <field name="name">bur_partner_field_add</field>
+          <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        
+        <xpath expr="//field[@name='image_1920']" position="before">
+                <group>
+                    <field name="total_due" string="Balance"/>
+              </group>  
+        </xpath>
+          
+        <xpath expr="//field[@name='category_id']" position="after">
+        <field name="MRB_Customer"/>
+        <field name="MRB_Bank" attrs="{'invisible': [('MRB_Customer','=',False)], 'required':[('MRB_Customer','=',True)]}"/>
+        </xpath>
+      </field>
+    </record>
+      
+        <!-- stock.picking form view Update -->
+    <record model="ir.ui.view" id="bur_stock_picking_form">
+      <field name="name">bur_stock_picking_field_add</field>
+          <field name="inherit_id" ref="stock.view_picking_form"/>
+      <field name="model">stock.picking</field>
+      <field name="arch" type="xml">
+         
+        <xpath expr="//field[@name='origin']" position="after">
+                    <field name="vehicle_reg_number" attrs='{"invisible": [("picking_type_code", "not in", ["outgoing"])],"required": [("picking_type_code", "=", "outgoing")]}'/>
+            
+                    <field name="vehicle_driver"  attrs='{"invisible": [("picking_type_code", "not in", ["outgoing"])], "required": [("picking_type_code", "=", "outgoing")]}'/>
+        </xpath>
+          
+      </field>
+    </record>
+      
+      
+      
+      
+    <!-- account_payment form view Update -->
+    <record model="ir.ui.view" id="bur_account_payment_form">
+      <field name="name">bur_account_payment_field_add</field>
+          <field name="inherit_id" ref="account.view_account_payment_form"/>
+      <field name="model">account.payment</field>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_bank_id']" position="after">
+        <field name="Vocher_number"/>
+        <field name="payment_Method" widget="selection"/>
+        <field name="Check_number" attrs="{'invisible': [('payment_Method','!=','ck')], 'required':[('payment_Method','=','ck')]}"/>
+        </xpath>
+      </field>
+    </record>
+      
+      
+          <!-- sale.order form view Update -->
+    <record model="ir.ui.view" id="bur_sale_order_form">
+      <field name="name">bur_sale_order_field_add</field>
+          <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="model">sale.order</field>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="replace">
+        <field name="partner_id" options="{'no_create': True, 'no_open': True}" />
+        </xpath>
+      </field>
+    </record>
+    
+    <!-- form view Update removing product on fly creation Ahmed Abdi 13/01/22: START-->
+
+      <record model="ir.ui.view" id="city_sale_order_form_prod">
+      <field name="name">city_sale_order_field_add_prod</field>
+          <field name="inherit_id" ref="sale.sale_order_line_view_form_readonly"/>
+      <field name="model">sale.order.line</field>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='product_id']" position="replace">
+        <field name="product_id" options="{'no_create': True}" />
+        </xpath>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="city_account_payment_form">
+      <field name="name">city_account_payment_field_add</field>
+          <field name="inherit_id" ref="account.view_account_payment_form"/>
+      <field name="model">account.payment</field>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="replace">
+        <field name="partner_id" options="{'no_create': True, 'no_open': True}" />
+        </xpath>
+      </field>
+    </record>
+      
+    <record model="ir.ui.view" id="city_account_move_form">
+      <field name="name">city_account_move_field_add</field>
+          <field name="inherit_id" ref="account.view_move_form"/>
+      <field name="model">account.move</field>
+      <field name="arch" type="xml">
+        
+        <xpath expr="//header/button[@name='action_post']" position="after">
+            <button name="bur_action_approval" states='draft'
+            string="send For Approval" type="object" class="oe_highlight"
+            groups= "account.group_account_invoice"
+             attrs="{'invisible': ['|', '|', ('state', '!=', 'draft'),  ('move_type', '=', 'entry')]}"/>
+        </xpath>
+        <xpath expr="//header/button[@name='action_post']" position="replace">
+        </xpath>
+        <xpath expr="//header/button[@name='action_post']" position="replace">
+             <button name="action_post"  string="Confirm" class="oe_highlight" 
+                type="object" groups="account.group_account_user"
+                attrs="{'invisible': ['|', '|', ('state', '!=', 'draft'), ('auto_post', '=', True), ('move_type', '=', 'entry')]}"/>
+        </xpath>
+        
+        <xpath expr="//field[@name='partner_id']" position="replace">
+        <field name="partner_id" options="{'no_create': True, 'no_open': True}" />
+        </xpath>
+          
+          
+      </field>
+    </record>
+       	
+      
+    <record model="ir.ui.view" id="city_purchase_order_form">
+      <field name="name">city_purchase_orderfield_add</field>
+          <field name="inherit_id" ref="purchase.purchase_order_form"/>
+      <field name="model">purchase.order</field>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="replace">
+        <field name="partner_id" options="{'no_create': True, 'no_open': True}" />
+        </xpath>
+      </field>
+    </record>
+      
+<!-- form view Update removing product on fly creation Ahmed Abdi 13/01/22: END-->
+      
+      
+<!--    Sales Approval:  From Here  -->
+      
+     		<record id="view_users_form_extends" model="ir.ui.view">
+			<field name="name">res.users.form</field>
+			<field name="model">res.users</field>
+			<field name="inherit_id" ref="base.view_users_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//page[@name='access_rights']" position="after">
+					<page string="Sale Approval">
+						<group>
+							<group>
+								<field name="sale_order_can_approve" widget="radio"/>
+								<field name="sale_order_amount_limit" attrs="{'invisible': [('sale_order_can_approve', '=', 'no')],'required': [('sale_order_can_approve', '=', 'yes')]}"/>
+								<field name="sale_order_discount_limit" attrs="{'invisible': [('sale_order_can_approve', '=', 'no')],'required': [('sale_order_can_approve', '=', 'yes')]}"/>
+							</group>
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+      
+      
+      
+      <record id="view_order_form_extends" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_confirm']" position="replace">
+                <button name="action_confirm" states="sent,waiting_for_approval" string="Confirm Sale"
+                        class="btn-primary o_sale_confirm" type="object"/>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="replace">
+                <button name="action_cancel" states="draft,sent,sale,waiting_for_approval" type="object"
+                        string="Cancel"/>
+            </xpath>
+
+            <xpath expr="//button[@name='action_confirm'][2]" position="after">
+                <button name="%(action_sales_approvals)d" states="draft,sent,waiting_for_approval" type="action" class="oe_highlight"
+                        string="Ask for approval"/>
+            </xpath>
+
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="approver_id"/>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree" position="replace">
+                <tree string="Sales Order Lines" decoration-info="invoice_status=='to invoice'">
+                    <control>
+                        <create string="Add a product"/>
+                        <create string="Configure a product" context="{'open_product_configurator': True}"
+                                groups="product.group_product_variant"/>
+                        <create string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                        <create string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                    </control>
+                    <field name="sequence" widget="handle"/>
+                    <field name="product_id"
+                           context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
+                    />
+
+                    <field name="name"/>
+                    <field name="product_uom_qty" string="Ordered Qty"
+                           context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"/>
+                    <field name="qty_delivered" invisible="context.get('hide_sale')"/>
+                    <field name="qty_invoiced" invisible="context.get('hide_sale')"/>
+                    <field name="qty_to_invoice" invisible="1"/>
+                    <field name="product_uom"
+                           attrs="{'readonly': [('state', 'in', ('sale','done', 'cancel'))]}"
+                           context="{'company_id': parent.company_id}" groups="product.group_uom"
+                           options='{"no_open": True}'/>
+                    <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"
+                           widget="many2many_tags"/>
+                    <field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                    <field name="tax_id" widget="many2many_tags"
+                           domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]"
+                           attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                    <field name="discount" groups="sale.group_discount_per_so_line"/>
+                    <field name="price_subtotal" widget="monetary"
+                           groups="sale.group_show_price_subtotal"/>
+                    <field name="price_total" widget="monetary" groups="sale.group_show_price_total"/>
+
+                    <field name="state" invisible="1"/>
+                    <field name="invoice_status" invisible="1"/>
+                    <field name="customer_lead" invisible="1"/>
+                </tree>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_order_tree_extend" model="ir.ui.view">
+        <field name="name">sale.order.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_status']" position="replace">
+                <field name="state"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_sale_approval" model="ir.actions.act_window">
+        <field name="name">Sales Approval</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="context">{}</field>
+        <field name="domain">[('state', 'not in', ('draft', 'sent', 'sale', 'cancel'))]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                All the approval sale orders will be available here.
+            </p>
+        </field>
+    </record>
+    <menuitem action="action_sale_approval"
+              id="menu_sale_approval" parent="sale.sale_order_menu"
+              sequence="11" groups="sales_team.group_sale_salesman,sales_team.group_sale_manager"/>
+
+    <!-- Show under sales settings to set minimum and maximum amount -->
+    <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sale1</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Sales" string="Sales" data-key="sale_management">
+                    <h2>Sale Approval Amount Limit</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="minimum_amount"/>
+                                <field name="minimum_amount"/>
+                                <div class="mt16">
+                                    <label for="maximum_amount"/>
+                                    <field name="maximum_amount"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

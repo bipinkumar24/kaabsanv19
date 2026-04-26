@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_employee_leave_report_new" model="ir.actions.report">
+            <field name="name">Employee Leave Report</field>
+            <field name="model">hr.employee</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">employee_leave_report.report_hr_employee_temp</field>
+            <field name="report_file">employee_leave_report.report_hr_employee_temp</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="binding_view_types" eval="False"/>
+        </record>
+        <record id="action_leave_report" model="ir.actions.report">
+            <field name="name">Leave Report</field>
+            <field name="model">leave.report.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">employee_leave_report.leave_report_template</field>
+            <field name="report_file">employee_leave_report.leave_report_template</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="binding_view_types" eval="False"/>
+        </record> 
+    </data>
+</odoo>

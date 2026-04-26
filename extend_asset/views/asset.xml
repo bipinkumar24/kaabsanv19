@@ -1,0 +1,33 @@
+<odoo>
+    <record id="account_asset_form_inherite" model="ir.ui.view">
+        <field name="name">account_asset_form_inherite</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+        <field name="arch" type="xml">
+            <!-- Odoo 19 migration: analytic_tag_ids was replaced by analytic_distribution.
+                 Old xpath kept for migration reference:
+                 <xpath expr="//field[@name='analytic_tag_ids']" position="after"> -->
+            <xpath expr="//field[@name='analytic_distribution']" position="after">
+                <br/>
+                <field name="asset_tag" widget="many2many_tags" options="{'color_field': 'color'}"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="account_asset_tree_inherite" model="ir.ui.view">
+        <field name="name">account.asset_tree_inherite</field>
+        <field name="model">account.asset</field>
+        <!-- Odoo 19 migration: account_asset.view_account_asset_purchase_tree no longer exists.
+             Old inherit ref kept for migration reference:
+             <field name="inherit_id" ref="account_asset.view_account_asset_purchase_tree"/> -->
+        <field name="inherit_id" ref="account_asset.view_account_asset_tree"/>
+        <field name="arch" type="xml">
+            <!-- Odoo 19 migration: tree views are list views.
+                 Old xpath kept for migration reference:
+                 <xpath expr="//tree/field[@name='name']" position="after"> -->
+            <xpath expr="//list/field[@name='name']" position="after">
+                <field name="asset_tag" widget="many2many_tags" options="{'color_field': 'color'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

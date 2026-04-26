@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_performance_rating_form">
+            <field name="name">performance.rating.form</field>
+            <field name="model">performance.rating.custom</field>
+            <field name="arch" type="xml">
+                <form string="Evaluation Form Ratings Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="sequence"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_performance_rating_tree">
+            <field name="name">performance.rating.tree</field>
+            <field name="model">performance.rating.custom</field>
+            <field name="arch" type="xml">
+                <list string="Evaluation Form Ratings List" editable="bottom">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_performance_rating_search">
+            <field name="name">performance.rating.search</field>
+            <field name="model">performance.rating.custom</field>
+            <field name="arch" type="xml">
+                <search string="Evaluation Form Ratings">
+                   <field name="name"/>
+               </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_performance_rating">
+            <field name="name">Evaluation Form Ratings</field>
+            <field name="res_model">performance.rating.custom</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem  id="menu_performance_rating" parent="odoo_hr_evaluation_form.menu_human_resources_configuration_hr_evaluation" action="action_performance_rating"/>
+
+        <record id="res_config_settings_view_employee_form_custom_rating" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.hr.appraisal.rating</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="hr_appraisal.res_config_settings_view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//app[@name='hr_appraisal']/block" position="inside">
+                    <setting string="Appraisal Rating" help="Maximum rating scale used to calculate evaluation scores.">
+                        <field name="appraisal_rating"/>
+                    </setting>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

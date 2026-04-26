@@ -1,0 +1,83 @@
+<odoo>
+    <record id="maintenance_checklist_line_form" model="ir.ui.view">
+        <field name="name">maintenance.checklist.line.form</field>
+        <field name="model">maintenance.checklist.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="equipment_id"/>
+                            <field name="checklist_ids"/>
+                            <field name="descriptione"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="maintenance_checklist_line_tree" model="ir.ui.view">
+        <field name="name">maintenance.checklist.line.tree</field>
+        <field name="model">maintenance.checklist.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="equipment_id"/>
+                <field name="checklist_ids"/>
+                <field name="descriptione"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_maintenance_checklist_line" model="ir.actions.act_window">
+        <field name="name">Checklist</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">maintenance.checklist.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="damage_details_line_form" model="ir.ui.view">
+        <field name="name">damage.details.line.form</field>
+        <field name="model">damage.details.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="descriptione"/>
+                            <field name='request_id'/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="damage_details_line_tree" model="ir.ui.view">
+        <field name="name">damage.details.line.tree</field>
+        <field name="model">damage.details.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="date"/>
+                <field name="descriptione"/>
+                <field name='request_id'/>
+            </list>
+        </field>
+    </record>
+
+    <record id="damage_details_line_line" model="ir.actions.act_window">
+        <field name="name">Damage Dtails</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">damage.details.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="sub_menu_checklist"
+              name="Checklist"
+              parent="maintenance.menu_m_request"
+              action="action_maintenance_checklist_line"/>
+    
+    <menuitem id="sub_menu_damage_details"
+              name="Damage Details"
+              parent="maintenance.menu_m_request"
+              action="damage_details_line_line"/>
+</odoo>

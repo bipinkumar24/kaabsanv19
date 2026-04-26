@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_car_inherit" model="ir.ui.view">
+            <field name="name">car.reservation.inherit</field>
+            <field name="model">car.reservation</field>
+            <field name="inherit_id" ref="car_reservation.car_reserve_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Odoo 19 migration: keep one stable insertion before vehicle_id.
+                     Old separate xpaths kept for migration reference:
+                <xpath expr="//field[@name='vehicle_id']" position="before">
+                    <field name="partner_id" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="lead_id"/>
+                </xpath>
+                -->
+
+                <xpath expr="//field[@name='vehicle_id']" position="before">
+                    <field name="lead_id"/>
+                    <field name="partner_id" readonly="1"/>
+                </xpath>
+
+<!--                <xpath expr="//field[@name='value']" position="after">-->
+<!--                    <field name="pickup_location"/>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='pickup_location']" position="after">-->
+<!--                    <field name="drop_location"/>-->
+<!--                </xpath>-->
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_mrp_materials_line">
+        <t t-set="currency" t-value="data['currency']"/>
+        <t t-foreach="data['operations']" t-as="op">
+            <t t-set="space_td" t-value="'margin-left: '+ str(op['level'] * 20) + 'px;'"/>
+            <tr class="o_mrp_bom_report_line o_mrp_bom_cost" t-att-parent_id="'operation-' + str(data['bom_id'])">
+                <td name="td_opr_line">
+                    <span t-att-style="space_td"/>
+                    <a href="#" t-att-data-res-id="op['operation'].id" t-att-data-model="'mrp.routing.workcenter'" class="o_mrp_bom_action"><t t-esc="op['name']"/></a>
+                </td>
+                <t t-foreach="range(data.get('extra_column_count', 0))" t-as="index">
+                    <td/>
+                </t>
+                <td/>
+                <td class="text-right">
+                    <span t-esc="op['duration_expected']" t-options='{"widget": "float_time"}'/>
+                </td>
+                <td groups="uom.group_uom"><span>Minutes</span></td>
+                <td/>
+                <td class="o_mrp_bom_cost text-right">
+                    <span t-esc="op['total']" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                </td>
+                <td/>
+            </tr>
+        </t>
+    </template>
+
+    <template id="report_report_mrp_bom_pdf_line_kaabasan" inherit_id="mrp.report_mrp_bom">
+        <xpath expr="//t[@t-call='mrp.report_mrp_bom_pdf_line']" position="after">
+            <tr class="o_mrp_bom_report_line o_mrp_bom_cost">
+                <td>Direct Material Cost</td>
+                <td class="text-end">
+                    <span t-esc="data.get('total_materials', 0)"/>
+                </td>
+                <td groups="uom.group_uom"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-else=""/>
+                <td class="text-end">
+                    <span t-esc="data.get('cost_materials', 0)" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                </td>
+            </tr>
+            <tr class="o_mrp_bom_report_line o_mrp_bom_cost">
+                <td>Direct Labour Cost</td>
+                <td class="text-end">
+                    <span t-esc="data.get('total_labours', 0)"/>
+                </td>
+                <td groups="uom.group_uom"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-else=""/>
+                <td class="text-end">
+                    <span t-esc="data.get('cost_labours', 0)" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                </td>
+            </tr>
+            <tr class="o_mrp_bom_report_line o_mrp_bom_cost">
+                <td>Direct Overhead Cost</td>
+                <td class="text-end">
+                    <span t-esc="data.get('total_ohs', 0)"/>
+                </td>
+                <td groups="uom.group_uom"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-if="data['forecast_mode']"/>
+                <td t-else=""/>
+                <td class="text-end">
+                    <span t-esc="data.get('cost_ohs', 0)" t-options='{"widget": "monetary", "display_currency": currency}'/>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+    <!-- Legacy Odoo code kept for reference:
+         <template id="report_mrp_bom_line_inherit_mrp_subcontractingsss" inherit_id="mrp.report_mrp_bom_line">
+             ...
+         </template>
+         Odoo 19 removed mrp.report_mrp_bom_line and now renders the BoM PDF
+         through mrp.report_mrp_bom + mrp.report_mrp_bom_pdf_line. -->
+    <record id="view_stock_move_line_salam" model="ir.ui.view">
+        <field name="name">view.view.stock.move.line.salam</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='quantity']" position="before">
+                <field name="qty_in"/>
+                <field name="qty_out"/>
+                <field name="qty_total"/>
+                <field name="balance_qty"/>
+            </xpath>
+            <xpath expr="//field[@name='quantity']" position="attributes">
+                <attribute name="string">Done Quantity</attribute>
+            </xpath>
+            <xpath expr="//field[@name='quantity']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="model_action_update_in_out" model="ir.actions.server">
+        <field name="name">Re-compute Stock In / Out</field>
+        <field name="model_id" ref="salam_product_move.model_stock_move_line"/>
+        <field name="binding_model_id" ref="salam_product_move.model_stock_move_line"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_compaute_in_out_sent()</field>
+    </record>
+</odoo>
