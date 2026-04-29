@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- =========approval access========== -->
+	    
+	<record id="group_change_effective_date" model="res.groups">
+            <field name="name">Change Effective Date</field>
+        </record>
+
+</odoo>

@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_budget_comparison_wizard_form" model="ir.ui.view">
+        <field name="name">budget.comparison.wizard.form</field>
+        <field name="model">budget.comparison.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Budget Comparison">
+                <group>
+                    <group>
+                        <field name="year_from"/>
+                    </group>
+                </group>
+                 <group>
+                    <group>
+                        <field name="half_year_from" invisible="quarter_from != False"/>
+                    </group>
+                    <group>
+                        <field name="quarter_from" invisible="half_year_from != False"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="from_start_date" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="from_end_date" readonly="1"/>
+                    </group>
+                </group>
+                 <group>
+                    <group>
+                        <field name="year_to"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="half_year_to" invisible="quarter_to != False"/>
+                    </group>
+                    <group>
+                        <field name="quarter_to" invisible="half_year_to != False"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="to_start_date" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="to_end_date" readonly="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Print Report" type="object" name="action_generate_report" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_budget_comparison_wizard" model="ir.actions.act_window">
+        <field name="name">Budget Comparison</field>
+        <field name="res_model">budget.comparison.wizard</field>        
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+        <!-- Menu Item -->
+    <menuitem id="menu_budget_comparison_wizard"
+              name="Budget Comparison Report"
+              parent="account.account_reports_management_menu"
+              action="action_budget_comparison_wizard"
+              sequence="33"/>
+
+
+
+    <template id="report_budget_comparison_wizard">
+         <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                <h2 class="text-center">Budget Comparison Report</h2>
+                <div class="row mb16">
+                    <div class="col-6">
+                            <p>
+                                <strong>Year:</strong><span t-esc="year_from"/>
+                                <strong>Date Range:</strong> <span t-esc="from_start_date" t-options='{"widget": "date"}'/> - <span t-esc="from_end_date" t-options='{"widget": "date"}'/><br/>
+                            </p>
+                    </div>
+                    <div class="col-6">
+                            <p>
+                                <strong>Year:</strong><span t-esc="year_to"/>
+                                <strong>Date Range:</strong> <span t-esc="to_start_date" t-options='{"widget": "date"}'/> - <span t-esc="to_end_date" t-options='{"widget": "date"}'/><br/>
+                            </p>
+                    </div>
+                </div>
+            </div>
+                <table class="table table-sm table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>FY <t t-esc="year_from"/> <t t-esc="half_year_from"/> <t t-esc="quarter_from"/> Actual</th>
+                      <th>FY <t t-esc="year_to"/> <t t-esc="half_year_to"/> <t t-esc="quarter_to"/> Budget</th>
+                      <th>FY <t t-esc="year_to"/> <t t-esc="half_year_to"/> <t t-esc="quarter_to"/> Actual</th>
+                      <th>Variance (Value)</th>
+                      <th>Variance (%)</th>
+                      <th>YoY Change</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="report_lines" t-as="line">
+                            <tr>
+                              <td><t t-esc="line['category']"/></td>
+                              <td><t t-esc="'%.2f' % line['actual_previous']"/></td>
+                              <td><t t-esc="'%.2f' % line['planned']"/></td>
+                              <td><t t-esc="'%.2f' % line['actual_current']"/></td>
+                              <td><t t-esc="'%.2f' % line['variance_value']"/></td>
+                              <td><t t-esc="'%.2f' % line['variance_percent']"/>%</td>
+                              <td><t t-esc="'%.2f' % line['yoy_change']"/>%</td>
+                            </tr>
+                          </t>
+                        </tbody>
+                </table>
+            </t>
+    </t>
+    </template>
+    <record id="action_budget_comparison_wizard_report" model="ir.actions.report">
+        <field name="name">Budget Comparison Report</field>
+        <field name="model">budget.comparison.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">budget_comparison.report_budget_comparison_wizard</field>
+        <field name="report_file">budget_comparison.report_budget_comparison_wizard</field>
+        <field name="binding_model_id" ref="model_budget_comparison_wizard"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+</odoo>

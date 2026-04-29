@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_budget_line_alert_accountant,budget.line alert accountant,account_budget.model_budget_line,account.group_account_user,1,1,1,1
+access_budget_line_alert_user,budget.line alert user,account_budget.model_budget_line,base.group_user,1,1,1,0

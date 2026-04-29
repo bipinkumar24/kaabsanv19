@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="crossovered_budget_form_inherit">
+			<field name="name">budget.analytic.form.inherit</field>
+			<field name="model">budget.analytic</field>
+			<field name="inherit_id" ref="account_budget.view_budget_analytic_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='budget_line_ids']/list//field[@name='auto_account_id']" position="after">
+					<field name="warning_type"/>
+					<field name="is_active"/>
+					<field name="allow2_manager" invisible="warning_type != 'restrict'"/>
+				</xpath>
+
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="budget_line_form_inherit">
+			<field name="name">budget.line.form.inherit</field>
+			<field name="model">budget.line</field>
+			<field name="inherit_id" ref="account_budget.view_budget_line_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='account_id']" position="after">
+					<field name="warning_type"/>
+					<field name="allow2_manager" invisible="warning_type != 'restrict'"/>
+					<field name="is_active"/>
+				</xpath>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="purchase_order_form_inherit">
+			<field name="name">purchase.order.form</field>
+			<field name="model">purchase.order</field>
+			<field name="inherit_id" ref="purchase.purchase_order_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="after">
+					<div invisible="not is_warning" class="alert alert-info" role="alert">
+					
+					<field invisible="1" name="is_warning"/>
+					<span><h3><field readonly="1" name="exceed_note"/></h3></span>
+					</div>
+				</xpath>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_move_form_inherit">
+			<field name="name">account.move.form</field>
+			<field name="model">account.move</field>
+			<field name="inherit_id" ref="account.view_move_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="after">
+					<div invisible="not is_warning" class="alert alert-info" role="alert">
+					<field invisible="1" name="is_warning"/>
+					<span><h3><field readonly="1" name="exceed_note"/></h3></span>
+					</div>
+				</xpath>
+			</field>
+		</record>
+
+</data>
+</odoo>
