@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ── Purchase Analysis – Search ────────────────────────────────────── -->
+    <record id="view_purchase_report_search_fleet_asset" model="ir.ui.view">
+        <field name="name">purchase.report.search.fleet.asset</field>
+        <field name="model">purchase.report</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_search"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//search/filter[last()]" position="after">
+                <separator/>
+                <filter name="filter_fleet"
+                        string="Linked to Fleet Vehicle"
+                        domain="[('fleet_vehicle_id', '!=', False)]"/>
+                <filter name="filter_asset"
+                        string="Linked to Asset"
+                        domain="[('asset_id', '!=', False)]"/>
+            </xpath>
+
+            <xpath expr="//search/group/filter[last()]" position="after">
+                <separator/>
+                <filter name="groupby_fleet_vehicle"
+                        string="Fleet Vehicle"
+                        context="{'group_by': 'fleet_vehicle_id'}"/>
+                <filter name="groupby_asset"
+                        string="Asset"
+                        context="{'group_by': 'asset_id'}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- ── Purchase Analysis – Pivot ─────────────────────────────────────── -->
+    <record id="view_purchase_report_pivot_fleet_asset" model="ir.ui.view">
+        <field name="name">purchase.report.pivot.fleet.asset</field>
+        <field name="model">purchase.report</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_pivot"/>
+        <field name="arch" type="xml">
+            <xpath expr="//pivot" position="inside">
+                <field name="fleet_vehicle_id" type="row"/>
+                <field name="asset_id"         type="row"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ── Purchase Analysis – Graph ─────────────────────────────────────── -->
+    <record id="view_purchase_report_graph_fleet_asset" model="ir.ui.view">
+        <field name="name">purchase.report.graph.fleet.asset</field>
+        <field name="model">purchase.report</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_graph"/>
+        <field name="arch" type="xml">
+            <xpath expr="//graph" position="inside">
+                <field name="fleet_vehicle_id"/>
+                <field name="asset_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -164,7 +164,6 @@ class InheritSaleOrderLine(models.Model):
 
 class ProductOnWarehouse(models.Model):
     _name = 'product.on.warehouse'
-    _description = 'product On warehouse'
 
     warehouse_id = fields.Many2one('stock.warehouse', required=True)
     available_qty = fields.Float()

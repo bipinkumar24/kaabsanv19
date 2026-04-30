@@ -26,24 +26,16 @@ class AttendanceState(models.Model):
          "The Activity Type and Activity must be unique! Please recheck if you have previously defined an attendance status with the same Activity Type and Activity"),
     ]
 
-    def name_get(self):
-        """
-        name_get that supports displaying tags with their code as prefix
-        """
-        result = []
+    def _compute_display_name(self):
         for r in self:
-            result.append((r.id, '[' + r.activity_id.name + '] ' + r.name))
-        return result
+            r.display_name = '[' + (r.activity_id.name or '') + '] ' + (r.name or '')
 
     @api.model
-    def name_search(self, name, args=None, operator='ilike', limit=100):
-        """
-        name search that supports searching by tag code
-        """
-        args = args or []
-        domain = []
+    def name_search(self, name='', domain=None, operator='ilike', limit=100):
+        domain = domain or []
+        search_domain = []
         if name:
-            domain = ['|', ('activity_id.name', '=ilike', name + '%'), ('name', operator, name)]
-        state = self.search(domain + args, limit=limit)
-        return state.name_get()
+            search_domain = ['|', ('activity_id.name', '=ilike', name + '%'), ('name', operator, name)]
+        records = self.search(search_domain + domain, limit=limit)
+        return [(r.id, r.display_name) for r in records]
 

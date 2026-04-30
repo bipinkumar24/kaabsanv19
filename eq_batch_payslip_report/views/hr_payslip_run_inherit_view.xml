@@ -1,0 +1,20 @@
+<odoo>
+    <record id="hr_payslip_run_view_kanban_inherit" model="ir.ui.view">
+        <field name="name">hr.payslip.run.view.kanban.inherit</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_view_kanban"/>
+        <field name="model">hr.payslip.run</field>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_payroll_hr_version_list_view_payrun']" position="after">
+                <button string="Batch Payslip Report"
+                        type="action"
+                        name="%(eq_batch_payslip_report.action_wizard_batch_payslip_report)d"
+                        class="btn btn-secondary"/>
+
+                <button string="Batch Payslip Report CNSS"
+                        type="action"
+                        name="%(eq_batch_payslip_report.action_wizard_batch_payslip_report_new)d"
+                        class="btn btn-secondary"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

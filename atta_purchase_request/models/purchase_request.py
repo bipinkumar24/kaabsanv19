@@ -3,7 +3,7 @@ from datetime import timedelta
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
-DEFAULT_NAME = _('New')
+DEFAULT_NAME = 'New'
 
 STATE = [
     ('draft', 'Draft'),
@@ -169,7 +169,7 @@ class PurchaseRequest(models.Model):
 
     @api.depends()
     def compute_has_access_right(self):
-        has_group_2nd_approval = self.user_has_groups(
+        has_group_2nd_approval = self.env.user.has_group(
             'atta_purchase_request.purchase_request_group_second_approval')
         self.update({'has_access_right': has_group_2nd_approval})
 

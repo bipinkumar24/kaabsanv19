@@ -5,6 +5,10 @@ from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError
 from odoo.tools import float_is_zero, float_round
 
+class AccountMove(models.Model):
+    _inherit = "account.move"
+
+    mrp_production_id = fields.Many2one('mrp.production')
 
 class MrpBom(models.Model):
     _inherit = "mrp.bom"
@@ -289,35 +293,13 @@ class MrpBomMaterialCost(models.Model):
             if not line.product_id or not line.mrp_pro_material_id.pricelist_id:
                 line.pricelist_item_id = False
             else:
-                set_product = line.product_id.product_variant_id if line.product_id.product_variant_id else line.product_id
-
-                if not set_product or not set_product.id:
-                    line.pricelist_item_id = False
-                    continue
-
+                set_product = line.product_id.product_variant_id
                 line.pricelist_item_id = line.mrp_pro_material_id.pricelist_id._get_product_rule(
                     set_product,
                     line.planned_qty or 1.0,
                     uom=line.uom_id,
                     date=line.mrp_pro_material_id.create_date,
                 )
-
-    # @api.depends('product_id', 'uom_id', 'planned_qty')
-    # def _compute_pricelist_item_id(self):
-    #     for line in self:
-    #         if not line.product_id or not line.mrp_pro_material_id.pricelist_id:
-    #             line.pricelist_item_id = False
-    #         else:
-    #             set_product = line.product_id.product_variant_id
-    #             res = line.mrp_pro_material_id.pricelist_id._compute_price_rule(
-    #                 set_product,
-    #                 line.planned_qty or 1.0,
-    #                 uom=line.uom_id,
-    #                 date=line.mrp_pro_material_id.create_date,
-    #                 compute_price=False
-    #             )
-    #             # Safely get the pricelist item
-    #             line.pricelist_item_id = res.get(set_product.id, (False, False))[1]
 
     def _get_pricelist_price(self):
         self.ensure_one()
@@ -326,9 +308,7 @@ class MrpBomMaterialCost(models.Model):
             self.product_id.ensure_one()
             pricelist_rule = self.pricelist_item_id
             order_date = self.mrp_pro_material_id.create_date or fields.Date.today()
-            set_product = self.product_id.product_variant_id if self.product_id.product_variant_id else self.product_id
-            if not set_product:
-                return 0
+            set_product = self.product_id.product_variant_id
             product = set_product.with_context(**self._get_product_price_context())
             qty = self.planned_qty or 1.0
             uom = self.uom_id or set_product.uom_id

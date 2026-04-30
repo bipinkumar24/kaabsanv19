@@ -6,14 +6,12 @@
     'author': "My Company",
     'website': "http://www.yourcompany.com",
     'category': 'MRP',
-    'version': '19.0.1.0.0',
-    # Odoo 19 migration: manufacturing valuation account moves are provided by mrp_account.
-    # Old dependency list kept for migration reference:
-    # ['mrp', 'stock_account', 'bi_odoo_process_costing_manufacturing']
-    'depends': ['mrp_account', 'bi_odoo_process_costing_manufacturing'],
+    'version': '19.0.0.1',
+    'depends': ['mrp','stock','stock_account'],
     'data': [
         'security/ir.model.access.csv',
         'views/mrp_production_view.xml',
         'wizard/change_date.xml',
+
     ],
 }

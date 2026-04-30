@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="group_force_inventory_date" model="res.groups">
+            <field name="name">Allow Force Inventory Date</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,35 +1,24 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "MRP Accounting Date",
-
-    'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
-
+    'name': "MRP Account Date",
+    'summary': "Adds accounting date functionality to Manufacturing Orders",
     'description': """
-        Long description of module's purpose
+        This module extends the Manufacturing (MRP) module
+        to manage and control accounting dates related to
+        manufacturing operations.
+
+        It allows better financial tracking and alignment
+        between production and accounting entries.
     """,
-
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
-
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
+    'author': "Bipin Prajapati",
+    'website': "",
     'category': 'Manufacturing',
-    'version': '19.0.1.0.0',
-
-    # any module necessary for this one to work correctly
-    # Odoo 19 migration: stock valuation journal entries are provided by mrp_account/stock_account.
-    # Old dependency kept for migration reference: ['mrp']
-    'depends': ['mrp_account'],
-
-    # always loaded
+    'version': '19.0.1.0.0',  # Change according to your Odoo version
+    'depends': ['mrp','account'],
     'data': [
         'views/mrp_inherit_views.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-
-    ],
+    'installable': True,
+    'application': False,
+    'license': 'LGPL-3',
 }

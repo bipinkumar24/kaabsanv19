@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="mrp_production_form_view" model="ir.ui.view">
+            <field name="name">mrp.production.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='user_id']" position="before">
+                    <field name="force_inventory_date"
+                           readonly="state in ['done', 'cancel']"
+                           groups="inventory_force_date.group_force_inventory_date"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

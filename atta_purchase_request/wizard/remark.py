@@ -14,7 +14,14 @@ class Remark(models.TransientModel):
     @api.model
     def default_get(self, fields):
         result = super(Remark, self).default_get(fields)
-        result['purchase_request_id'] = self._context.get('active_id')
+        purchase_request_id = self._context.get('active_id')
+        composer = self.env['mail.compose.message'].create({
+            'model': 'purchase.request',
+            'res_ids': str([purchase_request_id]) if purchase_request_id else False,
+            'composition_mode': 'comment',
+        })
+        result['composer_id'] = composer.id
+        result['purchase_request_id'] = purchase_request_id
         return result
 
     purchase_request_id = fields.Many2one('purchase.request', string='Approval Refund')
@@ -23,7 +30,13 @@ class Remark(models.TransientModel):
     is_first_level = fields.Boolean('Is First Level?')
     email_from = fields.Char('From Email')
     email_to = fields.Char('To Email')
-    composer_id = fields.Many2one('mail.compose.message', string='Composer', required=False)
+    composer_id = fields.Many2one(
+        'mail.compose.message',
+        string='Composer',
+        required=True,
+        delegate=True,
+        ondelete='cascade',
+    )
     attachment_ids = fields.Many2many('ir.attachment', 'remark_attachmment_id',
                                       'remark_id', 'attachment_id', string='Attachments')
     body_html = fields.Html('Body', render_engine='qweb', translate=True, sanitize=False)
@@ -132,4 +145,3 @@ class Remark(models.TransientModel):
                                            'remark_type': 'reject'
                                            })]
         self.purchase_request_id.next_approval_id = level_rec.id
-

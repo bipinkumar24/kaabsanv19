@@ -3,7 +3,7 @@ from datetime import datetime
 import pytz
 # from datetime import timedelta
 from datetime import date, timedelta
-from odoo import models, fields, api,registry, _
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
 
 _logger = logging.getLogger(__name__)

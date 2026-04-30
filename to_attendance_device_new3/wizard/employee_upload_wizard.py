@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.models import NewId
+from odoo.orm.identifiers import NewId
 
 
 class EmployeeUploadLine(models.TransientModel):

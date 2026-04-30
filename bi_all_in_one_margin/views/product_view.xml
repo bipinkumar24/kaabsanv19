@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="product_bundle_product_form_view" model="ir.ui.view">
+			<field name="name">product_bundle.product_form_view</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_only_form_view" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<field name="standard_price" position="after">
+					<field name="margin"  groups="bi_all_in_one_margin.group_allow_margin"/>
+				</field>
+			</field>
+		</record>
+
+	</data>
+</odoo>

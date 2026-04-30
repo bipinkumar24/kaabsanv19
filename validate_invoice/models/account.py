@@ -12,6 +12,13 @@ class AccountMove(models.Model):
         ondelete={'preposted': 'set default'},
     )
 
+    # Satisfies a stale view reference left by a previously uninstalled module
+    is_exact_move_duplicate = fields.Boolean(compute='_compute_is_exact_move_duplicate')
+
+    def _compute_is_exact_move_duplicate(self):
+        for move in self:
+            move.is_exact_move_duplicate = False
+
     def button_prepost(self):
         self.write({'state': 'preposted'})
 

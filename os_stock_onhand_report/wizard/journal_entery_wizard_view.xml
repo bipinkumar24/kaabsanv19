@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_link_journal_entry_wizard" model="ir.ui.view">
+            <field name="name">link.journal.entry.wizard.form</field>
+            <field name="model">link.journal.entry.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Link Accounting Entry">
+                    <group>
+                        <field name="move_id" invisible="1"/>
+                        <field name="journal_entry_id"/>
+                    </group>
+                    <footer>
+                        <button string="Link Journal Entry" type="object" name="action_link_journal_entry" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

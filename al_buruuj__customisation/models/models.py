@@ -25,11 +25,11 @@ class bur_res_partner(models.Model):
     _description = 'res.partner Inherited'
 
     @api.depends('total_due')
-    def _compute_total_due(self):
+    def _compute_total_due_oc(self):
         for rec in self:
             rec.total_due_OC = rec.total_due / 177.75
 
-    total_due_OC = fields.Monetary('Total Due USD', compute=_compute_total_due)
+    total_due_OC = fields.Monetary('Total Due USD', compute='_compute_total_due_oc')
     MRB_Customer = fields.Boolean('Murabaha Customer')
     MRB_Bank = fields.Char('Murabaha Bank')
 

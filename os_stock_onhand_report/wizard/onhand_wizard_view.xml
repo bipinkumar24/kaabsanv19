@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="export_stock_product_info_form_view" model="ir.ui.view">
+            <field name="name">export.stock.product.info.form.view</field>
+            <field name="model">stock.onhand.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Stock Onhand Report">
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="category_ids"
+                                   widget="many2many_tags"/>
+                            <field name="display_current_stock"/>
+                        </group>
+                        <group>
+                            <field name="product_ids"
+                                   widget="many2many_tags"/>
+                        </group>
+                        
+                    </group>
+                    <group>
+                        <separator string="Locations" colspan="4"/>
+                        <field name="location_ids" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button name="print_stock_onhand_report" string="Print"
+                                type="object" icon="fa-print"
+                                class="btn-primary"
+                                />
+                        <button string="Cancel" class="btn-secondary"
+                                special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+
+        </record>
+
+        <record id="action_wizard_stock_export" model="ir.actions.act_window">
+            <field name="name">Stock Onhand Report</field>
+            <field name="res_model">stock.onhand.wiz</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="wizard_stock_export"
+                  name="Stock Onhand Report"
+                  parent="stock.menu_warehouse_report"
+                  action="action_wizard_stock_export"
+                  sequence="112"
+        />
+
+    </data>
+</odoo>

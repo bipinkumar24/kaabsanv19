@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_pos_pos_form_add_margin_field" model="ir.ui.view">
+            <field name="name">view.pos.pos.form.add.margin.field</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//group[@name='order_total'][label[@for='margin']]" position="after">
+					<group>
+						<field name="margin" groups="bi_all_in_one_margin.group_allow_margin"/>
+					</group>
+	            </xpath>
+				<xpath expr="//field[@name='lines']//list//field[@name='price_unit']" position="after">
+						<field name="purchase_price" optional="hide"/>
+						<field name="margin" groups="bi_all_in_one_margin.group_allow_margin"/>
+	            </xpath>
+
+	            <xpath expr="//group[@name='order_total']/label[@for='margin']/following-sibling::div[1]" position="replace">
+					<div class="text-nowrap" invisible="1">
+                        <field name="margin" class="oe_inline" invisible="not is_total_cost_computed"/>
+                        <span class="oe_inline" invisible="not is_total_cost_computed">
+                            (<field name="margin_percent" nolabel="1" class="oe_inline" widget="percentage"/>)
+                        </span>
+                        <span invisible="is_total_cost_computed">TBD</span>
+                    </div>
+                </xpath>
+                <xpath expr="//label[@for='margin']" position="replace">
+                	<label for="margin" groups="base.group_user" invisible="1"/>
+                </xpath>
+	            
+	        </field>
+        </record>
+
+        <record model="ir.ui.view" id="bi_margin_view_pos_pivot">
+			<field name="name">margin.pivot.inherit</field>
+			<field name="model">report.pos.order</field>
+			<field name="inherit_id" ref="point_of_sale.view_report_pos_order_pivot"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='price_total']" position="after">
+					<field name="margin" type="measure" groups="bi_all_in_one_margin.group_allow_margin"/>
+				</xpath>
+			</field>
+	    </record>
+
+	    <record model="ir.ui.view" id="bi_margin_view_pos_graph">
+			<field name="name">margin.graph.inherit</field>
+			<field name="model">report.pos.order</field>
+			<field name="inherit_id" ref="point_of_sale.view_report_pos_order_graph"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='price_total']" position="after">
+					<field name="margin" type="measure" groups="bi_all_in_one_margin.group_allow_margin"/>
+				</xpath>
+			</field>
+	    </record>
+            
+    </data>
+</odoo>
+    

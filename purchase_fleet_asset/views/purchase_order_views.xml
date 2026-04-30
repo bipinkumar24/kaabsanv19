@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ── Purchase Order Form ───────────────────────────────────────────── -->
+    <record id="view_purchase_order_form_fleet_asset" model="ir.ui.view">
+        <field name="name">purchase.order.form.fleet.asset</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Single column in the inline line list, before Subtotal -->
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_subtotal']"
+                   position="before">
+                <field name="linked_to"
+                       string="Fleet / Asset"
+                       optional="show"
+                       widget="reference"/>
+                <field name="asset_tag"
+                       string="Asset Tag"
+                       optional="show"
+                       widget="many2many_tags"
+                       options="{'color_field': 'color'}"/>
+            </xpath>
+
+            <!-- Field inside the line popup dialog, after product qty -->
+            <xpath expr="//field[@name='order_line']/form//field[@name='product_qty']"
+                   position="after">
+                <separator string="Purchased For"/>
+                <field name="linked_to"
+                       string="Fleet / Asset"
+                       widget="reference"
+                       placeholder="Select Fleet Vehicle or Asset…"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- ── Purchase Order Lines standalone list view ─────────────────────── -->
+    <record id="view_purchase_order_line_tree_fleet_asset" model="ir.ui.view">
+        <field name="name">purchase.order.line.list.fleet.asset</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='price_subtotal']" position="before">
+                <field name="linked_to"
+                       string="Fleet / Asset"
+                       optional="show"
+                       widget="reference"/>
+                <field name="asset_tag"
+                       string="Asset Tag"
+                       optional="show"
+                       widget="many2many_tags"
+                       options="{'color_field': 'color'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ── Purchase Order Lines search: filter by fleet or asset ─────────── -->
+    <record id="view_purchase_order_line_search_fleet_asset" model="ir.ui.view">
+        <field name="name">purchase.order.line.search.fleet.asset</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/group" position="before">
+                <filter name="filter_has_fleet"
+                        string="Linked to Fleet Vehicle"
+                        domain="[('_fleet_vehicle_id', '!=', False)]"/>
+                <filter name="filter_has_asset"
+                        string="Linked to Asset"
+                        domain="[('_asset_id', '!=', False)]"/>
+                <separator/>
+            </xpath>
+            <xpath expr="//search/group" position="inside">
+                <filter name="groupby_fleet_vehicle"
+                        string="Fleet Vehicle"
+                        context="{'group_by': '_fleet_vehicle_id'}"/>
+                <filter name="groupby_asset"
+                        string="Asset"
+                        context="{'group_by': '_asset_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

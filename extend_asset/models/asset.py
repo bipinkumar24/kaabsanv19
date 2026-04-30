@@ -1,4 +1,4 @@
-from odoo import api, models, fields, _
+from odoo import api, models, fields
 
 class Aasets(models.Model):
     _inherit = 'account.asset'
@@ -13,6 +13,11 @@ class Assettag(models.Model):
     name = fields.Char(string='Name')
     color = fields.Integer(string='color')
 
-    _sql_constraints = [
-        ('unique_name', 'unique(name)', _('This Asset tag  already exists !'))
-    ]
+    # Odoo 15 legacy:
+    # _sql_constraints = [
+    #     ('unique_name', 'unique(name)', _('This Asset tag  already exists !'))
+    # ]
+    _unique_name = models.Constraint(
+        'unique(name)',
+        'This Asset tag  already exists !',
+    )

@@ -1,0 +1,6 @@
+
+15.0.0.1 ==>Added new boolean field in the user setting , when it is disable it will hide the margin column from all the apps
+
+15.0.0.2 ==> Fixed issue of when second time install module show trace backe and also committed sale report py because without them it's work as per index.
+
+15.0.0.3 ==> Hide base margin and margin percentage field based on our custom group.

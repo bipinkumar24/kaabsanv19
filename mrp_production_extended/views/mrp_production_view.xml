@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-
-    <record id="group_validate_post_entry" model="res.groups">
-        <field name="name">Validate/Post Entries</field>
-    </record>
-
     <record id="mrp_production_form_view_add_validate" model="ir.ui.view">
         <field name="name">mrp.production.form.inherit</field>
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
         <field name="arch" type="xml">
-<!--            <xpath expr="//field[@name='state']" position="replace">-->
-<!--                <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,progress,done,validate"/>-->
-<!--            </xpath>-->
-            <xpath expr="//field[@name='bom_id']" position="after">
+            <!--            <xpath expr="//field[@name='state']" position="replace">-->
+            <!--                <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,progress,done,validate"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[@name='bom_id']" position="before">
                 <field name="is_validate" readonly="1" force_save="1"/>
             </xpath>
-            <!-- Odoo 19 migration: attrs is removed and core now has four button_mark_done buttons.
-                 Old replace xpaths kept for migration reference:
-                 <xpath expr="//button[@name='button_mark_done'][1]" position="replace"> ... attrs="{'invisible': ['|', '|', ('state', 'in', ('draft', 'cancel', 'done', 'to_close', 'validate')), ('qty_producing', '=', 0), ('move_raw_ids', '!=', [])]}" ... </xpath>
-                 <xpath expr="//button[@name='button_mark_done'][2]" position="replace"> ... attrs="{'invisible': ['|', '|', ('state', 'in', ('draft', 'cancel', 'done', 'to_close', 'validate')), ('qty_producing', '=', 0), ('move_raw_ids', '=', [])]}" ... </xpath>
-            -->
-            <xpath expr="//button[@name='button_mark_done']" position="attributes">
-                <attribute name="string">Validate</attribute>
+            <xpath expr="//button[@name='button_mark_done'][1]" position="replace">
+                <button name="button_mark_done"
+                        invisible="state in ('draft','cancel','done','to_close','validate') or qty_producing == 0 or move_raw_ids"
+                        string="Validate" type="object" class="oe_highlight"
+                        confirm="There are no components to consume. Are you still sure you want to continue?"
+                        data-hotkey="g"/>
             </xpath>
-            <!-- Odoo 19 migration: button_scrap was removed from the MO form header.
-                 Old xpath kept for migration reference:
-                 <xpath expr="//button[@name='button_scrap']" position="before"> -->
-            <xpath expr="//button[@name='button_unbuild']" position="before">
-
-                <button name="action_validate_data" string="Validate" groups="mrp_production_extended.group_validate_post_entry"
+            <xpath expr="//button[@name='button_mark_done'][2]" position="replace">
+                <button name="button_mark_done"
+                        invisible="state in ('draft','cancel','done','to_close','validate') or qty_producing == 0 or not move_raw_ids"
+                        string="Validate" type="object" class="oe_highlight" data-hotkey="g"/>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="before">
+                <!--            <xpath expr="//header//button[@name='button_scrap']" position="before">-->
+                <button name="action_validate_data" string="Validate"
                         class="btn-primary" type="object" invisible="state != 'done' or is_validate"/>
             </xpath>
         </field>
@@ -38,7 +34,7 @@
     <record id="mrp_production_kaabsan_filter" model="ir.ui.view">
         <field name="name">mrp.production.kaabsan.select</field>
         <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='filter_draft']" position="before">
                 <filter string="Is Validate" name="filter_is_validate" domain="[('is_validate', '=', True)]"/>
@@ -55,27 +51,38 @@
         <field name="model">stock.picking</field>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_cancel']" position="after">
-                <button name="action_validate_data" string="Post Entry" groups="mrp_production_extended.group_validate_post_entry"
-                        class="btn-primary" type="object" invisible="state != 'done'"/>
+                <field name="is_posted" invisible="1"/>
+                <button name="action_validate_data" string="Post Entry"
+                        class="btn-primary" type="object"
+                        invisible="state != 'done' or is_posted"/>
+                <button name="action_unpost_entery" string="unPost Entry"
+                        class="btn-primary" type="object"
+                        invisible="state != 'validate' or not is_posted"/>
             </xpath>
         </field>
     </record>
 
-    <!-- Odoo 19 migration: stock_account.stock_valuation_layer_picking and
-         action_view_stock_valuation_layers no longer exist in this codebase.
-         Old view kept for migration reference:
-    <record id="stock_valuation_layer_picking_kaabsan111" model="ir.ui.view">
-        <field name="name">stock.valuation.layer.picking.kaabsan</field>
-        <field name="model">stock.picking</field>
-        <field name="inherit_id" ref="stock_account.stock_valuation_layer_picking"/>
-        <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_view_stock_valuation_layers']" position="replace">
-                <button string="Valuation" type="object" name="action_view_stock_valuation_layers"
-                        class="oe_stat_button" icon="fa-dollar" groups="base.group_no_one"
-                        attrs="{'invisible': [('state', 'not in', ['done', 'validate'])]}"/>
+<!--    <record id="stock_valuation_layer_picking_kaabsan" model="ir.ui.view">-->
+<!--        <field name="name">stock.valuation.layer.picking.kaabsan</field>-->
+<!--        <field name="model">stock.picking</field>-->
+<!--        &lt;!&ndash;        <field name="inherit_id" ref="stock_account.stock_valuation_layer_picking"/>&ndash;&gt;-->
+<!--        <field name="inherit_id" ref="stock.view_picking_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            &lt;!&ndash;            <xpath expr="//button[@name='action_view_stock_valuation_layers']" position="replace">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <button string="Valuation" type="object" name="action_view_stock_valuation_layers"&ndash;&gt;-->
+<!--            &lt;!&ndash;                        class="oe_stat_button" icon="fa-dollar" groups="base.group_no_one"&ndash;&gt;-->
+<!--            &lt;!&ndash;                        invisible="state not in ('done','validate')"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </xpath>&ndash;&gt;-->
+<!--        </field>-->
+<!--    </record>-->
 
-            </xpath>
-        </field>
+    <record id="server_action_mo_data" model="ir.actions.server">
+        <field name="name">Manufacuring Update</field>
+        <field name="model_id" ref="mrp.model_mrp_production"/>
+        <field name="binding_model_id" ref="mrp.model_mrp_production"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_mrp_production_change()</field>
     </record>
-    -->
+
 </odoo>

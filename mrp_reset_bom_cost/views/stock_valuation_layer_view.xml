@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Odoo 19 no longer exposes stock.valuation.layer.
+    <record id="model_stock_valuation_layer_ir_action_server_correct" model="ir.actions.server">
+        <field name="name">Correct Wrong Valuation Layer</field>
+        <field name="model_id" ref="stock_account.model_stock_valuation_layer"/>
+        <field name="binding_model_id" ref="stock_account.model_stock_valuation_layer"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = records._update_journal_entries()
+        </field>
+    </record>
+    -->
+</odoo>

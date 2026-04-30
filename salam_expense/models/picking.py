@@ -96,7 +96,7 @@ class Picking(models.Model):
     #         for move_line in rec.move_line_ids.filtered(lambda ml: not ml.package_id):
     #             move = move_line.move_id
     #             rounding = move.product_id.uom_id.rounding
-    #             diff = move_line.quantity
+    #             diff = move_line.qty_done
     #             if float_is_zero(diff, precision_rounding=rounding):
     #                 continue
     #             move_line._create_correction_svl(move, diff)
@@ -127,7 +127,7 @@ class Picking(models.Model):
             for move_line in rec.move_line_ids.filtered(lambda ml: not ml.package_id):
                 move = move_line.move_id
                 rounding = move.product_id.uom_id.rounding
-                diff = move_line.quantity
+                diff = move_line.qty_done
 
                 if float_is_zero(diff, precision_rounding=rounding):
                     continue

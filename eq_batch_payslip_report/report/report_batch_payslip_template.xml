@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_batch_payslip_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style>
+                            table, tr, td, th {
+                                border: 1px solid black !important;
+                            }
+                        </style>
+                        <div class="col-md-12 text-center">
+                            <h5>Batch : <span t-field="batch_id.name"/></h5>
+                            <h5>Period : <span t-field="batch_id.date_start"/> - <span t-field="batch_id.date_end"/></h5>
+                            <br/>
+                        </div>
+                        <table border="1" class="table">
+                            <tr style="border:1px solid black;">
+                                <th rowspan="2">No #</th>
+                                <th rowspan="2">Payslip Ref</th>
+                                <th rowspan="2">EmpID</th>
+                                <th rowspan="2">Employee</th>
+                                <th rowspan="2">Mobile</th>
+                                <th rowspan="2">Bank Acc</th>
+                                <th rowspan="2">Designation</th>
+                                <t t-foreach="_get_header" t-as="idx">
+                                    <t t-foreach="idx" t-as="key">
+                                        <th t-att-colspan="len(key_value)" class="text-center"><span t-esc="key.name"/></th>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr>
+                                <t t-foreach="_get_header" t-as="idx">
+                                    <t t-foreach="idx.values()" t-as="key">
+                                        <t t-foreach="key_value" t-as="rule">
+                                            <th class="text-center"><span t-esc="rule.name"/></th>
+                                        </t>
+                                    </t>
+                                </t>
+                            </tr>
+                            <tr t-foreach="batch_id.slip_ids" t-as="payslip">
+                                <td>
+                                    <span t-esc="payslip_index + 1"/>
+                                </td>
+                                <td>
+                                    <span t-field="payslip.employee_reference"/>
+                                </td>
+                                <td>
+                                    <span t-field="payslip.employee_id.identification_id"/>
+                                </td>
+                                <td>
+                                    <span t-field="payslip.employee_id"/>
+                                </td>
+                                <td>
+                                    <span t-field="payslip.employee_id.work_phone"/>
+                                </td>
+                                <td>
+                                    <t t-set="active_bank" t-value="payslip.employee_id.bank_account_ids.filtered(lambda b: b.active)[:1]"/>
+                                    <t t-if="active_bank">
+                                        <span t-esc="active_bank.bank_bic"/>
+                                        <span t-esc="active_bank.bank_name"/>
+                                    </t>
+                                </td>
+                                <td>
+                                    <span t-field="payslip.employee_id.job_id"/>
+                                </td>
+                                <t t-foreach="_get_rule_list" t-as="col_rule_id">
+                                    <td class="text-right">
+                                        <t t-set="amount" t-value="payslip.line_ids.filtered(lambda l: l.salary_rule_id.code == col_rule_id.code).total"/>
+                                        <span t-esc="'%.2f'% amount"/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center font-weight-bold">Total</td>
+                                <t t-foreach="_get_rule_list" t-as="col_rule_id">
+                                    <td class="text-right font-weight-bold">
+                                        <span t-esc="'%.2f' % total_rule_sum_dict.get(col_rule_id, 0.0)"/>
+                                    </td>
+                                </t>
+                            </tr>
+                        </table>
+
+                        <div class="text-center d-flex" style="margin-top: 10rem;">
+                            <div class="col-4">
+                                <div style="width: 56%;border-top: 1px solid;"> 
+                                    General Manager
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div style="width: 56%;border-top: 1px solid;">
+                                    HR Manager
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div style="width: 56%;border-top: 1px solid;">
+                                    Finance Manager
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

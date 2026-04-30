@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="bi_account_line_margin_inherit">
+			<field name="name">bi.account.line.margin.inherit</field>
+			<field name="model">account.move</field>
+			<field name="inherit_id" ref="account.view_move_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']" position="before">
+					<group>
+							<field name="margin_calc" widget='monetary'
+								options="{'currency_field': 'currency_id'}" groups="bi_all_in_one_margin.group_allow_margin" />
+							<field name="margin_cust" widget='monetary'
+								options="{'currency_field': 'currency_id'}" groups="bi_all_in_one_margin.group_allow_margin"/>
+					</group>                   
+            			</xpath>
+				<xpath expr="//field[@name='invoice_line_ids']//list//field[@name='price_unit']" position="after">
+					<field name="line_margin" groups="bi_all_in_one_margin.group_allow_margin" />
+					<field name="purchase_price" invisible="1"/>
+				</xpath>
+			</field>
+		</record>
+
+	<record model="ir.ui.view" id="bi_margin_view_pivot">
+		<field name="name">margin.pivot.inherit</field>
+		<field name="model">account.invoice.report</field>
+		<field name="inherit_id" ref="account.view_account_invoice_report_pivot"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='price_subtotal']" position="after">
+				<field name="margin_subtotal_signed" type="measure" groups="bi_all_in_one_margin.group_allow_margin"/>
+			</xpath>
+		</field>
+	</record>
+
+    <record id="bi_margin_view_graph" model="ir.ui.view">
+         <field name="name">margin.graph.inherit</field>
+         <field name="model">account.invoice.report</field>
+         <field name="inherit_id" ref="account.view_account_invoice_report_graph"/>
+         <field name="arch" type="xml">
+             <xpath expr="//field[@name='price_subtotal']" position="after">
+				<field name="margin_subtotal_signed" type="measure" groups="bi_all_in_one_margin.group_allow_margin"/>
+			</xpath>
+         </field>
+    </record>
+
+	</data>
+</odoo>

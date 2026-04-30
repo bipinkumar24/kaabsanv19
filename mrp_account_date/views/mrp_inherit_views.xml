@@ -1,37 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="view_mrp_inherit" model="ir.ui.view">
-            <field name="name">mrp.production.inherit123</field>
+        <record id="mrp_production_form_view_date" model="ir.ui.view">
+            <field name="name">mrp.production.inherit_18</field>
             <field name="model">mrp.production</field>
             <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='bom_id']" position="after">
-                    <field name="is_customer_required" invisible="1"/>
-                    <!-- Odoo 19 migration: attrs is replaced by direct expressions.
-                         Old attrs kept for migration reference:
-                         attrs="{'required':[('is_customer_required','=', True)]}" -->
-                    <field name="partner_id" required="is_customer_required"/>
-                </xpath>
                 <xpath expr="//field[@name='user_id']" position="after">
-                    <!-- Odoo 19 migration: attrs is replaced by direct expressions.
-                         Old attrs kept for migration reference:
-                         attrs="{'readonly':[('state','=','done')]}" -->
-                    <field name="accounting_date" required="1" readonly="state == 'done'"/>
+                    <field name="accounting_date" required="1" attrs="{'readonly':[('state','=','done')]}"/>
                 </xpath>
-            </field>
-        </record>
-        <record id="form_view_product_category_inherite_customer" model="ir.ui.view">
-            <field name="name">product.category</field>
-            <field name="model">product.category</field>
-            <!-- Odoo 19 migration: property_valuation is added by stock_account, not the base product view.
-                 Old inherit ref kept for migration reference:
-                 <field name="inherit_id" ref="product.product_category_form_view"/> -->
-            <field name="inherit_id" ref="stock_account.view_category_property_form_stock"/>
-            <field name="arch" type="xml">                              
-                <field name="property_valuation" position="after">
-                    <field name="is_customer_required"/>
-                </field>                     
             </field>
         </record>
     </data>

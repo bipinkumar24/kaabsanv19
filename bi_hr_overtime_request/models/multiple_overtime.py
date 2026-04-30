@@ -5,8 +5,7 @@
 from odoo import api, fields, models, _
 import datetime
 import pytz
-from odoo.exceptions import UserError,Warning
-from odoo.exceptions import UserError,ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 

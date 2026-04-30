@@ -1,6 +1,7 @@
 import logging
 
-from odoo import models, fields, api, registry, _
+from odoo import models, fields, api, _
+from odoo.modules.registry import Registry
 from odoo.exceptions import UserError
 
 from ..pyzk.zk.finger import Finger
@@ -102,7 +103,7 @@ class AttendanceDeviceUser(models.Model):
         for r in self:
             if r.del_user:
                 try:
-                    cr = registry(dbname).cursor()
+                    cr = Registry(dbname).cursor()
                     r = r.with_env(r.env(cr=cr))
                     r.device_id.delUser(r.uid, r.user_id)
                     super(AttendanceDeviceUser, r).unlink()

@@ -8,6 +8,7 @@
     'author': 'Bipin Prajapati',
     'summary': 'Custom Salam Sale',
     'description': "",
+    'license': 'AGPL-3',
     'depends': [
         'sale_management', 'account','stock', 'hr', 'stock_account', 'sh_all_in_one_cancel_adv',
     ],

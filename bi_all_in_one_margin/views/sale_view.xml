@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="bi_margin_sale_order">
+			<field name="name">bi.order.margin.view.form</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='sale_total']" position="after">
+					<group>
+						<field name="margin_calc" widget='monetary'
+							options="{'currency_field': 'currency_id'}"  groups="bi_all_in_one_margin.group_allow_margin"/>
+						<field name="margin_cust" widget='monetary'
+							options="{'currency_field': 'currency_id'}"  groups="bi_all_in_one_margin.group_allow_margin"/>
+
+					</group>
+				</xpath>
+				<xpath
+					expr="//field[@name='order_line']//list//field[@name='price_unit']"
+					position="after">
+					<field name="line_margin" groups="bi_all_in_one_margin.group_allow_margin"/>
+				</xpath>
+
+	            <field name="margin" position="attributes">
+					<attribute name="invisible">True</attribute>
+			    </field>
+
+				<field name="margin_percent" position="attributes">
+					<attribute name="groups">bi_all_in_one_margin.group_allow_margin</attribute>
+			    </field>
+
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="bi_sale_margin_sale_order">
+			<field name="name">bi.sale.margin.view.form</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale_margin.sale_margin_sale_order" />
+			<field name="arch" type="xml">
+				<xpath expr="//label[@for='margin']/following-sibling::div[1]" position="replace">
+					<div groups="base.group_user" invisible="1">
+	                    <field name="margin" class="oe_inline"/>
+	                    <field name="amount_untaxed" invisible="1"/>
+	                    <span class="oe_inline" invisible="amount_untaxed == 0">
+	                        (<field name="margin_percent" nolabel="1" class="oe_inline" widget="percentage"/>)
+	                    </span>
+	                </div>
+                </xpath>
+                <xpath expr="//label[@for='margin']" position="replace">
+                	<label for="margin" groups="base.group_user" invisible="1"/>
+                </xpath>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="bi_margin_view_sale_pivot">
+			<field name="name">margin.pivot.inherit</field>
+			<field name="model">sale.report</field>
+			<field name="inherit_id" ref="sale.view_order_product_pivot"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='product_uom_qty']" position="after">
+					<field name="margin" type="measure" groups="bi_all_in_one_margin.group_allow_margin"/>
+				</xpath>
+			</field>
+	    </record>
+
+	    <record model="ir.ui.view" id="bi_margin_view_sale_graph">
+			<field name="name">margin.graph.inherit</field>
+			<field name="model">sale.report</field>
+			<field name="inherit_id" ref="sale.view_order_product_graph"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='product_uom_qty']" position="after">
+					<field name="margin" type="measure" groups="bi_all_in_one_margin.group_allow_margin"/>
+				</xpath>
+			</field>
+	    </record>
+
+
+
+	</data>
+</odoo>

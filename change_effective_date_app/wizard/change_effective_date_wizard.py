@@ -26,7 +26,10 @@ class ChangeEffectiveDateWizard(models.TransientModel):
     def _update_picking_effective_date(self, picking):
         moves = picking.move_ids
         move_lines = picking.move_line_ids
-        valuation_layers = self.env['stock.valuation.layer'].search([('stock_move_id', 'in', moves.ids)])
+        # Odoo 19 no longer exposes the old stock.valuation.layer model.
+        # valuation_layers = self.env['stock.valuation.layer'].search([
+        #     ('stock_move_id', 'in', moves.ids)
+        # ])
         account_moves = moves.mapped('account_move_id')
 
         picking.write({'date_done': self.date_done})
@@ -36,11 +39,11 @@ class ChangeEffectiveDateWizard(models.TransientModel):
             move_lines.write({'date': self.date_done})
         if account_moves:
             account_moves.write({'date': self.date_done})
-        if valuation_layers:
-            self.env.cr.execute(
-                "UPDATE stock_valuation_layer SET create_date = %s WHERE id IN %s",
-                (self.date_done, tuple(valuation_layers.ids)),
-            )
+        # if valuation_layers:
+        #     self.env.cr.execute(
+        #         "UPDATE stock_valuation_layer SET create_date = %s WHERE id IN %s",
+        #         (self.date_done, tuple(valuation_layers.ids)),
+        #     )
 
     def update_effective_date(self):
         for rec in self:

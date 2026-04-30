@@ -3,10 +3,11 @@ import logging
 from datetime import date, datetime, time
 from datetime import datetime
 
-from odoo import models, fields, api, registry, _
+from odoo import models, fields, api, _
+from odoo.modules.registry import Registry
 from odoo.exceptions import ValidationError, UserError
 from odoo.tools import format_datetime
-from odoo.osv import expression
+from odoo.fields import Domain
 from dateutil import relativedelta
 from ..pyzk.zk import ZK
 from ..pyzk.zk.user import User
@@ -238,13 +239,9 @@ class AttendanceDevice(models.Model):
             else:
                 r.tz = default_tz
 
-    def name_get(self):
-        """
-        name_get that supports displaying location name and model as prefix
-        """
-        result = []
+    def _compute_display_name(self):
         for r in self:
-            name = r.name
+            name = r.name or ''
             if r.oem_vendor:
                 if r.device_name:
                     name = "[%s %s] %s" % (r.oem_vendor, r.device_name, name)
@@ -252,22 +249,18 @@ class AttendanceDevice(models.Model):
                     name = "[%s] %s" % (r.oem_vendor, name)
             if r.location_id:
                 name = "[%s] %s" % (r.location_id.name, name)
-            result.append((r.id, name))
-        return result
+            r.display_name = name
 
     @api.model
-    def name_search(self, name, args=None, operator='ilike', limit=100):
-        """
-        name search that supports searching by tag code
-        """
-        args = args or []
-        domain = []
+    def name_search(self, name='', domain=None, operator='ilike', limit=100):
+        domain = domain or []
+        search_domain = []
         if name:
-            domain = ['|', ('location_id.name', '=ilike', name + '%'), ('name', operator, name)]
-            if operator in expression.NEGATIVE_TERM_OPERATORS:
-                domain = ['&'] + domain
-        state = self.search(domain + args, limit=limit)
-        return state.name_get()
+            search_domain = ['|', ('location_id.name', '=ilike', name + '%'), ('name', operator, name)]
+            if operator in Domain.NEGATIVE_OPERATORS:
+                search_domain = ['&'] + search_domain
+        records = self.search(search_domain + domain, limit=limit)
+        return [(r.id, r.display_name) for r in records]
 
     @api.depends('device_user_ids', 'device_user_ids.active')
     def _compute_device_users_count(self):
@@ -1352,7 +1345,7 @@ class AttendanceDevice(models.Model):
         zk = self._set_zk()
         for r in self:
             try:
-                cr = registry(dbname).cursor()
+                cr = Registry(dbname).cursor()
                 r = r.with_env(r.env(cr=cr))
                 r.connect()
                 r.firmware_version = zk.get_firmware_version()

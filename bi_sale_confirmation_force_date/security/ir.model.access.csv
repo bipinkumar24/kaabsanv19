@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_confirmation_date_wizard,access_confirmation_date_wizard,bi_sale_confirmation_force_date.model_confirmation_date_wizard,,1,1,1,1
