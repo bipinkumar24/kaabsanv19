@@ -1,65 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-	<data>
-		<record id="management_form_view" model="ir.ui.view">
-			<field name="name">ti.shift.management.form</field>
-			<field name="model">ti.shift.management</field>
-			<field name="arch" type="xml">
-				<form string="management">
-					<sheet>
+	<record id="management_form_view" model="ir.ui.view">
+		<field name="name">ti.shift.management.form</field>
+		<field name="model">ti.shift.management</field>
+		<field name="arch" type="xml">
+			<form string="management">
+				<sheet>
+					<group>
+						<field name="name"/>
+						<field name="code"/>
+					</group>
+					<group>
+                        <group>
+                            <field name="hh_from"/>
+                            <field name="mm_from"/>
+                        </group>
 						<group>
-							<field name="name"/>
-							<field name="code"/>
-						</group>
-						<group>
-                            <group>
-                                <field name="hh_from"/>
-                                <field name="mm_from"/>
-                            </group>
-							<group>
-                                <field name="hh_to"/>
-                                <field name="mm_to"/>
-                            </group>
-						</group>
- 					<notebook>
-                        <page name="employees" string="Employee">
-                            <field name="employees"/>
-                        </page>
-                    </notebook>
-					</sheet>
-				</form>
-			</field>
-		</record>
+                            <field name="hh_to"/>
+                            <field name="mm_to"/>
+                        </group>
+					</group>
+					<notebook>
+                    <page name="employees" string="Employee">
+                        <field name="employees"/>
+                    </page>
+                </notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
 
-		<record id="management_tree_view" model="ir.ui.view">
-			<field name="name">ti.shift.management.tree</field>
-			<field name="model">ti.shift.management</field>
-			<field name="arch" type="xml">
-				<list string="management">
-					<field name="name" />
-					<field name="hh_from"/>
-                    <field name="mm_from"/>
-                    <field name="hh_to"/>
-                    <field name="mm_to"/>
-                    <field name="code"/>
-				</list>
-			</field>
-		</record>
+	<record id="management_tree_view" model="ir.ui.view">
+		<field name="name">ti.shift.management.tree</field>
+		<field name="model">ti.shift.management</field>
+		<field name="arch" type="xml">
+			<list string="management">
+				<field name="name" />
+				<field name="hh_from"/>
+                <field name="mm_from"/>
+                <field name="hh_to"/>
+                <field name="mm_to"/>
+                <field name="code"/>
+			</list>
+		</field>
+	</record>
 
-		<record model="ir.actions.act_window" id="management_tree_action">
-			<field name="name">Shift Management</field>
-			<field name="res_model">ti.shift.management</field>
-			<field name="view_mode">list,form</field>
-			<field name="help" type="html">
-				<p class="oe_view_nocontent_create">shift
-				</p>
-			</field>
-		</record>
+	<record model="ir.actions.act_window" id="management_tree_action">
+		<field name="name">Shift Management</field>
+		<field name="res_model">ti.shift.management</field>
+		<field name="view_mode">list,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">shift
+			</p>
+		</field>
+	</record>
 
 
-		<menuitem id="management_menu" name="Shift Management"
-			parent="attendace_device_menu" sequence="1100"
-			action="management_tree_action" />
-
-	</data>
+	<menuitem id="management_menu" name="Shift Management"
+		parent="attendace_device_menu" sequence="1100"
+		action="management_tree_action" />
 </odoo>

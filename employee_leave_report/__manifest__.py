@@ -17,7 +17,7 @@
     'version': '19.0.1.0.0',
 
     'depends': ['base', 'hr_holidays'],
-
+    'license': 'LGPL-3',
     'data': [
         'security/ir.model.access.csv',
         'wizard/employee_leave_report.xml',

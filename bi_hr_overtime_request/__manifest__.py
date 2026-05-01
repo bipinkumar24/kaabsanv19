@@ -35,6 +35,7 @@ Human Resources/Overtimes/Multiple Requests to Approve By Department
     'author': 'BrowseInfo',
     'website': 'https://www.browseinfo.in',
     "price": 10,
+    'license': 'LGPL-3',
     "currency": 'EUR',
     'depends': ['base','hr','hr_payroll','hr_payroll_account', 'expense_requests'],
     'demo': ['data/overtime_rule.xml'],

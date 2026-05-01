@@ -24,6 +24,7 @@
         'views/views.xml',
     ],
     'installable': True,
+    'license': 'LGPL-3',
     'application': True,
     'images': ['static/description/banner.jpg'],
     'price': 20,

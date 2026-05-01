@@ -132,7 +132,7 @@ Phiên bản hỗ trợ
         'views/set_date.xml',
         'views/shift_managment.xml',
         'wizard/attendance_wizard.xml',
-        'wizard/employee_upload_wizard.xml',
+        # 'wizard/employee_upload_wizard.xml',
 
     ],
     'images' : ['static/description/main_screenshot.png'],

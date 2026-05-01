@@ -42,9 +42,14 @@
 			</field>
 		</record>
 
-		<act_window id="action_employee_upload"
-			name="Upload to Attendance Machine" binding_model="hr.employee"
-			res_model="employee.upload.wizard" view_mode="form" target="new"
-			context="{'employee_ids':active_ids}" />
+		<record id="action_employee_upload" model="ir.actions.act_window">
+		    <field name="name">Upload to Attendance Machine</field>
+		    <field name="res_model">employee.upload.wizard</field>
+		    <field name="view_mode">form</field>
+		    <field name="target">new</field>
+		    <field name="binding_model_id" ref="hr.model_hr_employee"/>
+		    <field name="binding_view_types">list,form</field>
+		    <field name="context">{'employee_ids': active_ids}</field>
+		</record>
 	</data>
 </odoo>

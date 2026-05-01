@@ -50,7 +50,7 @@
 					<field name="uid" />
 					<field name="fid" />
 					<separator />
-					<group expand="0" string="Group By...">
+					<group >
 						<filter string="User" name="device_user_id"
 							context="{'group_by': 'device_user_id'}" />
 						<filter string="Device" name="device_id"

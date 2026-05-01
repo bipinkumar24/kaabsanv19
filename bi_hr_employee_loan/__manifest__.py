@@ -42,6 +42,7 @@ Loan Installments and Booking Interest and Booking entry if repayment method = c
 	 """,
     'author': 'BrowseInfo',
     'website': 'https://www.browseinfo.in',
+    'license': 'LGPL-3',
     "price": 39,
     "currency": 'EUR',
     'depends': ['base','hr','portal','utm','account','hr_payroll','hr_payroll_account'],

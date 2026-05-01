@@ -47,8 +47,12 @@
 			</field>
 		</record>
 
-		<act_window id="action_sync_device_attendance" name="Synchronize Data"
-			res_model="attendance.wizard" view_mode="form" target="new" />
+		<record id="action_sync_device_attendance" model="ir.actions.act_window">
+	        <field name="name">Synchronize Data</field>
+	        <field name="res_model">attendance.wizard</field>
+	        <field name="view_mode">form</field>
+	        <field name="target">new</field>
+	    </record>
 
 		<menuitem id="sync_device_attendance_menu" parent="attendace_device_menu"
 			sequence="10" name="Synchronize" action="action_sync_device_attendance" />
