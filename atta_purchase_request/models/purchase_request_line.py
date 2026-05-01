@@ -217,9 +217,9 @@ class PurchaseRequestLine(models.Model):
         if all([
             seller,
             self.uom_id,
-            seller.product_uom != self.uom_id,
+            seller.product_uom_id != self.uom_id,
         ]):
-            price_unit = seller.product_uom._compute_price(
+            price_unit = seller.product_uom_id._compute_price(
                 price_unit,
                 self.uom_id
             )

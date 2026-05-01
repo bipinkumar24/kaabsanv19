@@ -6,7 +6,7 @@
 	   <field name="model">loan.installment</field>
 	   <field name="priority">2</field>
 	   <field name="arch" type="xml">
-	    <tree string="Loan Installment" decoration-success="state == 'paid'">
+	    <list string="Loan Installment" decoration-success="state == 'paid'">
 	     <!-- <field name="installment_number" string="Number"/> -->
 	     <field name="loan_id"/>
 	     <field  name="date_from"/>
@@ -23,7 +23,7 @@
 			<field name="skip"/>
 	     
 			     
-	    </tree>
+	    </list>
 	   </field>
         </record>
         
@@ -108,7 +108,7 @@
 	  <field name="name">Loan Installments Details</field>
 	  <field name="type">ir.actions.act_window</field>
 	  <field name="res_model">loan.installment</field>
-	  <field name="view_mode">tree,form,kanban</field>
+	  <field name="view_mode">list,form,kanban</field>
 	  <field name="domain">[('state','not in',['confirm_postpone','approval_department'])]</field>
 	  <field name="search_view_id" ref="view_loan_installment_search_form"/>
 	  <field name="context">{'search_default_group_by_employee_id': 1}</field>

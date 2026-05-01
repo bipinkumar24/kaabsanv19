@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='user_id']" position="after">
-                    <field name="accounting_date" required="1" attrs="{'readonly':[('state','=','done')]}"/>
+                    <field name="accounting_date" required="1" readonly="state == 'done'"/>
                 </xpath>
             </field>
         </record>

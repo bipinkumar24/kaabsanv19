@@ -15,16 +15,16 @@ class ApprovalStockRequest(models.Model):
     approval_user_ids = fields.Many2many(
         'res.users',
         'approval_stock_request_res_users_rel',
-        'approval_id',
-        'user_id',
+        'approval_stock_request_id',
+        'res_users_id',
         string='Approval User',
     )
     group_ids = fields.Many2many('res.groups', 'res_groups_approval_stock', 'approval_id', 'group_id', string='Groups')
     fields_ids = fields.Many2many(
         'ir.model.fields',
         'approval_stock_request_ir_model_fields_rel',
-        'approval_id',
-        'field_id',
+        'approval_stock_request_id',
+        'ir_model_fields_id',
         string='Required Fields',
     )
 

@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <report 
-            id="report_employee_loan_print"
-            string="Print Loan"
-            model="loan.request" 
-            report_type="qweb-pdf"
-            file="bi_hr_employee_loan.report_loan" 
-            name="bi_hr_employee_loan.report_loan" 
-            attachment="(object.name + '_Loan.pdf')"
-        />
-        
-         
-    </data>
+    <record id="report_employee_loan_print" model="ir.actions.report">
+        <field name="name">Print Loan</field>
+        <field name="model">loan.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">bi_hr_employee_loan.report_loan</field>
+        <field name="report_file">bi_hr_employee_loan.report_loan</field>
+        <field name="attachment">(object.name + '_Loan.pdf')</field>
+    </record>
 </odoo>

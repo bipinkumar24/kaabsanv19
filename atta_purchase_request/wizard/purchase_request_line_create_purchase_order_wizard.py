@@ -284,9 +284,9 @@ class CreatePurchaseOrderWizardLine(models.TransientModel):
         if all([
             seller,
             self.uom_id,
-            seller.product_uom != self.uom_id,
+            seller.product_uom_id != self.uom_id,
         ]):
-            price_unit = seller.product_uom._compute_price(
+            price_unit = seller.product_uom_id._compute_price(
                 price_unit,
                 self.uom_id
             )
@@ -372,7 +372,7 @@ class CreatePurchaseOrderWizardLine(models.TransientModel):
             'name': self.description,
             'date_planned': self.schedule_date,
             'product_qty': self.quantity,
-            'product_uom': self.uom_id.id,
+            'product_uom_id': self.uom_id.id,
             'price_unit': self.price_unit_currency,
             'taxes_id': [(6, 0, self.tax_ids.ids)],
             'request_line_id': self.request_line_id.id,

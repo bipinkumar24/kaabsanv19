@@ -5,7 +5,7 @@
             <field name="name">approval.level.tree.pr</field>
             <field name="model">approval.level.pr</field>
             <field name="arch" type="xml">
-                <tree string="Approval Level Form" editable="bottom">
+                <list string="Approval Level Form" editable="bottom">
                     <field name="name" />
                     <field name="level" />
                     <field name="is_last_approval" />
@@ -15,7 +15,7 @@
                     <field name="group_ids" widget="many2many_tags"/>
                     <field name="fields_ids" widget="many2many_tags" domain="[('model', '=', 'purchase.request')]"/>
                     <field name="display_message"/>
-                </tree>
+                </list>
             </field>
         </record>
         <record model="ir.ui.view" id="approval_level_form_view_pr">

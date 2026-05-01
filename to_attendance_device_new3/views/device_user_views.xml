@@ -44,12 +44,12 @@
 						<notebook>
 							<page string="Attendance Data">
 								<field name="attendance_ids">
-									<tree name="attendance_ids" nolabel="1" create="false"
+									<list name="attendance_ids" nolabel="1" create="false"
 										delete="false" readonly="1">
 										<field name="timestamp" />
 										<field name="device_id" />
 										<field name="attendance_state_id" />
-									</tree>
+									</list>
 								</field>
 							</page>
 						</notebook>
@@ -67,7 +67,7 @@
 			<field name="name">attendance.device.user.tree</field>
 			<field name="model">attendance.device.user</field>
 			<field name="arch" type="xml">
-				<tree string="Device Users" create="false">
+				<list string="Device Users" create="false">
 					<field name="name" />
 					<field name="uid" />
 					<field name="user_id" />
@@ -75,7 +75,7 @@
 					<field name="device_id" />
 					<field name="group_id" />
 					<field name="del_user" widget="boolean_toggle" />
-				</tree>
+				</list>
 			</field>
 		</record>
 
@@ -106,7 +106,7 @@
 			id="device_user_list_action">
 			<field name="name">Devices Users</field>
 			<field name="res_model">attendance.device.user</field>
-			<field name="view_mode">tree,form</field>
+			<field name="view_mode">list,form</field>
 		</record>
 <!--        <menuitem id="sync_device_attendance_menu" parent="attendace_device_menu"-->
 <!--			sequence="110" name="Synchronize" action="action_sync_device_attendance" groups="hr_attendance.group_hr_attendance_user"/>-->

@@ -181,7 +181,7 @@ class Picking(models.Model):
         help="When doing automated inventory valuation, this is the Accounting Journal in which entries will be automatically posted when stock moves are processed.")
     property_stock_account_input_categ_id = fields.Many2one(
         'account.account', 'Stock Input Account', company_dependent=True,
-        domain="[('company_id', '=', allowed_company_ids[0]), ('deprecated', '=', False)]", check_company=True,
+        domain="[('company_ids', 'parent_of', allowed_company_ids[0])]", check_company=True,
         help="""Counterpart journal items for all incoming stock moves will be posted in this account, unless there is a specific valuation account
                     set on the source location. This is the default value for all products in this category. It can also directly be set on each product.""")
     property_stock_account_output_categ_id = fields.Many2one(
@@ -191,7 +191,7 @@ class Picking(models.Model):
                     It can also directly be set on each product.""")
     property_stock_valuation_account_id = fields.Many2one(
         'account.account', 'Stock Valuation Account', company_dependent=True,
-        domain="[('company_id', '=', allowed_company_ids[0]), ('deprecated', '=', False)]", check_company=True,
+        domain="[('company_ids', 'parent_of', allowed_company_ids[0])]", check_company=True,
         help="""When automated inventory valuation is enabled on a product, this account will hold the current value of the products.""", )
 
     @api.depends('state', 'move_lines')

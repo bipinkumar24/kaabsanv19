@@ -29,7 +29,7 @@
                                 <field name="select_all"/>
                             </group>
                             <field name="line_ids" invisible="1">
-                                <tree editable="bottom" create="0">
+                                <list editable="bottom" create="0">
                                     <field name="select"/>
                                     <field name="request_line_id"
                                            invisible="1"
@@ -52,7 +52,7 @@
                                     <field name="price_unit"/>
                                     <field name="tax_ids" invisible="1"/>
                                     <field name="price_subtotal"/>
-                                </tree>
+                                </list>
                             </field>
                         </group>
                     </sheet>

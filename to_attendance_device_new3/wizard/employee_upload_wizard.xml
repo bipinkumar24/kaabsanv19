@@ -25,10 +25,10 @@
 						</page>
 						<page id="upload_details" string="Upload Details">
 							<field name="line_ids">
-								<tree editable="bottom">
+								<list editable="bottom">
 									<field name="employee_id" />
 									<field name="device_id" />
-								</tree>
+								</list>
 							</field>
 						</page>
 					</notebook>

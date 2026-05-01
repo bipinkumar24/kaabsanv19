@@ -11,14 +11,14 @@
 						invisible="not unamapped_attendance_device_ids"
 						groups="hr_attendance.group_hr_attendance_user">
 						<field name="unamapped_attendance_device_ids">
-							<tree name="unamapped_attendance_device_ids" nolabel="1"
+							<list name="unamapped_attendance_device_ids" nolabel="1"
 								create="false" delete="false" edit="false">
 								<field name="name" />
 								<field name="ip" groups="hr_attendance.group_hr_attendance_user" />
 								<field name="port" groups="hr_attendance.group_hr_attendance_user" />
 								<field name="location_id" />
 								<field name="state" invisible="1" />
-							</tree>
+							</list>
 						</field>
 					</page>
 				</xpath>

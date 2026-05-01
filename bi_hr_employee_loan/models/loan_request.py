@@ -135,7 +135,7 @@ class Loan_Request(models.Model):
         return {
             'name': 'Move Details',
             'type': 'ir.actions.act_window',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'res_model': 'account.move',
             'domain': [('id', 'in', [x.id for x in self.move_entries])], 
         }

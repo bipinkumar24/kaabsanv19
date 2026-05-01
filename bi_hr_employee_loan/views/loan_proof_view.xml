@@ -6,10 +6,10 @@
 	   <field name="model">loan.proof</field>
 	   <field name="priority">2</field>
 	   <field name="arch" type="xml">
-	    <tree string="Loan proof">
+	    <list string="Loan proof">
 	     <field name="name"/>
 	     <field  name="mandatory"/>		     
-	    </tree>
+	    </list>
 	   </field>
         </record>
         
@@ -39,7 +39,7 @@
 	  <field name="name">Loan Proofs</field>
 	  <field name="type">ir.actions.act_window</field>
 	  <field name="res_model">loan.proof</field>
-	  <field name="view_mode">tree,form,kanban</field>
+	  <field name="view_mode">list,form,kanban</field>
 	  <field name="help" type="html">
 	   <p class="oe_view_nocontent_create"> </p>
 	   <p></p>
@@ -71,7 +71,7 @@
       <field name="name">Add Document</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">loan.image</field>
-      <field name="view_mode">tree,form,kanban</field>
+      <field name="view_mode">list,form,kanban</field>
       <field name="help" type="html">
        <p class="oe_view_nocontent_create"> </p>
        <p></p>

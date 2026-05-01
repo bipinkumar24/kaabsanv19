@@ -125,20 +125,20 @@
 									<field name="ignore_unknown_code" />
 								</group>
 								<field name="attendance_device_state_line_ids">
-									<tree name="attendance_device_state_line_ids"
+									<list name="attendance_device_state_line_ids"
 										editable="bottom">
 										<field name="attendance_state_id" />
 										<field name="code" />
 										<field name="activity_id" />
 										<field name="type" />
-									</tree>
+									</list>
 								</field>
 							</page>
 							<page name="unmapped_device_users"
 								string="Unmapped Device Users"
 								invisible="not umapped_device_user_ids">
 								<field name="umapped_device_user_ids">
-									<tree name="umapped_device_user_ids" nolable="1"
+									<list name="umapped_device_user_ids" nolable="1"
 										editable="bottom">
 										<field name="id" invisible="1" />
 										<field name="name" />
@@ -151,18 +151,18 @@
 										<field name="privilege" groups="base.group_no_one" />
 										<field name="uid" groups="base.group_no_one" />
 										<field name="del_user" groups="base.group_no_one" />
-									</tree>
+									</list>
 								</field>
 							</page>
 							<page name="unmapped_employees" string="Unmapped Employees"
 								invisible="not unmapped_employee_ids">
 								<field name="unmapped_employee_ids">
-									<tree name="unmapped_employee_ids">
+									<list name="unmapped_employee_ids">
 										<field name="name" />
 										<field name="department_id" />
 										<field name="job_id" />
 										<field name="parent_id" />
-									</tree>
+									</list>
 								</field>
 							</page>
 							<page name="tech_settings" string="Technical Settings">
@@ -216,7 +216,7 @@
 			<field name="name">attendance.device.tree</field>
 			<field name="model">attendance.device</field>
 			<field name="arch" type="xml">
-				<tree string="Attendance Devices"
+				<list string="Attendance Devices"
 					decoration-bf="message_needaction==True"
 					decoration-muted="state=='cancelled'">
 					<field name="message_needaction" invisible="1" />
@@ -233,7 +233,7 @@
 					<field name="total_att_records" />
 					<field name="auto_clear_attendance" />
 					<field name="state" />
-				</tree>
+				</list>
 			</field>
 		</record>
 
@@ -262,7 +262,7 @@
 			id="attendance_device_list_action">
 			<field name="name">Devices Informations</field>
 			<field name="res_model">attendance.device</field>
-			<field name="view_mode">tree,form</field>
+			<field name="view_mode">list,form</field>
 			<field name="view_id" ref="view_device_tree" />
 			<field name="help" type="html">
 				<p class="oe_view_nocontent_create">Create the first attendance device

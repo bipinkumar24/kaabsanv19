@@ -19,7 +19,7 @@
 		<field name="model">loan.request</field>
 		<field name="priority">2</field>
 		<field name="arch" type="xml">
-		<tree string="Loan Type">
+		<list string="Loan Type">
 			<field name="name"/>
 			<field  name="applied_date"/>
 			<field name="employee_id"/>
@@ -34,7 +34,7 @@
 			<field name="rate"/>
 			<field name="total_loan"/>
 			<field name="total_interest"/>     
-		</tree>
+		</list>
 		</field>
 	</record>
 		
@@ -154,7 +154,7 @@
 							<field name="rate" readonly="1"  invisible="is_interest_payable == False"/>
 
 							<field name="installment_ids">
-								<tree create="false" edit="true">
+								<list create="false" edit="true">
 									<field name="installment_number" string="Number"/>
 									<field  name="date_from"/>
 									<field  name="date_to"/>
@@ -165,7 +165,7 @@
 									<field  name="state"/>
 									<field name="currency_id"/>
 									<field name="skip"/>
-								</tree>
+								</list>
 								<form>
                                     <sheet>
 							    		<h2><field name="name" readonly="1"/></h2>
@@ -260,7 +260,7 @@
 	<field name="name">Loan Request</field>
 	<field name="type">ir.actions.act_window</field>
 	<field name="res_model">loan.request</field>
-	<field name="view_mode">tree,form,kanban</field>
+	<field name="view_mode">list,form,kanban</field>
 	<field name="domain">[('stage','=','draft')]</field>
 	<field name="help" type="html">
 	   <p class="oe_view_nocontent_create"> </p>
@@ -288,7 +288,7 @@
 	<field name="name">Loan Request To Approve</field>
 	<field name="type">ir.actions.act_window</field>
 	<field name="res_model">loan.request</field>
-	<field name="view_mode">tree,form,kanban</field>
+	<field name="view_mode">list,form,kanban</field>
 	<field name="domain">[('stage','in',['waiting_depart','applied','waiting'])]</field>
 	<field name="help" type="html">
 		<p class="oe_view_nocontent_create"> </p>
@@ -308,7 +308,7 @@
 	   <field name="model">loan.request</field>
 	   <field name="priority">2</field>
 	   <field name="arch" type="xml">
-	    <tree string="Loan Type" create="false">
+	    <list string="Loan Type" create="false">
 	     <field name="name"/>
 	     <field  name="applied_date"/>
 	     <field name="employee_id"/>
@@ -327,7 +327,7 @@
 	     	 <field name="total_interest"/>
 	     	 
 	 	     
-	    </tree>
+	    </list>
 	   </field>
         </record>
         	
@@ -335,7 +335,7 @@
 	<field name="name">Loans To Disburse</field>
 	<field name="type">ir.actions.act_window</field>
 	<field name="res_model">loan.request</field>
-	<field name="view_mode">tree,form,kanban</field>
+	<field name="view_mode">list,form,kanban</field>
 	<field name="domain">[('stage','=','approve')]</field>
 	<field name="help" type="html">
 		<p class="oe_view_nocontent_create"> </p>
@@ -343,7 +343,7 @@
 	</record>
 	<record id="disburse_loan_menu_display" model="ir.actions.act_window.view">
             <field name="sequence" eval="1"/>
-            <field name="view_mode">tree</field>
+            <field name="view_mode">list</field>
             <field name="view_id" ref="view_loan_req_tree_dis"/>
             <field name="act_window_id" ref="loan_req_disburse_action"/>
         </record>
@@ -353,7 +353,7 @@
 	   <field name="model">loan.request</field>
 	   <field name="priority">2</field>
 	   <field name="arch" type="xml">
-	    <tree string="Loan Type" create="false">
+	    <list string="Loan Type" create="false">
 	     <field name="name"/>
 	     <field  name="applied_date"/>
 	     <field name="employee_id"/>
@@ -372,7 +372,7 @@
 	     	 <field name="total_interest"/>
 	     	 
 	 	     
-	    </tree>
+	    </list>
 	   </field>
         </record> 
 
@@ -381,7 +381,7 @@
 	  <field name="name">Disbursed Loans</field>
 	  <field name="type">ir.actions.act_window</field>
 	  <field name="res_model">loan.request</field>
-	  <field name="view_mode">tree,form,kanban</field>
+	  <field name="view_mode">list,form,kanban</field>
 	  <field name="domain">[('stage','=','disbursed')]</field>
 	  <field name="help" type="html">
 	   <p class="oe_view_nocontent_create"> </p>
@@ -393,7 +393,7 @@
   
         <record id="total_loans" model="ir.actions.act_window.view">
             <field name="sequence" eval="1"/>
-            <field name="view_mode">tree</field>
+            <field name="view_mode">list</field>
             <field name="view_id" ref="view_loan_req_tree_total"/>
             <field name="act_window_id" ref="loan_req_total_action"/>
         </record>     

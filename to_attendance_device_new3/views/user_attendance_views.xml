@@ -41,7 +41,7 @@
 			<field name="name">Attendance Data</field>
 			<field name="model">user.attendance</field>
 			<field name="arch" type="xml">
-				<tree string="Attendance Data">
+				<list string="Attendance Data">
 					<field name="timestamp" />
 					<field name="date"/>
 					<field name="user_id" />
@@ -51,7 +51,7 @@
 					<field name="employee_id" />
 					<field name="hr_attendance_id" groups="base.group_no_one" />
 					<field name="device_id" />
-				</tree>
+				</list>
 			</field>
 		</record>
 		<record id="user_attendance_data_search_view" model="ir.ui.view">
@@ -85,7 +85,7 @@
 		<record model="ir.actions.act_window" id="action_user_attendance_data">
 			<field name="name">Attendance Data</field>
 			<field name="res_model">user.attendance</field>
-			<field name="view_mode">tree,pivot,form</field>
+			<field name="view_mode">list,pivot,form</field>
 			<field name="context">{'search_default_valid':1, 'group_by':[]}
 			</field>
 		</record>

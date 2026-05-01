@@ -39,7 +39,7 @@ class AdvanceSalaryWizard(models.TransientModel):
             'name': _('Partner Ledger'),
             'type': 'ir.actions.act_window',
             'res_model': 'account.move.line',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'view_id':self.env.ref('account.view_move_line_tree_grouped_partner').id,
             'search_view_id':self.env.ref('account.view_account_move_line_filter').id,
             'domain': [('id', 'in', line_ids)],

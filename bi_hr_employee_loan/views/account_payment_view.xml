@@ -26,7 +26,7 @@
                     <field name="is_loan_slip" invisible='1'/>
                 </xpath>    
 
-                <xpath expr="//form/sheet/notebook/page/field[@name='line_ids']/tree/field[@name='partner_id']" position="replace">
+                <xpath expr="//form/sheet/notebook/page/field[@name='line_ids']/list/field[@name='partner_id']" position="replace">
                     <field name="partner_id" invisible="parent.is_loan_slip == True" />
                     <field name="employee_id"/>
                 </xpath>

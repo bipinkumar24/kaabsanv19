@@ -6,84 +6,138 @@
                 model="base.automation">
             <field name="name">Purchase Request - 1st Level Approval: Send Mail</field>
             <field name="model_id" ref="model_purchase_request"/>
-            <field name="state">email</field>
-            <field name="template_id"
-                   ref="mail_template_data_purchase_request_first_approval"/>
             <field name="trigger">on_write</field>
             <field name="trigger_field_ids"
                    eval="[(6, 0, [ref('atta_purchase_request.field_purchase_request__state')])]"/>
             <field name="filter_pre_domain">[["state","=","draft"]]</field>
             <field name="filter_domain">[["state","=","first"]]</field>
         </record>
+        <record id="ir_actions_server_purchase_request_send_mail_first_approval"
+                model="ir.actions.server">
+            <field name="name">Purchase Request - 1st Level Approval: Send Mail</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="usage">base_automation</field>
+            <field name="base_automation_id"
+                   ref="base_automation_data_purchase_request_send_mail_first_approval"/>
+            <field name="state">mail_post</field>
+            <field name="template_id"
+                   ref="mail_template_data_purchase_request_first_approval"/>
+            <field name="mail_post_method">email</field>
+        </record>
 
         <record id="base_automation_data_purchase_request_send_mail_second_approval"
                 model="base.automation">
             <field name="name">Purchase Request - 2nd Level Approval: Send Mail</field>
             <field name="model_id" ref="model_purchase_request"/>
-            <field name="state">email</field>
-            <field name="template_id"
-                   ref="mail_template_data_purchase_request_second_approval"/>
             <field name="trigger">on_write</field>
             <field name="trigger_field_ids"
                    eval="[(6, 0, [ref('atta_purchase_request.field_purchase_request__state')])]"/>
             <field name="filter_pre_domain">[["state","=","first"]]</field>
             <field name="filter_domain">[["state","=","second"]]</field>
         </record>
+        <record id="ir_actions_server_purchase_request_send_mail_second_approval"
+                model="ir.actions.server">
+            <field name="name">Purchase Request - 2nd Level Approval: Send Mail</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="usage">base_automation</field>
+            <field name="base_automation_id"
+                   ref="base_automation_data_purchase_request_send_mail_second_approval"/>
+            <field name="state">mail_post</field>
+            <field name="template_id"
+                   ref="mail_template_data_purchase_request_second_approval"/>
+            <field name="mail_post_method">email</field>
+        </record>
 
         <record id="base_automation_data_purchase_request_send_mail_third_approval"
                 model="base.automation">
             <field name="name">Purchase Request - 3rd Level Approval: Send Mail</field>
             <field name="model_id" ref="model_purchase_request"/>
-            <field name="state">email</field>
-            <field name="template_id"
-                   ref="mail_template_data_purchase_request_third_approval"/>
             <field name="trigger">on_write</field>
             <field name="trigger_field_ids"
                    eval="[(6, 0, [ref('atta_purchase_request.field_purchase_request__state')])]"/>
             <field name="filter_pre_domain">[["state","=","second"]]</field>
             <field name="filter_domain">[["state","=","third"]]</field>
         </record>
+        <record id="ir_actions_server_purchase_request_send_mail_third_approval"
+                model="ir.actions.server">
+            <field name="name">Purchase Request - 3rd Level Approval: Send Mail</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="usage">base_automation</field>
+            <field name="base_automation_id"
+                   ref="base_automation_data_purchase_request_send_mail_third_approval"/>
+            <field name="state">mail_post</field>
+            <field name="template_id"
+                   ref="mail_template_data_purchase_request_third_approval"/>
+            <field name="mail_post_method">email</field>
+        </record>
 
         <record id="base_automation_data_purchase_request_send_mail_fourth_approval"
                 model="base.automation">
             <field name="name">Purchase Request - 4th Level Approval: Send Mail</field>
             <field name="model_id" ref="model_purchase_request"/>
-            <field name="state">email</field>
-            <field name="template_id"
-                   ref="mail_template_data_purchase_request_fourth_approval"/>
             <field name="trigger">on_write</field>
             <field name="trigger_field_ids"
                    eval="[(6, 0, [ref('atta_purchase_request.field_purchase_request__state')])]"/>
             <field name="filter_pre_domain">[["state","=","third"]]</field>
             <field name="filter_domain">[["state","=","fourth"]]</field>
         </record>
+        <record id="ir_actions_server_purchase_request_send_mail_fourth_approval"
+                model="ir.actions.server">
+            <field name="name">Purchase Request - 4th Level Approval: Send Mail</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="usage">base_automation</field>
+            <field name="base_automation_id"
+                   ref="base_automation_data_purchase_request_send_mail_fourth_approval"/>
+            <field name="state">mail_post</field>
+            <field name="template_id"
+                   ref="mail_template_data_purchase_request_fourth_approval"/>
+            <field name="mail_post_method">email</field>
+        </record>
 
         <record id="base_automation_data_purchase_request_send_mail_successfully_approved"
                 model="base.automation">
             <field name="name">Purchase Request - Successfully Approved: Send Mail</field>
             <field name="model_id" ref="model_purchase_request"/>
-            <field name="state">email</field>
-            <field name="template_id"
-                   ref="mail_template_data_purchase_request_successfully_approved"/>
             <field name="trigger">on_write</field>
             <field name="trigger_field_ids"
                    eval="[(6, 0, [ref('atta_purchase_request.field_purchase_request__state')])]"/>
             <field name="filter_pre_domain">["|",["state","=","third"],["state","=","fourth"]]</field>
             <field name="filter_domain">[["state","=","final"]]</field>
         </record>
+        <record id="ir_actions_server_purchase_request_send_mail_successfully_approved"
+                model="ir.actions.server">
+            <field name="name">Purchase Request - Successfully Approved: Send Mail</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="usage">base_automation</field>
+            <field name="base_automation_id"
+                   ref="base_automation_data_purchase_request_send_mail_successfully_approved"/>
+            <field name="state">mail_post</field>
+            <field name="template_id"
+                   ref="mail_template_data_purchase_request_successfully_approved"/>
+            <field name="mail_post_method">email</field>
+        </record>
 
         <record id="base_automation_data_purchase_request_send_mail_cancel"
                 model="base.automation">
             <field name="name">Purchase Request - Cancel: Send Mail</field>
             <field name="model_id" ref="model_purchase_request"/>
-            <field name="state">email</field>
-            <field name="template_id"
-                   ref="mail_template_data_purchase_request_cancel"/>
             <field name="trigger">on_write</field>
             <field name="trigger_field_ids"
                    eval="[(6, 0, [ref('atta_purchase_request.field_purchase_request__state')])]"/>
             <field name="filter_pre_domain">["|","|","|","|",["state","=","first"],["state","=","second"],["state","=","third"],["state","=","fourth"],["state","=","final"]]</field>
             <field name="filter_domain">[["state","=","canceled"]]</field>
+        </record>
+        <record id="ir_actions_server_purchase_request_send_mail_cancel"
+                model="ir.actions.server">
+            <field name="name">Purchase Request - Cancel: Send Mail</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="usage">base_automation</field>
+            <field name="base_automation_id"
+                   ref="base_automation_data_purchase_request_send_mail_cancel"/>
+            <field name="state">mail_post</field>
+            <field name="template_id"
+                   ref="mail_template_data_purchase_request_cancel"/>
+            <field name="mail_post_method">email</field>
         </record>
 
     </data>

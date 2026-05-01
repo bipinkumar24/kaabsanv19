@@ -8,7 +8,7 @@
            <field name="priority" eval="20"/>
            <field name="arch" type="xml">
                <xpath expr="//button[@name='action_cancel']"  position="after">
-                 <button name="action_draft" id='btn_reset_draft' states="cancel" string="Reset to Draft" type="object"/>
+                 <button name="action_draft" id='btn_reset_draft' invisible="state != 'cancel'" string="Reset to Draft" type="object"/>
                </xpath>
                <xpath expr="//button[@name='action_cancel']"  position="replace">
                  <field name="cancel_done_picking" invisible="1" />

@@ -65,38 +65,37 @@
                     name="cancel"
                     domain="[('state','=','cancel')]"
                 />
-                <group expand="0" string="Group By">
-                    <filter
-                        name="warehouse"
-                        string="Warehouse"
-                        domain="[]"
-                        context="{'group_by':'warehouse_id'}"
-                    />
-                    <filter
-                        name="location"
-                        string="Location"
-                        domain="[]"
-                        context="{'group_by':'location_id'}"
-                    />
-                    <filter
-                        name="status"
-                        string="Status"
-                        domain="[]"
-                        context="{'group_by':'state'}"
-                    />
-                    <filter
-                        name="route"
-                        string="Route"
-                        domain="[]"
-                        context="{'group_by':'route_id'}"
-                    />
-                    <filter
-                        name="product"
-                        string="Product"
-                        domain="[]"
-                        context="{'group_by':'product_id'}"
-                    />
-                </group>
+                <separator string="Group By"/>
+                <filter
+                    name="warehouse"
+                    string="Warehouse"
+                    domain="[]"
+                    context="{'group_by':'warehouse_id'}"
+                />
+                <filter
+                    name="location"
+                    string="Location"
+                    domain="[]"
+                    context="{'group_by':'location_id'}"
+                />
+                <filter
+                    name="status"
+                    string="Status"
+                    domain="[]"
+                    context="{'group_by':'state'}"
+                />
+                <filter
+                    name="route"
+                    string="Route"
+                    domain="[]"
+                    context="{'group_by':'route_id'}"
+                />
+                <filter
+                    name="product"
+                    string="Product"
+                    domain="[]"
+                    context="{'group_by':'product_id'}"
+                />
             </search>
         </field>
     </record>
