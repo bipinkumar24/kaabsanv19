@@ -634,7 +634,7 @@ class PurchaseRequest(models.Model):
         orders = self.env['allcation.request'].search([('purchase_request_id', '=', self.id)])
         return {
             'name': _('Allocation Request'),
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'res_model': 'allcation.request',
             'view_id': False,
             'type': 'ir.actions.act_window',
@@ -645,7 +645,7 @@ class PurchaseRequest(models.Model):
         orders = self.env['stock.picking'].search([('purchase_request_id', '=', self.id)])
         return {
             'name': _('Expense Transfers'),
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'res_model': 'stock.picking',
             'view_id': False,
             'type': 'ir.actions.act_window',

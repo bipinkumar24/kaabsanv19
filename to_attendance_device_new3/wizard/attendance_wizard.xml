@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-	<data>
-		<record model="ir.ui.view" id="attendance_wizard_form_view">
+			<record id="attendance_wizard_form_view" model="ir.ui.view">
 			<field name="name">Attendance Device Synchronization wizard</field>
 			<field name="model">attendance.wizard</field>
 			<field name="arch" type="xml">
@@ -29,10 +28,8 @@
 						</group>
 					</group>
 					<footer>
-						<button name="action_download_attendance" type="object"
-							string="Download Attendance" class="oe_highlight" />
-<!--						<button name="sync_attendance" type="object"-->
-<!--							string="Synchronize Attendance" class="oe_highlight" groups="base.group_no_one" />-->
+							<button name="action_download_attendance" type="object"
+								string="Download Attendance" class="oe_highlight" />
 						<button name="action_fix_user_attendance_valid" type="object"
 							string="Fix Attendance Valid" groups="base.group_no_one" />
 						<button name="download_attendance_custom" type="object"
@@ -47,15 +44,23 @@
 			</field>
 		</record>
 
+<<<<<<< Updated upstream
 		<record id="action_sync_device_attendance" model="ir.actions.act_window">
 	        <field name="name">Synchronize Data</field>
 	        <field name="res_model">attendance.wizard</field>
 	        <field name="view_mode">form</field>
 	        <field name="target">new</field>
 	    </record>
+=======
+			<record id="action_sync_device_attendance" model="ir.actions.act_window">
+				<field name="name">Synchronize Data</field>
+				<field name="res_model">attendance.wizard</field>
+				<field name="view_mode">form</field>
+				<field name="target">new</field>
+			</record>
+>>>>>>> Stashed changes
 
 		<menuitem id="sync_device_attendance_menu" parent="attendace_device_menu"
 			sequence="10" name="Synchronize" action="action_sync_device_attendance" />
 
-	</data>
-</odoo>
+	</odoo>

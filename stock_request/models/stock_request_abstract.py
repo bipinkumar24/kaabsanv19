@@ -158,7 +158,11 @@ class StockRequest(models.AbstractModel):
                 routes |= routes_by_warehouse[record.warehouse_id.id]
             parents = record.get_parents().ids
             record.route_ids = routes.filtered(
-                lambda r: any(p.location_id.id in parents for p in r.rule_ids)
+                lambda r: any(
+                    location.id in parents
+                    for rule in r.rule_ids
+                    for location in rule.location_src_id | rule.location_dest_id
+                )
             )
 
     def get_parents(self):

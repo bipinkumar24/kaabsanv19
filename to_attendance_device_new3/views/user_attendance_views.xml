@@ -72,12 +72,15 @@
 					<filter string="Not Synchronized" name="not_synch"
 						domain="[('hr_attendance_id','=',False)]"
 						help="Show attendance records that have no link to Odoo's HR Atteandnce" />
+<<<<<<< Updated upstream
 					<group>
+=======
+						<separator string="Group By" />
+>>>>>>> Stashed changes
 						<filter string="User" name="user_id" context="{'group_by': 'user_id'}" />
 						<filter string="Device" name="device_id" context="{'group_by': 'device_id'}" />
 						<filter string="Employee" name="employee_id"
 							context="{'group_by': 'employee_id'}" />
-					</group>
 				</search>
 			</field>
 		</record>

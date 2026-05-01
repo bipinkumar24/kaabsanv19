@@ -42,7 +42,7 @@
             <field name="name">Approval Level of Purchase Request</field>
             <field name="res_model">approval.level.pr</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
         <menuitem id="menu_approval_level_pr" parent="atta_purchase_request.purchase_request_menu_config"
                   name="Purchase Request Approval Level" action="action_approval_level_pr"

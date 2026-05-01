@@ -75,5 +75,3 @@ class ResUsers(models.Model):
                     menu.restrict_user_ids = [fields.Command.unlink(rec.id)]
                 rec.hide_menu_ids = [fields.Command.clear()]
                 rec.is_show_specific_menu = True
-
-

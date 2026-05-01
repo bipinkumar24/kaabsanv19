@@ -50,12 +50,15 @@
 					<field name="uid" />
 					<field name="fid" />
 					<separator />
+<<<<<<< Updated upstream
 					<group >
+=======
+						<separator string="Group By" />
+>>>>>>> Stashed changes
 						<filter string="User" name="device_user_id"
 							context="{'group_by': 'device_user_id'}" />
 						<filter string="Device" name="device_id"
 							context="{'group_by': 'device_id'}" />
-					</group>
 				</search>
 			</field>
 		</record>
