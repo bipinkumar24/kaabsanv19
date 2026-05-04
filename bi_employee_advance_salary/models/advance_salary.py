@@ -381,7 +381,7 @@ class AccountPaymentRegister(models.TransientModel):
     def action_create_payments(self):
         res = super(AccountPaymentRegister, self).action_create_payments()
         for rec in self:
-            if rec.payment_difference < 0:
+            if rec.source_amount < rec.amount:
                 raise ValidationError(_("You Can Not Pay More Than Payment Amount!"))
         return res
 
