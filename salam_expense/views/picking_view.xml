@@ -43,7 +43,7 @@
         </field>
     </record>
 
-    <record id="view_picking_form_inherit_expense" model="ir.ui.view">
+    <record id="view_picking_form_inherit_expense_updated" model="ir.ui.view">
         <field name="name">view.picking.form.inherit.expense</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
@@ -51,11 +51,27 @@
             <xpath expr="//field[@name='origin']" position="after">
                 <field name="sale_delivery_date" invisible = "picking_type_code not in 'outgoing'"/>
             </xpath>
-
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_view_journal_entry" type="object"
+                        class="oe_stat_button" icon="fa-book"
+                        invisible="not expense_account_move_id or not is_expense">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Journal Entry</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <field name="is_posted" invisible="1"/>
+                <button name="action_validate_data" string="Post Entry"
+                        class="btn-primary" type="object"
+                        invisible="state != 'done' or is_posted"/>
+                <button name="action_unpost_entery" string="unPost Entry"
+                        class="btn-primary" type="object"
+                        invisible="state != 'validate' or not is_posted"/>
+            </xpath>
             <xpath expr="//form" position="attributes">
                 <attribute name="delete">0</attribute>
             </xpath>
-
             <xpath expr="//field[@name='is_locked']" position="after">
                 <field name="is_expense" column_invisible="1" />
                 <field name="expense_picking_type_id" column_invisible="1" />
@@ -68,50 +84,53 @@
                         type="object" groups="sh_all_in_one_cancel_adv.group_sh_stock_cancel"
                         invisible = "not is_expense"/>
             </button>
-
             <xpath expr="//field[@name='backorder_id']" position="after">
                 <field name="employee_id" invisible="not is_expense" required="is_expense"/>
-                <field name="state" string="Inventory Manager Status" invisible="not is_expense"/>
+                <!-- <field name="state" string="Inventory Manager Status" invisible="not is_expense"/> -->
+                <field name="expense_account_move_id" invisible="1"/>
             </xpath>
-
             <xpath expr="//header" position="inside">
                 <button name="action_approve" type="object"
                         invisible="not is_button or not is_expense"
                         string="Approve / Reject" class="oe_highlight" />
             </xpath>
-            <!-- <xpath expr="//button[@name='button_scrap']" position="replace">
-                <button name="button_scrap" type="object" string="Scrap"
-                        attrs="{'invisible': ['|', '&amp;', ('picking_type_code', '=', 'incoming'), ('state', '!=', 'done'), '|', '&amp;', ('picking_type_code', '=', 'outgoing'),('state', '=', 'done'), ('is_expense', '=', True)]}"
-                        data-hotkey="y"/>
-                    <button name="button_scrap"
-                        type="object"
-                        string="Scrap"
-                        invisible="(picking_type_code == 'incoming' and state != 'done') or (picking_type_code == 'outgoing' and state == 'done') or is_expense"
-                        data-hotkey="y"/>
-            </xpath> -->
             <xpath expr="//button[@name='action_cancel']" position="replace">
                 <button name="action_cancel" invisible="is_expense or state not in ('assigned','confirmed','draft','waiting')" string="Cancel" groups="base.group_user" type="object" data-hotkey="z"/>
             </xpath>
-
             <xpath expr="//field[@name='state']" position="before">
                 <field name="next_approval_id" widget="statusbar" invisible="not is_expense"/>
             </xpath>
-            <xpath expr="//field[@name='state']" position="attributes">
-                <attribute name="invisible">is_expense</attribute>
+            <xpath expr="//field[@name='state'][1]" position="replace">
+                <field name="state" widget="statusbar" invisible="picking_type_code != 'incoming' or is_expense" statusbar_visible="draft,assigned,done"/>
+            </xpath>
+            <xpath expr="//field[@name='state'][2]" position="replace">
+                <field name="state" widget="statusbar" invisible="picking_type_code == 'incoming' or is_expense" statusbar_visible="draft,confirmed,assigned,done"/>
             </xpath>
             <xpath expr="//field[@name='origin']" position="after">
-                <!-- <field name="property_stock_account_output_categ_id"
-                       attrs="{'required':[('is_expense', '=', True), ('state', 'not in', ('done', 'cancel'))],
-                                   'readonly':[('state', 'in', ('done', 'cancel'))],
-                                   'invisible': [('is_expense', '=', False)]}"/> -->
-                    <field name="property_stock_account_output_categ_id"
+                <field name="property_stock_account_output_categ_id"
                         required="is_expense and state not in ['done','cancel']"
                         readonly="state in ['done','cancel']"
                         invisible="not is_expense"/>
-                            
             </xpath>
         </field>
     </record>
+
+    <!-- <record model="ir.ui.view" id="stock_inherit_view_picking_form_kaabsan">
+        <field name="name">stock.view_picking_form_kaabsan</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <field name="is_posted" invisible="1"/>
+                <button name="action_validate_data" string="Post Entry"
+                        class="btn-primary" type="object"
+                        invisible="state != 'done' or is_posted"/>
+                <button name="action_unpost_entery" string="unPost Entry"
+                        class="btn-primary" type="object"
+                        invisible="state != 'validate' or not is_posted"/>
+            </xpath>
+        </field>
+    </record> -->
 
     <record id="action_picking_expense" model="ir.actions.act_window">
         <field name="name">Expense Transfers</field>

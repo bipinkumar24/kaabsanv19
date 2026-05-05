@@ -44,13 +44,13 @@ class my_equipment_request(models.Model):
     payment_state = fields.Selection(PAYMENT_STATE_SELECTION, string="Payment Status", store=True,
                                      readonly=True, copy=False, tracking=True, compute='_compute_payment_state')
 
-    @api.model
-    def create(self, vals):
-        if vals.get('name', ('New')) == ('New'):
-            vals['name'] = self.env['ir.sequence'].next_by_code(
-                'overtime.request') or ('New')
-        res = super(my_equipment_request, self).create(vals)
-        return res
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('name', 'New') == 'New':
+                vals['name'] = self.env['ir.sequence'].next_by_code(
+                    'overtime.request') or 'New'
+        return super(my_equipment_request, self).create(vals_list)
 
     @api.depends('bill_id', 'bill_id.payment_state')
     def _compute_payment_state(self):

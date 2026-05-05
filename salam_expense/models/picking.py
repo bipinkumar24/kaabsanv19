@@ -33,6 +33,18 @@ class StockMove(models.Model):
 class Picking(models.Model):
     _inherit = "stock.picking"
 
+    def action_unpost_entery(self):
+        for picking in self:
+            move = picking.expense_account_move_id
+            if not move:
+                raise UserError(_('No journal entry linked to this picking.'))
+            if move.state == 'posted':
+                move.button_draft()
+            picking.sudo().write({
+                'state': 'done',
+                'is_posted': False,
+            })
+
     is_expense = fields.Boolean('Is Expense')
 
     def _compute_sale_date(self):
@@ -59,6 +71,136 @@ class Picking(models.Model):
             return False
     expense_picking_type_id = fields.Many2one('stock.picking.type', string='Expense Operation Type', default=get_expense_operation_type)
     employee_id = fields.Many2one('hr.employee', 'Employee')
+    expense_account_move_id = fields.Many2one('account.move', string='Journal Entry', copy=False, readonly=True)
+
+    def action_validate_data(self):
+        AccountMove = self.env['account.move']
+        Journal = self.env['account.journal']
+
+        for picking in self:
+
+            # 🔹 Get journal (company safe)
+            journal = Journal.search([
+                ('type', '=', 'general'),
+                ('company_id', '=', picking.company_id.id)
+            ], limit=1)
+
+            if not journal:
+                raise UserError("Please configure a General Journal.")
+
+            # 🔹 Find existing journal entry
+            account_move = picking.expense_account_move_id or AccountMove.search([
+                ('ref', '=', picking.name),
+                ('journal_id', '=', journal.id),
+                ('company_id', '=', picking.company_id.id),
+            ], limit=1)
+
+            debit_map = {}
+            credit_map = {}
+
+            # 🔹 Loop moves (Odoo 19 fields)
+            for move in picking.move_ids:
+
+                product = move.product_id
+
+                # ✅ Correct qty field in Odoo 19
+                qty = move.quantity or move.product_uom_qty
+
+                cost = product.standard_price or 0.0
+                value = qty * cost
+
+                print(value, "valuesssssssss")
+                if not value:
+                    continue
+
+                # In Odoo 19, output account moved from product.category to stock.location
+                stock_account = product.categ_id.property_stock_valuation_account_id
+                output_account = picking.property_stock_account_output_categ_id
+
+                print(stock_account, output_account, "output_accounts056789876")
+
+                if not stock_account or not output_account:
+                    continue
+
+                # 🔹 Group debit
+                debit_map[output_account.id] = debit_map.get(output_account.id, 0.0) + value
+
+                # 🔹 Group credit
+                credit_map[stock_account.id] = credit_map.get(stock_account.id, 0.0) + value
+
+            move_lines = []
+
+            # 🔹 Debit lines
+            for acc_id, amount in debit_map.items():
+                move_lines.append((0, 0, {
+                    'name': picking.name,
+                    'account_id': acc_id,
+                    'debit': amount,
+                    'credit': 0.0,
+                }))
+
+            # 🔹 Credit lines
+            for acc_id, amount in credit_map.items():
+                move_lines.append((0, 0, {
+                    'name': picking.name,
+                    'account_id': acc_id,
+                    'debit': 0.0,
+                    'credit': amount,
+                }))
+
+            if not move_lines:
+                continue
+
+            # 🔹 Create or update journal entry
+            if account_move:
+                if account_move.state == 'posted':
+                    account_move.button_draft()
+
+                account_move.line_ids.unlink()
+
+                account_move.write({
+                    'line_ids': move_lines,
+                    'date': fields.Date.context_today(self),
+                })
+            else:
+                account_move = AccountMove.create({
+                    'journal_id': journal.id,
+                    'date': fields.Date.context_today(self),
+                    'ref': picking.name,
+                    'line_ids': move_lines,
+                    'company_id': picking.company_id.id,
+                })
+
+            # 🔹 Post entry
+            account_move.action_post()
+
+            print(account_move, "account_movessssssssssssssss", "hellllllllll")
+
+            # 🔹 Update picking
+            picking.write({
+                'state': 'validate',
+                'is_posted': True,
+                'expense_account_move_id': account_move.id,
+            })
+
+    def action_view_journal_entry(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Journal Entry'),
+            'res_model': 'account.move',
+            'res_id': self.expense_account_move_id.id,
+            'view_mode': 'form',
+            'target': 'current',
+        }
+
+    def action_unpost_entry(self):
+        for picking in self:
+            move = picking.expense_account_move_id
+            if not move:
+                raise UserError(_('No journal entry linked to this picking.'))
+            if move.state == 'posted':
+                move.button_draft()
 
     def button_validate(self):
         for rec in self:
@@ -142,6 +284,7 @@ class Picking(models.Model):
     @api.depends('next_approval_id', 'next_approval_user_id')
     def _compute_is_button(self):
         for rec in self:
+            print()
             if self.env.user.id in rec.next_approval_user_id.ids:
                 rec.is_button = True
             else:
