@@ -60,11 +60,19 @@
                 <button name="action_unpost_entery" string="unPost Entry"
                         groups="inventory_extended.group_post_journal_entry"
                         class="btn-primary" type="object" invisible="state != 'validate'"/>
+                <button name="action_cancel_fuel" string="Cancel" type="object"
+                        class="btn-secondary"
+                        groups="stock.group_stock_manager"
+                        invisible="state not in ['done', 'validate']"/>
+                <button name="action_reset_to_draft" string="Reset to Draft" type="object"
+                        class="btn-secondary"
+                        groups="stock.group_stock_manager"
+                        invisible="state != 'cancel'"/>
             </xpath>
             <xpath expr="//button[@name='action_validate']" position="replace">
-                <button name="action_validate" string="Stock Out" type="object" class="oe_highlight"
+                <button name="action_validate" string="Validate" type="object" class="oe_highlight"
                         context="{'not_unlink_on_discard': True}"
-                        invisible="hide_validate or state not in ['draft']"
+                        invisible="is_fual_expense or state != 'draft'"
                         data-hotkey="v"/>
                 <button name="action_validate" string="Approve By Store Keeper" type="object" class="oe_highlight"
                         context="{'not_unlink_on_discard': True}"
@@ -97,6 +105,11 @@
                 <button class="oe_stat_button" name="action_get_stock_move_lines"
                         string="Stock Moves" type="object"
                         invisible="not move_ids and not stock_move_ids" icon="fa-exchange"/>
+                <button class="oe_stat_button" name="action_view_account_moves"
+                        type="object" icon="fa-pencil-square-o"
+                        invisible="not account_move_count">
+                    <field name="account_move_count" widget="statinfo" string="Journal Entries"/>
+                </button>
             </xpath>
 
             <xpath expr="//sheet" position="inside">

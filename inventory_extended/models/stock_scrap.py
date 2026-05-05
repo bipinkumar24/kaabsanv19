@@ -82,6 +82,29 @@ class StockScrap(models.Model):
     is_mutiline = fields.Boolean(string="Multi Location")
     scrap_line_ids = fields.One2many('stock.scrap.line', 'scrap_id', string="Scrap Line")
     stock_move_ids = fields.Many2many('stock.move', string="Stock Move", copy=False)
+    account_move_ids = fields.Many2many(
+        'account.move', string="Journal Entries",
+        compute='_compute_account_move_ids')
+    account_move_count = fields.Integer(compute='_compute_account_move_ids')
+
+    @api.depends('move_ids.account_move_id', 'stock_move_ids.account_move_id')
+    def _compute_account_move_ids(self):
+        for scrap in self:
+            ams = (scrap.move_ids | scrap.stock_move_ids).mapped('account_move_id')
+            scrap.account_move_ids = ams
+            scrap.account_move_count = len(ams)
+
+    def action_view_account_moves(self):
+        self.ensure_one()
+        action = self.env['ir.actions.act_window']._for_xml_id('account.action_move_journal_line')
+        moves = self.account_move_ids
+        if len(moves) == 1:
+            action['view_mode'] = 'form'
+            action['res_id'] = moves.id
+            action['views'] = [(False, 'form')]
+        else:
+            action['domain'] = [('id', 'in', moves.ids)]
+        return action
 
     # @api.constrains('curreent_odoo_meter', 'odometer')
     # def _check_odometer(self):
@@ -230,24 +253,34 @@ class StockScrap(models.Model):
 
     def all_ready_do_scrap(self):
         for scrap in self:
+            orphan_done = scrap.move_ids.filtered(lambda m: m.state == 'done' and not m.account_move_id)
             scrap.move_ids._do_unreserve()
             scrap.move_ids._action_confirm()
             scrap.move_ids._action_assign()
             scrap.move_ids.move_line_ids.quantity = scrap.scrap_qty
             scrap.move_ids.move_line_ids.picked = True
             scrap.move_ids._action_done()
+            if orphan_done:
+                orphan_done.sudo()._create_account_move()
+                if scrap.is_fual_expense:
+                    scrap._reset_journal_entries_to_draft()
             scrap.write({'state': 'done'})
             scrap.date_done = fields.Datetime.now()
         return True
 
     def action_confirm_assign_muti_stock(self, qty, move_id):
         for scrap in self:
+            orphan_done = move_id if (move_id.state == 'done' and not move_id.account_move_id) else move_id.browse()
             move_id._do_unreserve()
             move_id._action_confirm()
             move_id._action_assign()
             move_id.move_line_ids.quantity = qty
             move_id.move_line_ids.picked = True
             move_id._action_done()
+            if orphan_done:
+                orphan_done.sudo()._create_account_move()
+                if scrap.is_fual_expense:
+                    scrap._reset_journal_entries_to_draft()
         return True
 
     def all_ready_do_scrap_muti(self):
@@ -290,6 +323,17 @@ class StockScrap(models.Model):
     def action_reject(self):
         self.state = 'cancel'
 
+    def action_cancel_fuel(self):
+        for scrap in self:
+            scrap._reset_journal_entries_to_draft()
+            ams = (scrap.move_ids | scrap.stock_move_ids).mapped('account_move_id')
+            if ams:
+                ams.sudo().unlink()
+            scrap.sudo().write({'state': 'cancel'})
+
+    def action_reset_to_draft(self):
+        self.write({'state': 'draft'})
+
     def action_validate(self):
         self.ensure_one()
 
@@ -306,6 +350,18 @@ class StockScrap(models.Model):
                 raise ValidationError(_(
                     "Please configure the Stock Valuation Account on the Fuel Expense Location '%s' before validating."
                 ) % self.scrap_location_id.display_name)
+        else:
+            # For regular scraps: ensure the scrap location's valuation account
+            # and the product category's stock valuation account are configured.
+            if self.product_id.is_storable and self.product_id.valuation == 'real_time':
+                if not self.scrap_location_id.valuation_account_id:
+                    raise ValidationError(_(
+                        "Please configure the Stock Valuation Account on the Scrap Location '%s' before validating."
+                    ) % self.scrap_location_id.display_name)
+                if not self.product_id._get_product_accounts().get('stock_valuation'):
+                    raise ValidationError(_(
+                        "Please configure the Stock Valuation Account on the Product Category '%s' before validating."
+                    ) % self.product_id.categ_id.display_name)
 
         if self.fleet_id:
             finger_templates = self.env['fleet.vehicle.odometer'].create({
@@ -330,7 +386,7 @@ class StockScrap(models.Model):
         elif self.move_ids or self.stock_move_ids:
             if self.move_ids:
                 self.move_ids.sudo().write({'product_uom_qty': self.scrap_qty})
-                self.move_ids.mapped('move_line_ids').sudo().write({'product_uom_qty': self.scrap_qty})
+                self.move_ids.mapped('move_line_ids').sudo().write({'quantity': self.scrap_qty})
                 # v15 valuation adjustment chain disabled in v19 (used removed fields
                 # valuation_unit_price + account_move_ids; valuation now flows through
                 # stock.valuation.layer). Re-enable once ported.
@@ -338,7 +394,7 @@ class StockScrap(models.Model):
             if self.stock_move_ids:
                 for scrap_line in self.scrap_line_ids:
                     scrap_line.move_id.sudo().write({'product_uom_qty': scrap_line.qty})
-                    scrap_line.move_id.mapped('move_line_ids').sudo().write({'product_uom_qty': scrap_line.qty})
+                    scrap_line.move_id.mapped('move_line_ids').sudo().write({'quantity': scrap_line.qty})
                     # v15 valuation adjustment chain disabled (see comment above).
                     self.action_confirm_assign_muti_stock(scrap_line.qty, scrap_line.move_id)
                 return self.all_ready_do_scrap_muti()
