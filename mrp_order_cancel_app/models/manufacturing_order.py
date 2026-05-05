@@ -67,9 +67,9 @@ class ManufacturingOrder(models.Model):
                         move.move_dest_ids.write({'procure_method': 'make_to_stock'})
                     move.move_dest_ids.write({'move_orig_ids': [(3, move.id, 0)], 'move_orig_ids': [(5, 0, 0)]})
                 move.write({'state': 'cancel'})
-                account_moves = account_move_obj.search([('stock_move_id', '=', move.id)])
-                valuation = move.stock_valuation_layer_ids
-                valuation and valuation.sudo().unlink()
+                account_moves = account_move_obj.search([('stock_move_ids', 'in', move.ids)])
+                # valuation = move.stock_valuation_layer_ids
+                # valuation and valuation.sudo().unlink()
                 if account_moves:
                     for account_move in account_moves:
                         account_move.button_draft()
@@ -79,7 +79,7 @@ class ManufacturingOrder(models.Model):
 
             # if order.company_id.cancel_work_order_for_mo:
             order.workorder_ids.action_cancel()
-                    
+ 
         res = super().action_cancel()
         return res
 
@@ -94,6 +94,6 @@ class ManufacturingOrder(models.Model):
                 'raw_material_production_id': False,
             })
             order.qty_producing = 0
-            order._onchange_move_raw()
-            order._onchange_move_finished()
+            # order._onchange_move_raw()
+            # order._onchange_move_finished()
         self.filtered(lambda mo: mo.state == 'cancel').write({'state': 'draft'})

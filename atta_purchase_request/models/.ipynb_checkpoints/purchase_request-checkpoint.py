@@ -120,6 +120,11 @@ class PurchaseRequest(models.Model):
         index=True,
         readonly=True,
     )
+    not_storable = fields.Boolean(
+        string="Not Storable",
+        default=False,
+        help="Check this if the requested items are not stored in inventory (e.g., services, expenses)."
+    )
     state = fields.Selection(
         selection=STATE,
         string='Status',

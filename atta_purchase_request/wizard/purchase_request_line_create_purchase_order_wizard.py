@@ -220,7 +220,7 @@ class CreatePurchaseOrderWizardLine(models.TransientModel):
         if not self.product_id:
             return
 
-        self.uom_id = self.product_id.uom_po_id
+        self.uom_id = self.product_id.uom_id
         order_line = self.env['purchase.order.line'].sudo().search(
             [
                 ('product_id', '=', self.product_id.id),
@@ -374,6 +374,6 @@ class CreatePurchaseOrderWizardLine(models.TransientModel):
             'product_qty': self.quantity,
             'product_uom_id': self.uom_id.id,
             'price_unit': self.price_unit_currency,
-            'taxes_id': [(6, 0, self.tax_ids.ids)],
+            'tax_ids': [(6, 0, self.tax_ids.ids)],
             'request_line_id': self.request_line_id.id,
         }

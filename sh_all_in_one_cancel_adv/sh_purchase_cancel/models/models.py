@@ -342,7 +342,7 @@ class PurchaseOrder(models.Model):
                 'type': 'ir.actions.act_window',
                 'res_model': 'purchase.order',
                 'view_type': 'form',
-                'view_mode': 'tree,kanban,form,pivot,graph,calendar,activity',
+                'view_mode': 'list,kanban,form,pivot,graph,calendar,activity',
                 'target': 'current',
                 'context': {}
             }

@@ -19,13 +19,21 @@ class Emp(models.Model):
         if self.employees_id:
             if self.employees_id.phone:
                 self.phone = self.employees_id.phone
-            if self.employees_id.mobile:
-                self.phone = self.employees_id.mobile
+            if self.employees_id.phone:
+                self.phone = self.employees_id.phone
 
 class Account(models.Model):
     _inherit = 'account.move'
-    
+
+    is_exact_move_duplicate = fields.Boolean(compute='_compute_is_exact_move_duplicate')
+
+    @api.depends('duplicated_ref_ids')
+    def _compute_is_exact_move_duplicate(self):
+        for move in self:
+            move.is_exact_move_duplicate = False
+
     is_expense = fields.Boolean(string='Is Expense')
+    invoice_date = fields.Date(default=fields.Date.context_today)
     department_id = fields.Many2one('hr.department', string='Department',
                                     default=lambda self: self._get_default_department())
     employees_fee_ids = fields.One2many('emp.fee', 'account_id', string=' ')
@@ -50,9 +58,9 @@ class Account(models.Model):
     def create(self, vals):
         rec = super(Account, self).create(vals)
         required_fields = ''
-        for field in rec.next_approval_id.fields_ids:
+        for field in rec.next_approval_id.sudo().fields_ids:
             required_fields += field.field_description + ", "
-        for field in rec.next_approval_id.fields_ids:
+        for field in rec.next_approval_id.sudo().fields_ids:
             if self.env['account.move'].search([(field.name, '=', False), ('id', '=', rec.id)]):
                 raise ValidationError("Required Fields are %r" % required_fields)
         rec.remark_ids = [(0, 0, {'name': "New Created",
@@ -66,9 +74,9 @@ class Account(models.Model):
     def write(self, vals):
         for rec in self:
             required_fields = ' '
-            for field in rec.next_approval_id.fields_ids:
+            for field in rec.next_approval_id.sudo().fields_ids:
                 required_fields += field.field_description + ","
-            for field in rec.next_approval_id.fields_ids:
+            for field in rec.next_approval_id.sudo().fields_ids:
                 if not vals.get(field.name):
                     if self.env['account.move'].search([(field.name, '=', False), ('id', '=', rec.id)]):
                         raise ValidationError("Required Fields are %r" % required_fields)
@@ -187,7 +195,7 @@ class Account(models.Model):
             rec.state_2 = 'depapproved'
 
             partner_ids = []
-            for user in self.env.ref('expense_requests.department_approver').users:
+            for user in self.env.ref('expense_requests.department_approver').user_ids:
                 partner_ids.append(user.partner_id.id)
 
             fetchmail_server_id = self.env['fetchmail.server'].sudo().search([])
@@ -214,7 +222,7 @@ class Account(models.Model):
             rec.state_2 = 'hr'
 
             partner_ids = []
-            for user in self.env.ref('expense_requests.hr_approver').users:
+            for user in self.env.ref('expense_requests.hr_approver').user_ids:
                 partner_ids.append(user.partner_id.id)
 
             fetchmail_server_id = self.env['fetchmail.server'].sudo().search([])
@@ -241,7 +249,7 @@ class Account(models.Model):
             rec.state_2 = 'finance'
 
             partner_ids = []
-            for user in self.env.ref('expense_requests.Finance_approver').users:
+            for user in self.env.ref('expense_requests.Finance_approver').user_ids:
                 partner_ids.append(user.partner_id.id)
 
             fetchmail_server_id = self.env['fetchmail.server'].sudo().search([])
@@ -295,3 +303,4 @@ class Account(models.Model):
         if not level_rec:
             raise UserError(_("Please Configure Reject Level First or Contact to Administrator"))
         self.next_approval_id = level_rec.id
+

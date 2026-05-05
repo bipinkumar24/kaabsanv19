@@ -11,18 +11,18 @@
             <xpath expr="//field[@name='bom_id']" position="before">
                 <field name="is_validate" readonly="1" force_save="1"/>
             </xpath>
-<!--            <xpath expr="//button[@name='button_mark_done'][1]" position="replace">-->
-<!--                <button name="button_mark_done"-->
-<!--                        invisible="state in ('draft','cancel','done','to_close','validate') or qty_producing == 0 or move_raw_ids"-->
-<!--                        string="Validate" type="object" class="oe_highlight"-->
-<!--                        confirm="There are no components to consume. Are you still sure you want to continue?"-->
-<!--                        data-hotkey="g"/>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//button[@name='button_mark_done'][2]" position="replace">-->
-<!--                <button name="button_mark_done"-->
-<!--                        invisible="state in ('draft','cancel','done','to_close','validate') or qty_producing == 0 or not move_raw_ids"-->
-<!--                        string="Validate" type="object" class="oe_highlight" data-hotkey="g"/>-->
-<!--            </xpath>-->
+       <!--   <xpath expr="//button[@name='button_mark_done'][1]" position="replace">
+                <button name="button_mark_done"
+                        invisible="state in ('draft','cancel','done','to_close','validate') or qty_producing == 0 or move_raw_ids"
+                        string="Validate" type="object" class="oe_highlight"
+                        confirm="There are no components to consume. Are you still sure you want to continue?"
+                        data-hotkey="g"/>
+            </xpath>
+            <xpath expr="//button[@name='button_mark_done'][2]" position="replace">
+                <button name="button_mark_done"
+                        invisible="state in ('draft','cancel','done','to_close','validate') or qty_producing == 0 or not move_raw_ids"
+                        string="Validate" type="object" class="oe_highlight" data-hotkey="g"/>
+            </xpath> -->
             <xpath expr="//button[@name='action_cancel']" position="before">
                 <!--            <xpath expr="//header//button[@name='button_scrap']" position="before">-->
                 <button name="action_validate_data" string="Validate"

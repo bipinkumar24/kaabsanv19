@@ -195,6 +195,6 @@ class POSOrder(models.Model):
                 'type': 'ir.actions.act_window',
                 'res_model': 'pos.order',
                 'view_type': 'form',
-                'view_mode': 'tree,form',
+                'view_mode': 'list,form',
                 'target': 'current',
             }

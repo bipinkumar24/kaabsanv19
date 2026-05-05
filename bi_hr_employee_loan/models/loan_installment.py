@@ -11,7 +11,7 @@ class Loan_Installment(models.Model):
     _name = 'loan.installment'
     _description = "Loan Installment"
     
-    name = fields.Char(string="Name",readonly="True",compute="_compute_name")
+    name = fields.Char(string="Name", readonly=True, compute="_compute_name")
     installment_number = fields.Integer(string="Installment Number")
     date_from = fields.Date(string="Date From")
     date_to  = fields.Date(string="Date To")

@@ -140,6 +140,7 @@
                                         <field name="po_creation_state" invisible="1"/>
                                         <field name="is_edited" invisible="1"/>
                                         <field name="is_first" invisible="1"/>
+                                        <field name="request_next_approval_level" invisible="1"/>
                                         <field name="product_id"
                                                readonly="not parent.readonly_field"
                                                required="quantity > 0 and not is_first"
@@ -175,11 +176,16 @@
                                         <field name="request_currency_id" invisible="1"/>
                                         <field name="price_unit_currency"
                                                groups="atta_purchase_request.purchase_request_group_second_approval"
+                                               required="quantity > 0 and request_next_approval_level &gt;= 3"
+                                               invisible="not request_next_approval_level or request_next_approval_level &lt; 3"
                                                optional="hide"/>
                                         <field name="price_unit"
                                                groups="atta_purchase_request.purchase_request_group_second_approval"
                                                optional="hide"/>
-                                        <field name="uom_id" optional="show"/>
+                                        <field name="uom_id"
+                                               required="quantity > 0 and request_next_approval_level &gt;= 3"
+                                               invisible="not request_next_approval_level or request_next_approval_level &lt; 3"
+                                               optional="show"/>
                                         <field name="tax_ids"
                                                widget="many2many_tags"
                                                optional="hide"/>

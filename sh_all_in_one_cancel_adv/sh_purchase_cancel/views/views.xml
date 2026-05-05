@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="purchase.purchase_order_form" />
         <field name="arch" type="xml">
             <button name="button_cancel" position="replace">
-                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_purchase_cancel" attrs="{'invisible':[('state','=','cancel')]}"></button>
+                <button name="sh_cancel" string="Cancel" type="object" groups="sh_all_in_one_cancel_adv.group_sh_purchase_cancel" invisible="state == 'cancel'"></button>
             </button>
         </field>
     </record>

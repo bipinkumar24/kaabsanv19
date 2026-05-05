@@ -10,57 +10,33 @@
                    ref="base.res_config_settings_view_form"/>
             <field name="arch" type="xml">
 
-                <xpath expr="//div[hasclass('settings')]" position="inside">
-                    <div class="app_settings_block"
-                         data-string="Purchase Requests"
+                <xpath expr="//form" position="inside">
+                    <app data-string="Purchase Requests"
                          string="Purchase Requests"
-                         data-key="purchase_request"
-                         groups="atta_purchase_request.purchase_request_group_manager"
-                    >
-                        <h2>Purchase Request</h2>
-                        <div class="row mt16 o_settings_container">
-                            <div class="col-xs-12 col-md-6 o_setting_box">
-                                <div class="o_setting_left_pane">
-                                    <field name="has_pr_4th_approve"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="has_pr_4th_approve"/>
+                         name="purchase_request"
+                         groups="atta_purchase_request.purchase_request_group_manager">
+                        <block title="Purchase Request" name="purchase_request_settings">
+                            <setting id="has_pr_4th_approve_setting"
+                                     string="4-Level Approval"
+                                     help="Approve purchase requests by 4 levels. The 4th level is triggered by the untaxed amount of the purchase request.">
+                                <field name="has_pr_4th_approve"/>
+                                <div class="content-group mt8" invisible="not has_pr_4th_approve">
+                                    <div class="row">
+                                        <label for="pr_4th_approve_amount" class="col-md-4 o_light_label"/>
+                                        <field name="pr_4th_approve_amount" required="has_pr_4th_approve"/>
+                                    </div>
                                     <div class="text-muted">
-                                        Tick the checkbox if you want to approve
-                                        purchase requests by 4 levels.
-                                        The 4th level is triggered by
-                                        the untaxed amount of purchase request!
-                                    </div>
-                                    <div class="content-group"
-                                         invisible="not has_pr_4th_approve">
-                                        <div class="row mt16">
-                                            <label for="pr_4th_approve_amount"
-                                                   class="col-md-4 o_light_label"/>
-                                            <field name="pr_4th_approve_amount"
-                                                   required="has_pr_4th_approve"/>
-                                        </div>
-                                        <div class="ml-16 text-muted">
-                                            Minimum untaxed amount will trigger
-                                            the 4th approval level!
-                                        </div>
+                                        Minimum untaxed amount that triggers the 4th approval level.
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-md-6 o_setting_box">
-                                <div class="o_setting_left_pane">
-                                    <field name="is_required_vendor_in_pr"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="is_required_vendor_in_pr"/>
-                                    <div class="text-muted">
-                                        Tick the checkbox if you want to
-                                        require preferred vendors for all
-                                        PR lines in 2nd approval!
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
+                            </setting>
+                            <setting id="is_required_vendor_in_pr_setting"
+                                     string="Require Preferred Vendors"
+                                     help="Require preferred vendors for all PR lines in 2nd approval.">
+                                <field name="is_required_vendor_in_pr"/>
+                            </setting>
+                        </block>
+                    </app>
                 </xpath>
 
             </field>

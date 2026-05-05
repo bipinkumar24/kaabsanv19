@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="update_location_qty_group" model="res.groups">
+            <field name="name">Update Inventory qty access</field>
+        </record>
+
+    </data>
+</odoo>

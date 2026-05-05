@@ -33,7 +33,7 @@ class EvaluationGenerator(models.Model):
         return {'name': _('Generated Evaluations'),
                 'res_model': 'hr_evaluation.evaluation',
                 'domain': [('id', 'in', evaluations)],
-                'views': [(eval_tree_view.id, 'tree'),(eval_form_view.id, 'form')],
+                'views': [(eval_tree_view.id, 'list'),(eval_form_view.id, 'form')],
                 'context': self.env.context,
                 'type': 'ir.actions.act_window'}
 

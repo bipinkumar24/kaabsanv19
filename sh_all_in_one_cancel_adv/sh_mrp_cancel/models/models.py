@@ -301,7 +301,7 @@ class Production(models.Model):
                 'type':'ir.actions.act_window',
                 'res_model':'mrp.production',
                 'view_type':'form',
-                'view_mode':'tree,form',
+                'view_mode':'list,form',
                 'target':'current',
             }
         

@@ -372,7 +372,7 @@ class MaintenanceRequestInherit(models.Model):
         return {
             'name': _('Job Orders'),
             'view_type': 'form',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'res_model': 'project.task',
             'view_id': False,
             'type': 'ir.actions.act_window',

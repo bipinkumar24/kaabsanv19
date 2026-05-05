@@ -676,12 +676,13 @@ class PurchaseRequest(models.Model):
             'purchase_request_rollback')
         return super(PurchaseRequest, self).copy(default)
 
-    @api.model
-    def create(self, values):
-        if values.get('name', DEFAULT_NAME) == DEFAULT_NAME:
-            values['name'] = self.env['ir.sequence'].next_by_code(
-                'purchase_request_rollback')
-        return super(PurchaseRequest, self).create(values)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for values in vals_list:
+            if values.get('name', DEFAULT_NAME) == DEFAULT_NAME:
+                values['name'] = self.env['ir.sequence'].next_by_code(
+                    'purchase_request_rollback')
+        return super(PurchaseRequest, self).create(vals_list)
 
     def unlink(self):
         for rec in self:

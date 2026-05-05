@@ -119,6 +119,6 @@ class LandedCost(models.Model):
                 'type': 'ir.actions.act_window',
                 'res_model': 'stock.landed.cost',
                 'view_type': 'form',
-                'view_mode': 'tree,form',
+                'view_mode': 'list,form',
                 'target': 'current',
             }

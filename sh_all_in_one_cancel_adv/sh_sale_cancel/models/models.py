@@ -345,7 +345,7 @@ class SaleOrder(models.Model):
                 'type': 'ir.actions.act_window',
                 'res_model': 'sale.order',
                 'view_type': 'form',
-                'view_mode': 'tree,kanban,form,calendar,pivot,graph,activity',
+                'view_mode': 'list,kanban,form,calendar,pivot,graph,activity',
                 'target': 'current',
                 'context': {'search_default_my_quotation': 1}
             }

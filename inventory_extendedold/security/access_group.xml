@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="procurement_manager_group" model="res.groups">
+            <field name="name">Procurement Manager For Fuel</field>
+        </record>
+
+        <record id="finance_manager_group" model="res.groups">
+            <field name="name">Store Keeper</field>
+        </record>
+
+    </data>
+</odoo>

@@ -48,7 +48,7 @@ class ModelAccessRights(models.Model):
 
         access_rules = self.sudo().search([
             ("model_id.model", "=", model_name),
-            ("groups_id", "in", self.env.user.groups_id.ids),
+            ("groups_id", "in", self.env.user.group_ids.ids),
         ])
         for rule in access_rules:
             restrictions["is_delete"] = restrictions["is_delete"] or rule.is_delete
@@ -58,3 +58,4 @@ class ModelAccessRights(models.Model):
             )
             restrictions["is_archive"] = restrictions["is_archive"] or rule.is_archive
         return restrictions
+

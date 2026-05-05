@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_request_view_form_inherits_1" model="ir.ui.view">
+        <field name="name">purchase.request.view.form.inherit.expense.restrict</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="atta_purchase_request.purchase_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='note']" position="after">
+                <field name="not_storable" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list/field[@name='expense_create']" position="replace">
+                <field name="expense_create" column_invisible="parent.not_storable == True"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

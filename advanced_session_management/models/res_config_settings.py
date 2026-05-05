@@ -43,9 +43,8 @@ class res_config_settings(models.TransientModel):
         else:
             timeout = self.session_timeout_interval_number
         if timeout != active_timeout:
-            # login_logs = self.env['res.device.log'].sudo().search([('is_current','=',True)],limit=1)
-            login_logs = self.env['res.device.log'].sudo().search([])
-            login_logs = login_logs.filtered(lambda log: log.is_current)
+            
+            login_logs = self.env['res.device.log'].sudo().search([('is_current','=',True)],limit=1)
             if self.session_timeout_active in ['active', 'inactive']:
                 for login_log in login_logs:
                     login_log.timeout_date = datetime.now() + timedelta(hours=self.session_timeout_interval_number)

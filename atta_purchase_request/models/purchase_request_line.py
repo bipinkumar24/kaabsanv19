@@ -139,7 +139,7 @@ class PurchaseRequestLine(models.Model):
         if not self.product_id:
             return
 
-        self.uom_id = self.product_id.uom_po_id
+        self.uom_id = self.product_id.uom_id
         order_line = self.env['purchase.order.line'].sudo().search(
             [
                 ('product_id', '=', self.product_id.id),
@@ -248,6 +248,12 @@ class PurchaseRequestLine(models.Model):
         store=True,
     )
 
+    request_next_approval_level = fields.Integer(
+        related='request_id.next_approval_id.level',
+        string='Approval Level',
+        store=True,
+    )
+
     product_id = fields.Many2one(
         comodel_name='product.product',
         string='Product',
@@ -310,7 +316,6 @@ class PurchaseRequestLine(models.Model):
     uom_id = fields.Many2one(
         comodel_name='uom.uom',
         string='Unit of Measure',
-        required=True,
     )
     tax_ids = fields.Many2many(
         comodel_name='account.tax',
@@ -319,7 +324,6 @@ class PurchaseRequestLine(models.Model):
     )
     price_unit_currency = fields.Float(
         string='Unit Price (FCY)',
-        required=True,
         digits='Product Price',
         tracking=True,
         default=0,
@@ -493,11 +497,12 @@ class PurchaseRequestLine(models.Model):
                 'purchase request status is difference from draft!'
             ))
 
-    @api.model
-    def create(self, values):
-        res = super(PurchaseRequestLine, self).create(values)
-        res.check_state_for_changing_lines()
-        return res
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super(PurchaseRequestLine, self).create(vals_list)
+        for rec in records:
+            rec.check_state_for_changing_lines()
+        return records
 
     def unlink(self):
         for rec in self:

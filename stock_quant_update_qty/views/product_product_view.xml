@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="product_normal_form_view_add_button" model="ir.ui.view">
+            <field name="name">product.product.form.button</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="action_move_qty"  string="Update Onhand Qty" class="oe_highlight" 
+                            type="object" groups="stock_quant_update_qty.update_location_qty_group"/>
+                        </header>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
