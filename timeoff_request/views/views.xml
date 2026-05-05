@@ -5,11 +5,7 @@
             <field name="res_model">hr.leave</field>
             <field name="view_mode">list,kanban,form,calendar,activity</field>
             <field name="search_view_id" ref="hr_holidays.hr_leave_view_search_manager"/>
-            <field name="domain">['|', ('employee_id.company_id', 'in', allowed_company_ids),
-                '&amp;', ('multi_employee', '=', True),
-                '&amp;', ('state', 'in', ['draft', 'confirm', 'validate1']),
-                ('employee_ids.company_id', 'in', allowed_company_ids)]
-            </field>
+            <field name="domain">[('employee_id.company_id', 'in', allowed_company_ids)]</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Meet the time off dashboard.
@@ -20,12 +16,13 @@
             </field>
         </record>
         
-        <menuitem id="trequest" name="Leave Request" parent="hr_holidays.menu_hr_holidays_management" sequence="200"/>
+        <menuitem id="trequest" name="Leave Request" web_icon="timeoff_request,static/description/leave.png" sequence="20"/>
         <menuitem
                 id="menu_open_department_leave_approve"
                 name="Leave Requests"
                 parent="trequest"
                 action="hr_leave_action_action_approve_department"
+                sequence="10"
         />
 
 

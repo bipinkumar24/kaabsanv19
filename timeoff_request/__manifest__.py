@@ -31,6 +31,6 @@
     ],
     'images': ['static/description/leave.png'],
     'installable': True,
-    'application': False,
+    'application': True,
     # only loaded in demonstration mode
 }
