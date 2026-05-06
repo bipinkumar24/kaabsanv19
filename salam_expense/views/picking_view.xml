@@ -54,7 +54,7 @@
             <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
                 <button name="action_view_journal_entry" type="object"
                         class="oe_stat_button" icon="fa-book"
-                        invisible="not expense_account_move_id or not is_expense">
+                        invisible="not expense_account_move_id">
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_text">Journal Entry</span>
                     </div>

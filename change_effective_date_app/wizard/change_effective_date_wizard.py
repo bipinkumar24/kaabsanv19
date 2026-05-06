@@ -12,6 +12,19 @@ class ChangeEffectiveDateWizard(models.TransientModel):
     all_picking = fields.Boolean(string='Apply All Picking')
     picking_id = fields.Many2one('stock.picking', string='Picking')
 
+    def _update_expense_account_move_date(self, picking, date_done):
+        if 'expense_account_move_id' not in picking._fields or not picking.expense_account_move_id:
+            return
+
+        account_move = picking.expense_account_move_id
+        move_date = fields.Date.to_date(date_done)
+        if account_move.state == 'posted':
+            account_move.button_draft()
+            account_move.write({'date': move_date})
+            account_move.action_post()
+        else:
+            account_move.write({'date': move_date})
+
     def update_effective_date(self):
         for rec in self:
             if not rec.all_picking:
@@ -20,6 +33,7 @@ class ChangeEffectiveDateWizard(models.TransientModel):
                     for picking in picking_ids:
                         rec.picking_id = picking.id
                         rec.picking_id.date_done = rec.date_done
+                        rec._update_expense_account_move_date(rec.picking_id, rec.date_done)
                         move_ids = self.env['stock.move'].search([('reference', '=', rec.picking_id.name)])
                         move_line_ids = self.env['stock.move.line'].search([('reference', '=', rec.picking_id.name)])
                         for move_id in move_ids:
@@ -36,6 +50,7 @@ class ChangeEffectiveDateWizard(models.TransientModel):
                             move_line_id.date = rec.date_done
                 else:
                     rec.picking_id.date_done = rec.date_done
+                    rec._update_expense_account_move_date(rec.picking_id, rec.date_done)
                     move_ids = self.env['stock.move'].search([('reference', '=', rec.picking_id.name)])
                     move_line_ids = self.env['stock.move.line'].search([('reference', '=', rec.picking_id.name)])
                     for move_id in move_ids:
@@ -54,6 +69,7 @@ class ChangeEffectiveDateWizard(models.TransientModel):
                 picking_ids = self.env['stock.picking'].search([('state', '=', 'done')])
                 for picking_id in picking_ids:
                     picking_id.date_done = rec.date_done
+                    rec._update_expense_account_move_date(picking_id, rec.date_done)
                     move_ids = self.env['stock.move'].search([('reference', '=', picking_id.name)])
                     move_line_ids = self.env['stock.move.line'].search([('reference', '=', picking_id.name)])
                     for move_id in move_ids:

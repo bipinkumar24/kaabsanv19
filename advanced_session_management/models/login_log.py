@@ -77,9 +77,12 @@ class login_log(models.Model):
             if record.state == 'active':
                 # request.session.logout(keep_db=True)
                 session_store = http.root.session_store
-                get_session = session_store.get(record.session_id)
+                try:
+                    get_session = session_store.get(record.session_id)
+                except ValueError:
+                    get_session = False
              
-                if get_session.db and get_session.uid == record.user_id.id and get_session.sid == record.session_id:
+                if get_session and get_session.db and get_session.uid == record.user_id.id and get_session.sid == record.session_id:
                     # get_session.logout(keep_db=True)
                     session_store.delete(get_session)
                 record.sudo().write({'state':'close','logout_date':datetime.now()})

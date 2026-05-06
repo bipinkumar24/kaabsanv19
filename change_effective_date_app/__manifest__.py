@@ -10,7 +10,7 @@
     Change Effective Date : Changes The Effective Date In Stock Picking And It Stock Move, Inventory Valuation And Journal Entry With Single Or Multiple Picking
 """,
     "license" : "OPL-1",
-    'depends': ['stock','account','mrp_production_extended','stock_account'],
+    'depends': ['stock','account','mrp_production_extended','stock_account', 'salam_expense'],
     'data': [
             'security/security.xml',
             'security/ir.model.access.csv',

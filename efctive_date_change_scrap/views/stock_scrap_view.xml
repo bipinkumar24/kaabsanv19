@@ -10,7 +10,7 @@
                 <button name="action_change_effective_date"
                         string="Change Effective Date"
                         type="object"
-                        invisible="state != 'done'"
+                        invisible="state not in ('done', 'validate')"
                         class="btn-secondary"/>
             </xpath>
         </field>

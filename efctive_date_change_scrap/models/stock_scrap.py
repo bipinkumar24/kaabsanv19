@@ -1,10 +1,8 @@
-from odoo import fields, models
+from odoo import models
 
 
 class StockScrap(models.Model):
     _inherit = 'stock.scrap'
-
-    is_fual_expense = fields.Boolean(string="Is Fual Expense Location")
 
     def action_change_effective_date(self):
         self.ensure_one()

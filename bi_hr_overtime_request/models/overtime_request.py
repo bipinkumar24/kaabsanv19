@@ -104,7 +104,7 @@ class my_equipment_request(models.Model):
                 partner_id = self.env['res.partner'].create({'name': self.employee_id.name})
                 self.employee_id.partner_id = partner_id.id
 
-            hr_contract_id = self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id), ('state', '=', 'open')])
+            employee_wage = self.employee_id.contract_wage or 0.0
 
             level_id = self.env['approval.level.account'].search([('is_finance_approval', '=', True)])
             if not level_id:
@@ -124,7 +124,7 @@ class my_equipment_request(models.Model):
                         'account_id': expense_account.id,
                         'name': product_id.name,
                         'quantity': 1,
-                        'price_unit': (self.num_of_hours * hr_contract_id.wage) / 240
+                        'price_unit': (self.num_of_hours * employee_wage) / 240
                     })
                 ],
             })

@@ -4,7 +4,7 @@
     'summary': 'Change effective date of scrap order and its related journal entry',
     'category': 'Inventory',
     'author': 'Kaabsan',
-    'depends': ['stock', 'stock_account'],
+    'depends': ['stock', 'stock_account', 'inventory_extended'],
     'data': [
         'security/ir.model.access.csv',
         'views/change_scrap_date_wizard_view.xml',
