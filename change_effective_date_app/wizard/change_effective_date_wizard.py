@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import _, fields, models
+from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 
 
@@ -12,47 +12,60 @@ class ChangeEffectiveDateWizard(models.TransientModel):
     all_picking = fields.Boolean(string='Apply All Picking')
     picking_id = fields.Many2one('stock.picking', string='Picking')
 
-    def _get_target_pickings(self):
-        self.ensure_one()
-        if self.all_picking:
-            return self.env['stock.picking'].search([('state', '=', 'done')])
-
-        if self.env.context.get('from_server_action'):
-            picking_ids = self.env.context.get('default_change_dates_ids', [])
-            return self.env['stock.picking'].browse(picking_ids).filtered(lambda p: p.state == 'done')
-
-        return self.picking_id.filtered(lambda p: p.state == 'done')
-
-    def _update_picking_effective_date(self, picking):
-        moves = picking.move_ids
-        move_lines = picking.move_line_ids
-        # Odoo 19 no longer exposes the old stock.valuation.layer model.
-        # valuation_layers = self.env['stock.valuation.layer'].search([
-        #     ('stock_move_id', 'in', moves.ids)
-        # ])
-        account_moves = moves.mapped('account_move_id')
-
-        picking.write({'date_done': self.date_done})
-        if moves:
-            moves.write({'date': self.date_done})
-        if move_lines:
-            move_lines.write({'date': self.date_done})
-        if account_moves:
-            account_moves.write({'date': self.date_done})
-        # if valuation_layers:
-        #     self.env.cr.execute(
-        #         "UPDATE stock_valuation_layer SET create_date = %s WHERE id IN %s",
-        #         (self.date_done, tuple(valuation_layers.ids)),
-        #     )
-
     def update_effective_date(self):
         for rec in self:
-            if not rec.date_done:
-                raise UserError(_("Please select an effective date."))
+            if not rec.all_picking:
+                if self.env.context.get('from_server_action'):
+                    picking_ids = self.env['stock.picking'].browse(self.env.context.get('default_change_dates_ids'))
+                    for picking in picking_ids:
+                        rec.picking_id = picking.id
+                        rec.picking_id.date_done = rec.date_done
+                        move_ids = self.env['stock.move'].search([('reference', '=', rec.picking_id.name)])
+                        move_line_ids = self.env['stock.move.line'].search([('reference', '=', rec.picking_id.name)])
+                        for move_id in move_ids:
+                            move_id.date = rec.date_done
+                            if 'stock.valuation.layer' in self.env:
+                                valuation_ids = self.env['stock.valuation.layer'].search([('stock_move_id', '=', move_id.id)])
+                                for valuation_id in valuation_ids:
+                                    self.env.cr.execute("UPDATE stock_valuation_layer set create_date = '%s' WHERE id=%s" % (
+                                        rec.date_done, valuation_id.id))
+                                account_move_ids = self.env['account.move'].search([('stock_move_id', '=', move_id.id)])
+                                for account_move_id in account_move_ids:
+                                    account_move_id.date = rec.date_done
+                        for move_line_id in move_line_ids:
+                            move_line_id.date = rec.date_done
+                else:
+                    rec.picking_id.date_done = rec.date_done
+                    move_ids = self.env['stock.move'].search([('reference', '=', rec.picking_id.name)])
+                    move_line_ids = self.env['stock.move.line'].search([('reference', '=', rec.picking_id.name)])
+                    for move_id in move_ids:
+                        move_id.date = rec.date_done
+                        if 'stock.valuation.layer' in self.env:
+                            valuation_ids = self.env['stock.valuation.layer'].search([('stock_move_id', '=', move_id.id)])
+                            for valuation_id in valuation_ids:
+                                self.env.cr.execute("UPDATE stock_valuation_layer set create_date = '%s' WHERE id=%s" % (
+                                    rec.date_done, valuation_id.id))
+                            account_move_ids = self.env['account.move'].search([('stock_move_id', '=', move_id.id)])
+                            for account_move_id in account_move_ids:
+                                account_move_id.date = rec.date_done
+                    for move_line_id in move_line_ids:
+                        move_line_id.date = rec.date_done
+            else:
+                picking_ids = self.env['stock.picking'].search([('state', '=', 'done')])
+                for picking_id in picking_ids:
+                    picking_id.date_done = rec.date_done
+                    move_ids = self.env['stock.move'].search([('reference', '=', picking_id.name)])
+                    move_line_ids = self.env['stock.move.line'].search([('reference', '=', picking_id.name)])
+                    for move_id in move_ids:
+                        move_id.date = rec.date_done
+                        if 'stock.valuation.layer' in self.env:
+                            valuation_ids = self.env['stock.valuation.layer'].search([('stock_move_id', '=', move_id.id)])
+                            for valuation_id in valuation_ids:
+                                self.env.cr.execute("UPDATE stock_valuation_layer set create_date = '%s' WHERE id=%s" % (
+                                    rec.date_done, valuation_id.id))
+                            account_move_ids = self.env['account.move'].search([('stock_move_id', '=', move_id.id)])
+                            for account_move_id in account_move_ids:
+                                account_move_id.date = rec.date_done
 
-            pickings = rec._get_target_pickings()
-            if not pickings:
-                raise UserError(_("No completed picking was found to update."))
-
-            for picking in pickings:
-                rec._update_picking_effective_date(picking)
+                    for move_line_id in move_line_ids:
+                        move_line_id.date = rec.date_done

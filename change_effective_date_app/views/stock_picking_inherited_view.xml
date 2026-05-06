@@ -8,8 +8,7 @@
 			<xpath expr="//form/header/button[@name='action_confirm']" position="after">
 				<button name="action_change_effective_date"
 						string="Change Effective Date"
-						type="object"
-						invisible="state not in ['done']"
+						type="object"  invisible="state not in ['done','validate']"
 						groups="change_effective_date_app.group_change_effective_date"
 						class="oe_highlight"/>
 <!--				groups="base.group_user"-->
