@@ -360,12 +360,8 @@ class Loan_Request(models.Model):
         #                                       'bi_hr_employee_loan',
         #                                       'email_template_hr_approved_loan_request')[1]
         # email_template_obj = self.env['mail.template'].sudo().browse(template_id)
-        user_ids = []
-        for user in self.env['res.users'].search([]):
-            if self.env.ref('bi_hr_employee_loan.hr_loan_accountant_id') in user.groups_id:   
-                user_ids.append(user.partner_id.id)
-        users = set(user_ids)
-        user_ids = list(users)
+        group = self.env.ref('bi_hr_employee_loan.hr_loan_accountant_id')
+        user_ids = list(set(group.user_ids.mapped('partner_id').ids))
         # if template_id:
         #     values = email_template_obj.generate_email(self.id, fields=['subject', 'body_html', 'email_from', 'email_to', 'partner_to', 'email_cc', 'reply_to', 'scheduled_date'])
         #     values['email_from'] = self.employee_id.work_email or self.employee_id.user_id.email
@@ -472,6 +468,8 @@ class Loan_Request(models.Model):
         return super(Loan_Request, self).create(vals)
 
     def compute_loan(self):
+        if not self.duration_months:
+            raise ValidationError(_("Please set a valid loan duration (number of months) before computing."))
         amount = sum(self.installment_ids.mapped('principal_amount'))
         first_installment_rec = self.installment_ids.filtered(lambda r: r.installment_number == 1)
         if self.duration_months != len(self.installment_ids) or self.principal_amount != amount or first_installment_rec.date_from != self.first_installment_date:
@@ -500,7 +498,7 @@ class Loan_Request(models.Model):
                     else:
                         month = month + 1
                 start_date = datetime.date(year, month, 1)
-                _, num_days = calendar.monthrange(year, month)
+                num_days = calendar.monthrange(year, month)[1]
                 end_date = datetime.date(year, month, num_days)
 
                 # if self.first_installment == 'this':
@@ -569,11 +567,11 @@ class Loan_Request(models.Model):
             res = self.env['account.move']
 
             name_of = self.employee_id.name
-            loan_product_id = self.env['product.product'].search([('default_code', '=', 'Loan'), ('detailed_type', '=', 'service')])
+            loan_product_id = self.env['product.product'].search([('default_code', '=', 'Loan'), ('type', '=', 'service')])
             if not loan_product_id:
                 loan_product_id = self.env['product.product'].create({'name': 'Loan',
                                                    'default_code': 'Loan',
-                                                   'detailed_type': 'service',
+                                                   'type': 'service',
                                                    'list_price': 0,
                                                    'taxes_id': False
                                                    })
@@ -620,14 +618,12 @@ class Loan_Request(models.Model):
                             if move_entrie_id.invoice_line_ids:
                                 line_id = move_entrie_id.invoice_line_ids[0]
                                 line_id.with_context(check_move_validity=False).write({'price_unit': self.principal_amount})
-                                line_id.move_id.with_context(check_move_validity=False)._recompute_dynamic_lines(recompute_all_taxes=True, recompute_tax_base_amount=True)
                     if move_entrie_id.amount_total != self.principal_amount:
                         if move_entrie_id.state == 'posted':
                             if move_entrie_id.invoice_line_ids:
                                 line_id = move_entrie_id.invoice_line_ids[0]
                                 move_entrie_id.button_draft()
                                 line_id.with_context(check_move_validity=False).write({'price_unit': self.principal_amount})
-                                line_id.move_id.with_context(check_move_validity=False)._recompute_dynamic_lines(recompute_all_taxes=True, recompute_tax_base_amount=True)
                                 move_entrie_id.action_prepost()
                                 move_entrie_id.action_post()
 
@@ -709,20 +705,9 @@ class Loan_Request(models.Model):
                     'ref' : str(self.name) ,
                     'loan_ids': self,
                     'line_ids' : move_line})
-        template_id = self.env['ir.model.data'].get_object_reference(
-                                              'bi_hr_employee_loan',
-                                              'email_template_disburse')[1]
-        email_template_obj = self.env['mail.template'].sudo().browse(template_id)
-        if template_id:
-            values = email_template_obj.generate_email(self.id, fields=['subject', 'body_html', 'email_from', 'email_to', 'partner_to', 'email_cc', 'reply_to', 'scheduled_date'])
-            values['email_from'] = self.env.user.email
-            values['email_to'] = self.employee_id.work_email or self.employee_id.user_id.email
-            values['res_id'] = False
-            values['notification'] = True
-            mail_mail_obj = self.env['mail.mail']
-            msg_id = mail_mail_obj.sudo().create(values)
-            if msg_id:
-                mail_mail_obj.send([msg_id])   
+        template = self.env.ref('bi_hr_employee_loan.email_template_disburse', raise_if_not_found=False)
+        if template:
+            template.send_mail(self.id, force_send=True)   
         self.write({'stage' : 'disbursed','account_entery_id':jounral.id ,'disbursement_date' : fields.Datetime.now()})
 
 class ir_attachment(models.Model):
