@@ -181,7 +181,7 @@ class ChartfAccount(models.Model):
     def _get_advance_salary_product(self):
         product = self.env['product.product'].search([
             ('default_code', '=', 'Advance_salary'),
-            ('detailed_type', '=', 'service'),
+            ('type', '=', 'service'),
         ], limit=1)
         if not product:
             product = self.env['product.product'].create({
