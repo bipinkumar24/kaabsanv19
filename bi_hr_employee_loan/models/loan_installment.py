@@ -64,13 +64,21 @@ class Loan_Installment(models.Model):
             else:
                 loan.loan_amount_balance = loan.emi_installment
 
-    @api.depends('installment_number','loan_id')
+    # @api.depends('installment_number','loan_id')
+    # def _compute_name(self):
+    #     for line in self :
+    #         line.name = ""
+    #         if line.loan_id and line.installment_number :
+    #             line.name = line.loan_id.name + '/' + str(line.installment_number)
+    #     return
+
+    @api.depends('installment_number', 'loan_id')
     def _compute_name(self):
-        for line in self :
+        for line in self:
             line.name = ""
-            if line.loan_id and line.installment_number :
-                line.name = line.loan_id.name + '/' + str(line.installment_number)
-        return
+            if line.loan_id and line.installment_number:
+                loan_name = line.loan_id.name or ''
+                line.name = f"{loan_name}/{line.installment_number}"
 
 
     def approve_payment(self):
