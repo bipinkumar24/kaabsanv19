@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_change_scrap_date_wizard_form" model="ir.ui.view">
+        <field name="name">change.scrap.date.wizard.form</field>
+        <field name="model">change.scrap.date.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Change Effective Date">
+                <group>
+                    <field name="scrap_id"/>
+                    <field name="current_date"/>
+                    <field name="effective_date"/>
+                </group>
+                <footer>
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

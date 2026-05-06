@@ -49,8 +49,8 @@ class Picking(models.Model):
 
     def _compute_sale_date(self):
         for rec in self:
-            sale_order_id = self.env['sale.order'].search([('name', '=', rec.origin)])
-            rec.sale_delivery_date = sale_order_id.date_order
+            sale_order = self.env['sale.order'].search([('name', '=', rec.origin)], limit=1)
+            rec.sale_delivery_date = sale_order.date_order if sale_order else False
 
     sale_delivery_date = fields.Datetime(string='Sale Delivery date', compute='_compute_sale_date')
 
