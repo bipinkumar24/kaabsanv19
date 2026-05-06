@@ -10,7 +10,7 @@
                 </group>
                 <group string="Current Dates">
                     <field name="current_effective_date"/>
-                    <field name="current_date_done"/>
+                    <field name="current_date"/>
                 </group>
                 <group string="New Date">
                     <field name="effective_date"/>
