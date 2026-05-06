@@ -265,12 +265,12 @@ class ChartfAccount(models.Model):
                 partner_id = self.env['res.partner'].create({'name': self.employee_id.name})
                 self.employee_id.partner_id = partner_id.id
 
-            if not self.employee_id.bank_account_id:
-                raise ValidationError(
-                    _("The employee '%s' does not have a bank account configured. "
-                      "Please configure the bank account before proceeding.")
-                    % (self.employee_id.name)
-                )
+            # if not self.employee_id.bank_account_id:
+            #     raise ValidationError(
+            #         _("The employee '%s' does not have a bank account configured. "
+            #           "Please configure the bank account before proceeding.")
+            #         % (self.employee_id.name)
+            #     )
             bill_id = self.env['account.move'].create({
                 'move_type': 'in_invoice',
                 'partner_id': partner_id.id,
@@ -298,8 +298,7 @@ class ChartfAccount(models.Model):
 
                     <p style="margin:4px 0 0 0;">
                         Kindly be informed that the bank account number for employee 
-                        <strong>{self.employee_id.name}</strong> is 
-                        <strong>{self.employee_id.bank_account_id.acc_number}</strong>.
+                        <strong>{self.employee_id.name}</strong>
                     </p>
 
                 </div>
