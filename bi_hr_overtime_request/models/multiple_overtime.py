@@ -33,13 +33,23 @@ class Multi_equipment_request(models.Model):
     bill_ids = fields.Many2many('account.move', string="Account Move", copy=False)
     overtime_line_ids = fields.One2many('overtime.line.multiple', 'multiple_overtime_id', string='Overtime Lines')
 
-    @api.model
-    def create(self, vals):
-        if vals.get('name', ('New')) == ('New'):
-            vals['name'] = self.env['ir.sequence'].next_by_code(
-                'multiple.overtime.request') or ('New')
-        res = super(Multi_equipment_request, self).create(vals)
-        return res
+    # @api.model
+    # def create(self, vals):
+    #     if vals.get('name', ('New')) == ('New'):
+    #         vals['name'] = self.env['ir.sequence'].next_by_code(
+    #             'multiple.overtime.request') or ('New')
+    #     res = super(Multi_equipment_request, self).create(vals)
+    #     return res
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('name', 'New') == 'New':
+                vals['name'] = self.env['ir.sequence'].next_by_code(
+                    'multiple.overtime.request'
+                ) or 'New'
+
+        return super(Multi_equipment_request, self).create(vals_list)
 
     def _get_overtime_expense_account(self, product):
         accounts = product.product_tmpl_id._get_product_accounts()
