@@ -21,7 +21,7 @@ class ir_model_access(models.Model):
         assert isinstance(model, str), 'Not a model name: %s' % (model,)
         is_model_exists = True
         if model not in self.env:
-            _logger.error('Missing model %s', model)
+            _logger.warning('Missing model %s (module not installed)', model)
             is_model_exists = False
 
         has_access = model in self._get_allowed_models(mode)

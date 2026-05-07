@@ -21,7 +21,7 @@ class ProductTemplate(models.Model):
         @return: dictionary which contains information regarding stock accounts and super (income+expense accounts)
         """
         accounts = super(ProductTemplate, self)._get_product_accounts()
-        ctx = self._context
+        ctx = self.env.context
         if ctx.get('is_expense'):
             picking_id = ctx.get('picking_id')
             if picking_id.property_valuation == 'real_time':

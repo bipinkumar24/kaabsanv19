@@ -33,23 +33,13 @@ class Multi_equipment_request(models.Model):
     bill_ids = fields.Many2many('account.move', string="Account Move", copy=False)
     overtime_line_ids = fields.One2many('overtime.line.multiple', 'multiple_overtime_id', string='Overtime Lines')
 
-    # @api.model
-    # def create(self, vals):
-    #     if vals.get('name', ('New')) == ('New'):
-    #         vals['name'] = self.env['ir.sequence'].next_by_code(
-    #             'multiple.overtime.request') or ('New')
-    #     res = super(Multi_equipment_request, self).create(vals)
-    #     return res
-
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
             if vals.get('name', 'New') == 'New':
                 vals['name'] = self.env['ir.sequence'].next_by_code(
-                    'multiple.overtime.request'
-                ) or 'New'
-
-        return super(Multi_equipment_request, self).create(vals_list)
+                    'multiple.overtime.request') or 'New'
+        return super().create(vals_list)
 
     def _get_overtime_expense_account(self, product):
         accounts = product.product_tmpl_id._get_product_accounts()
@@ -88,7 +78,23 @@ class Multi_equipment_request(models.Model):
                     partner_id = self.env['res.partner'].create({'name': rec.name})
                     rec.employee_id.partner_id = partner_id.id
 
-                hr_contract_id = self.env['hr.contract'].search([('employee_id', '=', rec.employee_id.id), ('state', '=', 'open')])
+                # hr.version is the contract model used in this installation
+                # (hr.contract is not available; hr.version holds wage + employee_id)
+                HrVersion = self.env.get('hr.version')
+                HrContract = self.env.get('hr.contract')
+                if HrVersion is not None:
+                    hr_contract_id = HrVersion.search(
+                        [('employee_id', '=', rec.employee_id.id), ('active', '=', True)],
+                        order='contract_date_start desc', limit=1)
+                    if not hr_contract_id:
+                        raise UserError(_('No active version/contract found for employee "%s". Please configure one.') % rec.employee_id.name)
+                elif HrContract is not None:
+                    hr_contract_id = HrContract.search(
+                        [('employee_id', '=', rec.employee_id.id), ('state', '=', 'open')], limit=1)
+                    if not hr_contract_id:
+                        raise UserError(_('No running contract found for employee "%s". Please configure a contract with state "Running".') % rec.employee_id.name)
+                else:
+                    raise UserError(_('No contract model (hr.version or hr.contract) found. Please install the Payroll module.'))
 
                 level_id = self.env['approval.level.account'].search([('is_finance_approval', '=', True)])
                 if not level_id:
