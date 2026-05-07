@@ -256,17 +256,23 @@ class StockScrap(models.Model):
 
     def all_ready_do_scrap(self):
         for scrap in self:
+            # Separate already-done moves (orphans without JE) from pending moves.
+            # _do_unreserve() on a done move can reset its state, causing _action_done()
+            # to process it again and produce a duplicate journal entry alongside
+            # the explicit _create_account_move() call below.
             orphan_done = scrap.move_ids.filtered(lambda m: m.state == 'done' and not m.account_move_id)
-            scrap.move_ids._do_unreserve()
-            scrap.move_ids._action_confirm()
-            scrap.move_ids._action_assign()
-            scrap.move_ids.move_line_ids.quantity = scrap.scrap_qty
-            scrap.move_ids.move_line_ids.picked = True
-            scrap.move_ids._action_done()
+            pending_moves = scrap.move_ids.filtered(lambda m: m.state not in ('done', 'cancel'))
+            if pending_moves:
+                pending_moves._do_unreserve()
+                pending_moves._action_confirm()
+                pending_moves._action_assign()
+                pending_moves.move_line_ids.quantity = scrap.scrap_qty
+                pending_moves.move_line_ids.picked = True
+                pending_moves._action_done()
             if orphan_done:
                 orphan_done.sudo()._create_account_move()
-                if scrap.is_fual_expense:
-                    scrap._reset_journal_entries_to_draft()
+            if scrap.is_fual_expense:
+                scrap._reset_journal_entries_to_draft()
             scrap.write({'state': 'done'})
             scrap.date_done = fields.Datetime.now()
         return True
@@ -274,16 +280,17 @@ class StockScrap(models.Model):
     def action_confirm_assign_muti_stock(self, qty, move_id):
         for scrap in self:
             orphan_done = move_id if (move_id.state == 'done' and not move_id.account_move_id) else move_id.browse()
-            move_id._do_unreserve()
-            move_id._action_confirm()
-            move_id._action_assign()
-            move_id.move_line_ids.quantity = qty
-            move_id.move_line_ids.picked = True
-            move_id._action_done()
+            if move_id.state not in ('done', 'cancel'):
+                move_id._do_unreserve()
+                move_id._action_confirm()
+                move_id._action_assign()
+                move_id.move_line_ids.quantity = qty
+                move_id.move_line_ids.picked = True
+                move_id._action_done()
             if orphan_done:
                 orphan_done.sudo()._create_account_move()
-                if scrap.is_fual_expense:
-                    scrap._reset_journal_entries_to_draft()
+            if scrap.is_fual_expense:
+                scrap._reset_journal_entries_to_draft()
         return True
 
     def all_ready_do_scrap_muti(self):
