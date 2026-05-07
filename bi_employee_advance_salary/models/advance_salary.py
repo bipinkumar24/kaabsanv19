@@ -227,12 +227,12 @@ class ChartfAccount(models.Model):
                         })
                     ],
                 })
-                if not line.employee_id.bank_account_id:
-                    raise ValidationError(
-                        _("The employee '%s' does not have a bank account configured. "
-                          "Please configure the bank account before proceeding.")
-                        % (line.employee_id.name)
-                    )
+                # if not line.employee_id.bank_account_id:
+                #     raise ValidationError(
+                #         _("The employee '%s' does not have a bank account configured. "
+                #           "Please configure the bank account before proceeding.")
+                #         % (line.employee_id.name)
+                #     )
 
                 message = f"""
                     <div style="background:#d9edf7;
@@ -247,7 +247,7 @@ class ChartfAccount(models.Model):
                         <p style="margin:4px 0 0 0;">
                             Kindly be informed that the bank account number for employee 
                             <strong>{line.employee_id.name}</strong> is 
-                            <strong>{line.employee_id.bank_account_id.acc_number}</strong>.
+                           
                         </p>
 
                     </div>
