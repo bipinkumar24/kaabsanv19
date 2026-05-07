@@ -217,14 +217,17 @@ class StockScrap(models.Model):
                         'company_id': self.company_id.id,
                         'picked': True,
                         'scrap_id': scrap.id,
+                        'move_line_ids': [(0, 0, {
+                            'product_id': self.product_id.id,
+                            'product_uom_id': self.product_uom_id.id,
+                            'quantity': line.qty,
+                            'picked': True,
+                            'location_id': line.scrap_id.location_id.id,
+                            'location_dest_id': line.scrap_location_id.id,
+                        })],
                     })
-                    move._action_confirm()
-                    move._action_assign()
-                    line.write({'move_id': move.id})
-                    for move_line in move.move_line_ids:
-                        move_line.quantity = line.qty
-                        move_line.picked = True
                     move.with_context(is_scrap=True)._action_done()
+                    line.write({'move_id': move.id})
                     scrap.write({'state': 'done'})
                     scrap.write({'stock_move_ids': [(4, move.id, 0)]})
             else:
