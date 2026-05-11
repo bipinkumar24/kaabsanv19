@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_imex_pdf">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="text-center">
+                        <h4 style="font-weight:800;">Imex Inventory report - <t t-out="name"/>
+	                    </h4>
+                    </div>
+                    <br/>
+                    <div class="page">
+                        <div class="oe_structure"/>
+                            <div class="row"> 
+                                <div style="width: 50%;">
+                                    <strong>From Date:</strong>
+                                    <t class="m-0" t-out="from_date"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <strong>To Date:</strong>
+                                    <t class="m-0" t-out="date_to"/>
+                                </div>
+                            </div>
+                            <div class="row"> 
+                                <div style="width: 50%;">
+                                    <strong>Location:</strong>
+                                    <t class="m-0" t-out="location_id"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <strong>Category:</strong>
+                                    <t class="m-0" t-out="name"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <table class="table table-sm o_main_table" style="font-size: 12px;border: 1px solid black;">
+                                <thead>
+                                    <tr style="border: 1px solid black;">
+                                        <th style="border: 1px solid black;">Date</th>
+                                        <th style="border: 1px solid black;">Reference</th>
+                                        <th style="border: 1px solid black;">Partner</th>
+                                        <th style="border: 1px solid black;">Source Location</th>
+                                        <th style="border: 1px solid black;">Dest Location</th>
+                                        <th style="border: 1px solid black;">Price</th>
+                                        <th style="border: 1px solid black;">In</th>
+                                        <th style="border: 1px solid black;">Out</th>
+                                        <th style="border: 1px solid black;">Balance</th>
+                                        <th style="border: 1px solid black;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	<t t-foreach="not_date_records" t-as="line">
+                                		<tr style="border: 1px solid black;">
+	                                		<th style="border: 1px solid black;"></th>
+	                                        <th style="border: 1px solid black;">Initial</th>
+	                                        <th style="border: 1px solid black;"></th>
+	                                        <th style="border: 1px solid black;"></th>
+	                                        <th style="border: 1px solid black;"></th>
+	                                        <th style="border: 1px solid black;"></th>
+	                                        <th style="border: 1px solid black;"></th>
+	                                        <th style="border: 1px solid black;"></th>
+	                                        <th style="border: 1px solid black;"><t t-out="line.initial"/></th>
+	                                        <th style="border: 1px solid black;"><t t-out="line.initial_amount"/></th>
+	                                    </tr>
+                                	</t>
+                                	<t t-set="product_balance" t-value="not_date_records[0].initial" />
+                					<t t-set="product_amount" t-value="not_date_records[0].initial_amount" />
+                                	<t t-foreach="sorted_records" t-as="line">
+                                		<t t-set="product_balance" t-value="product_balance + line.product_in - line.product_out" />
+                    					<t t-set="product_amount" t-value="product_amount + line.product_in * line.unit_cost - line.product_out * line.unit_cost" />
+                                		<tr style="border: 1px solid black;">
+	                                		<th style="border: 1px solid black;"><t t-out="line.date.date()"/></th>
+	                                        <th style="border: 1px solid black;"><t t-out="line.display_name"/></th>
+	                                        <th style="border: 1px solid black;"><t t-out="line.picking_id.partner_id.name"/></th>
+	                                        <th style="border: 1px solid black;"><t t-out="line.location_id.complete_name"/></th>
+	                                        <th style="border: 1px solid black;"><t t-out="line.location_dest_id.complete_name"/></th>
+	                                        <th style="border: 1px solid black;"><t t-out="line.unit_cost"/></th>
+	                                        <th style="border: 1px solid black;"><t t-out="line.product_in"/></th>
+	                                        <th style="border: 1px solid black;"><t t-out="line.product_out"/></th>
+	                                        <th style="border: 1px solid black;"><t t-out="'%.2f'% product_balance"/></th>
+	                                        <th style="border: 1px solid black;"><t t-out="'%.2f'% product_amount"/></th>
+                                        </tr>
+                                	</t>
+                                </tbody>
+                            </table>
+                        </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

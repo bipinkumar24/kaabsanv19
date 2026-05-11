@@ -11,10 +11,10 @@
                                     <h2>Stock Onhand Report</h2>
                                 </div>
                             <div>
-                                <h4> Date:- <t t-esc="doc.date_from" t-options='{"widget": "date","format": "dd-MM-yyyy"}'/></h4>
+                                <h4> Date:- <span t-field="doc.date_from" t-options='{"widget": "date","format": "dd-MM-yyyy"}'/></h4>
                             </div>
                             <t t-if="doc.display_current_stock">
-                                <t t-foreach="doc.location_ids" t-as="loc">
+                                <t t-foreach="docs.location_ids" t-as="loc">
                                     <div style="height:30%">
                                         <table border="1" class="table table-condensed" style="border-style:solid">
                                             <tr style="height:30%">
@@ -37,16 +37,16 @@
                                                 <th style="border: 1px solid black;color:white;" class="thead-light">Cost</th>
                                                 <th style="border: 1px solid black;color:white;" class="thead-light">Total</th>
                                             </tr>
-                                            <t t-foreach="doc.get_onhand_products(loc)" t-as="track">
-                                                <tr style="height:30%; text-align:center;">
-                                                    <td t-esc="track['code'] or ''" style="border: 1px solid black" class="thead-light"/>
-                                                    <td t-esc="track['product'] or ''" style="border: 1px solid black" class="thead-light"/>
-                                                    <td t-esc="track['qty'] or '0.0'" style="border: 1px solid black" class="thead-light"/>
-                                                    <td t-esc="track['cost'] or '0.0'" style="border: 1px solid black" class="thead-light"/>
-                                                    <td t-esc="track['total'] or '0.0'" style="border: 1px solid black" class="thead-light"/>
+                                            <tr style="height:30%; text-align:center;">
+                                                <tr t-foreach="docs.get_onhand_products(loc)" t-as="track">
+                                                    <td t-out="track['code'] or ''" style="border: 1px solid black" class="thead-light"/>
+                                                    <td t-out="track['product'] or ''" style="border: 1px solid black" class="thead-light"/>
+                                                    <td t-out="track['qty'] or '0.0'" style="border: 1px solid black" class="thead-light"/>
+                                                    <td t-out="track['cost'] or '0.0'" style="border: 1px solid black" class="thead-light"/>
+                                                    <td t-out="track['total'] or '0.0'" style="border: 1px solid black" class="thead-light"/>
                                                     <t t-set="net" t-value="net + track['qty'] "/>
                                                 </tr>
-                                            </t>
+                                            </tr>
                                         </table>
                                         <br/>
                                     </t>
@@ -55,8 +55,8 @@
                             <table border="1" class="table table-condensed" style="border-style:solid; text-align:center;">
                                 <tr style="background-color:#a77a9b;">
                                     <th style="border: 1px solid black;color:white;" class="thead-light">Product</th>
-                                    <t t-foreach="doc.location_ids" t-as="loc">
-                                        <th style="border: 1px solid black;color:white;" class="thead-light"><t t-esc="loc.complete_name"/></th>
+                                    <t t-foreach="docs.location_ids" t-as="loc">
+                                        <th style="border: 1px solid black;color:white;" class="thead-light"><t t-out="loc.complete_name"/></th>
                                     </t>
                                     <th style="border: 1px solid black;color:white;" class="thead-light">Total Qty</th>
                                     <th style="border: 1px solid black;color:white;" class="thead-light">Unit Cost</th>
@@ -64,23 +64,23 @@
                                 </tr>
                                 <t t-set="Total_amount_value" t-value="0"/>
                                 <t t-set="price" t-value="0"/>
-                                <t t-foreach="doc.get_all_data()" t-as="line">
+                                <t t-foreach="docs.get_all_data()" t-as="line">
                                     <tr>
-                                        <td t-esc="line[-0] or ''" style="border: 1px solid black" class="thead-light"/>
+                                        <td t-out="line[0] or ''" style="border: 1px solid black" class="thead-light"/>
                                         <t t-foreach="line[1:-3]" t-as="qty">
-                                            <td t-esc="qty or ''" style="border: 1px solid black" class="thead-light"/>
+                                            <td t-out="qty or ''" style="border: 1px solid black" class="thead-light"/>
                                         </t>
-                                        <td t-esc="'{0:,.4f}'.format(line[-3]) or ''" style="border: 1px solid black" class="thead-light"/>
-<!--                                        <td t-esc="line[-2] or ''" style="border: 1px solid black" class="thead-light" />-->
-                                        <td t-esc="'{0:,.4f}'.format(line[-2]) or ''" style="border: 1px solid black" class="thead-light" />
+                                        <td t-out="'{0:,.4f}'.format(line[-3]) or ''" style="border: 1px solid black" class="thead-light"/>
+<!--                                        <td t-out="line[-2] or ''" style="border: 1px solid black" class="thead-light" />-->
+                                        <td t-out="'{0:,.4f}'.format(line[-2]) or ''" style="border: 1px solid black" class="thead-light" />
 
-                                        <td t-esc="'{0:,.4f}'.format(line[-1]) or ''" style="border: 1px solid black" class="thead-light"/>
+                                        <td t-out="'{0:,.4f}'.format(line[-1]) or ''" style="border: 1px solid black" class="thead-light"/>
                                         <t t-set="Total_amount_value" t-value="Total_amount_value + line[-1] or 0"/>
                                     </tr>
                                 </t>
                             </table>
                             <div>
-                                Total Amount Value:- <t t-esc="Total_amount_value"/>
+                                Total Amount Value:- <t t-out="Total_amount_value"/>
                             </div>
                         </div>
                     </t>

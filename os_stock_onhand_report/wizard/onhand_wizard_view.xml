@@ -20,8 +20,7 @@
                         
                     </group>
                     <group>
-                        <separator string="Locations" colspan="4"/>
-                        <field name="location_ids" nolabel="1"/>
+                        <field name="location_ids" widget="many2many_tags" string="Locations"/>
                     </group>
                     <footer>
                         <button name="print_stock_onhand_report" string="Print"
